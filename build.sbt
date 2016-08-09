@@ -1,4 +1,4 @@
-name := """scala-swiss-knife"""
+name := """scala-toolbox"""
 
 version := "1.0"
 

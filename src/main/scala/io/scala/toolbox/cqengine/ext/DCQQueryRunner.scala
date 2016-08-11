@@ -11,7 +11,7 @@ import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 
 trait TDCQQueryResultBase
-case class TDCQQueryResult(result: Seq[util.Map[_, _]], count: Int) extends TDCQQueryResultBase
+case class TDCQQueryResult(result: Seq[util.Map[_, _]]) extends TDCQQueryResultBase
 case class DCQAggregatedResult(result: Map[_, Int], limit: Int, sortByDirection: Option[String]) extends TDCQQueryResultBase
 case class DCQCountResult(count: Int) extends TDCQQueryResultBase
 
@@ -24,8 +24,8 @@ class DCQQueryRunner(schema: Map[String, String])
 
   val parser = ExtSqlParser.create(schema)
 
-  def exec(query: String, isLazy: Boolean)
-             (implicit indexedCollection: ConcurrentIndexedCollectionEx): TDCQQueryResultBase ={
+  def query(query: String)
+           (implicit indexedCollection: ConcurrentIndexedCollectionEx): TDCQQueryResultBase ={
 
     parser.parseQuery(query) match {
 
@@ -34,10 +34,7 @@ class DCQQueryRunner(schema: Map[String, String])
         var iter: ResultSet[util.Map[_, _]] = null
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
-          TDCQQueryResult(
-            iter.take(q.limit).toSeq,
-            if (isLazy) -1 else iter.size()
-          )
+          TDCQQueryResult(iter.take(q.limit).toSeq)
         } finally { iter.close()}
 
       case q: DCQFoldByKeyQuery =>
@@ -47,7 +44,6 @@ class DCQQueryRunner(schema: Map[String, String])
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
           val d = ConcurrentIndexedCollectionEx.foldBy(q.foldByKey, iter, null)
           DCQAggregatedResult(d.toMap, q.limit, sortByDirection=q.sortByDirection)
-
         } finally {iter.close()}
 
       case q: DCQSQLCountQuery =>
@@ -72,27 +68,27 @@ class DCQQueryRunner(schema: Map[String, String])
     }
   }
 
-  def execWithAggregation(sql: String, isLazy: Boolean)
-                         (partitions: Seq[ConcurrentIndexedCollectionEx]): Future[TDCQQueryResultBase] ={
+  def queryMultiple(sql: String)
+                   (partitions: Seq[ConcurrentIndexedCollectionEx]): Future[TDCQQueryResultBase] ={
 
     val resultPromise = Promise[TDCQQueryResultBase]
 
     val partitionQueries = for {
       p <- partitions
       f = Future {
-        exec(sql, isLazy)(p)
+        query(sql)(p)
       }
     } yield f
 
     Future.sequence(partitionQueries) onComplete {
 
       case Success(partitionsResult) =>
-
-        reduceResults(sql)(partitionsResult) onComplete {
-          case Success(r) => resultPromise.success(r)
-          case Failure(e) => resultPromise.failure(e)
+        reduce(sql)(partitionsResult) onComplete {
+          case Success(r) =>
+            resultPromise.success(r)
+          case Failure(e) =>
+            resultPromise.failure(e)
         }
-
       case Failure(e) =>
         resultPromise.failure(e)
     }
@@ -100,8 +96,8 @@ class DCQQueryRunner(schema: Map[String, String])
     resultPromise.future
   }
 
-  def reduceResults(sql: String)
-                   (partitionsResult: Seq[TDCQQueryResultBase]): Future[TDCQQueryResultBase] ={
+  def reduce(sql: String)
+            (partitionsResult: Seq[TDCQQueryResultBase]): Future[TDCQQueryResultBase] ={
 
     val resultPromise = Promise[TDCQQueryResultBase]
 
@@ -114,7 +110,7 @@ class DCQQueryRunner(schema: Map[String, String])
         results foreach { ri =>
           aggregatedIndexedCollection.addAll(ri.result)
         }
-        val aggregatedResult = exec(sql, isLazy = true)(aggregatedIndexedCollection)
+        val aggregatedResult = query(sql)(aggregatedIndexedCollection)
         resultPromise.success(aggregatedResult)
 
       case t : DCQCountResult =>

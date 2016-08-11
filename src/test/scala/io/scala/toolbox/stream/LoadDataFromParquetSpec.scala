@@ -103,12 +103,12 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
         rec = null
     }
 
-    val count = collection.count("select * from ds1")
-    val ds1 = collection.query("select * from ds1").take(10)
-    val ds2 = collection.query("select * from ds1 where cadd_score > 3").take(10)
-    val ds3 = collection.query("select * from ds1 where sample_count < 5").take(10)
-    val ds4 = collection.query("select * from ds1 where gene_name not in ('LINC00900-BUD13')").take(10)
-    val g1 = collection.foldBy("chrom", "select * from ds1")
+//    val count = collection.count("select * from ds1")
+//    val ds1 = collection.query("select * from ds1").take(10)
+//    val ds2 = collection.query("select * from ds1 where cadd_score > 3").take(10)
+//    val ds3 = collection.query("select * from ds1 where sample_count < 5").take(10)
+//    val ds4 = collection.query("select * from ds1 where gene_name not in ('LINC00900-BUD13')").take(10)
+//    val g1 = collection.foldBy("chrom", "select * from ds1")
 
     assert(true)
   }

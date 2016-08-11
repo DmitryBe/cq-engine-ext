@@ -5,7 +5,9 @@ import com.googlecode.cqengine.ConcurrentIndexedCollection
 import com.googlecode.cqengine.attribute.Attribute
 import com.googlecode.cqengine.entity.MapEntity
 import com.googlecode.cqengine.index.navigable.NavigableIndex
+import com.googlecode.cqengine.query.Query
 import com.googlecode.cqengine.query.QueryFactory._
+import com.googlecode.cqengine.query.option.QueryOptions
 import com.googlecode.cqengine.query.parser.sql.SQLParser
 import com.googlecode.cqengine.resultset.ResultSet
 import scala.collection.JavaConversions._
@@ -15,7 +17,6 @@ class ConcurrentIndexedCollectionEx(schemaDescription: Map[String, String]) {
 
   val collection = new ConcurrentIndexedCollection[util.Map[_, _]]
   val attributes = createAttrs(schemaDescription)
-  lazy val parser = SQLParser.forPojoWithAttributes(classOf[java.util.Map[_, _]], attributes)
 
   def addIndexes(indexes: Map[String, String]): ConcurrentIndexedCollectionEx ={
 
@@ -60,12 +61,44 @@ class ConcurrentIndexedCollectionEx(schemaDescription: Map[String, String]) {
     collection.add(new MapEntity(e))
   }
 
-  def query(sql: String): ResultSet[util.Map[_, _]] ={
-    parser.retrieve(collection, sql)
+  def addAll(c: Seq[util.Map[_, _]]): Unit ={
+    c foreach{ e => collection.add(e) }
   }
 
-  def sumBy(key: String, sql: String): (Float, Int) = {
-    val iter = query(sql)
+  def retrieve(query: Query[util.Map[_, _]], queryOptions: QueryOptions): ResultSet[util.Map[_, _]] ={
+    collection.retrieve(query, noQueryOptions)
+  }
+
+  private def createAttrs(attrs: Map[String, String]): Map[String, Attribute[util.Map[_, _], _]] ={
+
+    val attributes = attrs map {
+      case (name, sType) =>
+        mapAttribute(name, getAttrsType(sType))
+    }
+    Map(attributes map {x => x.getAttributeName -> x} toSeq : _*)
+  }
+
+  private def getAttrsType(sType: String) = sType match {
+    case "java.lang.String" => classOf[java.lang.String]
+    case "java.lang.Integer" => classOf[java.lang.Integer]
+    case "java.lang.Float" => classOf[java.lang.Float]
+    case "java.lang.Boolean" => classOf[java.lang.Boolean]
+    case _ => throw new Exception(s"unsupported type: $sType")
+  }
+
+  private def createIdxForAttr[A <: Comparable[A]](idxType: String, a: Attribute[util.Map[_, _], A]): NavigableIndex[A, util.Map[_, _]] = {
+    idxType match {
+      case "NavigableIndex" => NavigableIndex.onAttribute(a)
+      case _ => throw new Exception("unsupported index type")
+    }
+  }
+
+}
+
+object ConcurrentIndexedCollectionEx{
+
+  def sumBy(key: String, iter: ResultSet[Map[_, _]]): (Float, Int) = {
+
     val result = iter.foldLeft((0f, 0))((pair, row) => {
 
       row.containsKey(key) match {
@@ -83,8 +116,8 @@ class ConcurrentIndexedCollectionEx(schemaDescription: Map[String, String]) {
     result
   }
 
-  def foldBy(key: String, sql: String, emptyVal: Any = null): mutable.Map[_, Int] ={
-    val iter = query(sql)
+  def foldBy(key: String, iter: ResultSet[util.Map[_, _]], emptyVal: Any = null): mutable.Map[_, Int] ={
+
     val foldedResults = iter.foldLeft(mutable.Map.empty[Any, Int])((map, row) => {
 
       val mRow = row
@@ -101,8 +134,7 @@ class ConcurrentIndexedCollectionEx(schemaDescription: Map[String, String]) {
     foldedResults
   }
 
-  def foldBy2(key1: String, key2: String, sql: String, emptyVal: Any = null): mutable.Map[_, Int] ={
-    val iter = query(sql)
+  def foldBy2(key1: String, key2: String, iter: Iterable[util.Map[_, _]], emptyVal: Any = null): mutable.Map[_, Int] ={
 
     val foldedResults = iter.foldLeft(mutable.Map.empty[(Any, Any), Int])((map, row) => {
 
@@ -130,33 +162,25 @@ class ConcurrentIndexedCollectionEx(schemaDescription: Map[String, String]) {
     foldedResults
   }
 
-  def count(sql: String): Int = {
-    val r = query(sql)
-    r.size()
+  def histogram(key: String, iter: ResultSet[util.Map[_, _]], emptyVal: Any = null): mutable.Map[_, Int] ={
+
+    val foldedResults = iter.foldLeft(mutable.Map.empty[Any, Int])((map, row) => {
+
+      val mRow = row
+      mRow.containsKey(key) match {
+        case true =>
+          val v = ((mRow.get(key).asInstanceOf[Float] - 0.000001f) / 0.05f).toInt
+          map(v) = map.getOrElse(v, 0) + 1
+        case false =>
+          map(emptyVal) = map.getOrElse(emptyVal, 0) + 1
+      }
+      map
+    })
+
+    foldedResults
   }
 
-  private def createAttrs(attrs: Map[String, String]): Map[String, Attribute[util.Map[_, _], _]] ={
-
-    val attributes = attrs map {
-      case (name, sType) =>
-        mapAttribute(name, getAttrsType(sType))
-    }
-    Map(attributes map {x => x.getAttributeName -> x} toSeq : _*)
+  def count(iter: ResultSet[util.Map[_, _]]): Int = {
+    iter.size()
   }
-
-  private def getAttrsType(sType: String) = sType match {
-    case "java.lang.String" => classOf[java.lang.String]
-    case "java.lang.Integer" => classOf[java.lang.Integer]
-    case "java.lang.Float" => classOf[java.lang.Float]
-    case "java.lang.Boolean" => classOf[java.lang.Boolean]
-    case _ => throw new Exception(s"unsupported type: $sType")
-  }
-
-  private def createIdxForAttr[A <: Comparable[A]](idxType: String, a: Attribute[util.Map[_, _], A]): NavigableIndex[A, util.Map[_, _]] = {
-    idxType match {
-      case "NavigableIndex" => NavigableIndex.onAttribute(a)
-      case _ => throw new Exception("unsupported index type")
-    }
-  }
-
 }

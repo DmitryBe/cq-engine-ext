@@ -9,8 +9,8 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
 import com.googlecode.cqengine.entity.MapEntity
 import com.typesafe.config.ConfigFactory
-import io.scala.toolbox.cqengine.{CQEConvertors, ConcurrentIndexedCollectionEx}
-import io.scala.toolbox.parquet.{AvroParquetPartitionsIterator, ParquetTools}
+import io.toolbox.cqengineext.{ConcurrentIndexedCollectionExt, CqEngineConvertors}
+import io.toolbox.parquet.{AvroParquetPartitionsIterator, ParquetTools}
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.hadoop.conf.Configuration
@@ -43,7 +43,7 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
     val cqSchema = ParquetTools.readParquetSchema(pathStr)
 
     def _init = {
-      new ConcurrentIndexedCollectionEx(schemaDescription = cqSchema)
+      new ConcurrentIndexedCollectionExt(schemaDescription = cqSchema)
         .addIndexes(Map(
           "cadd_score" -> "NavigableIndex",
           "sample_count" -> "NavigableIndex",
@@ -58,7 +58,7 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
     val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, partitions, targetPartition)
     val parquetSource = avro.toStreamSource
 
-    val mapper = Flow[GenericRecord] map {r => CQEConvertors.convertGenericRecord2MapEntity(r)(cqSchema)}
+    val mapper = Flow[GenericRecord] map {r => CqEngineConvertors.convertGenericRecord2MapEntity(r)(cqSchema)}
 
     val stream = parquetSource via getCounterFlow(1000) via mapper to Sink.foreachParallel(storageBins)((rec) => {
       storages(getNextStorage).add(rec)
@@ -80,7 +80,7 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
     var rec = reader.read()
     val schema = rec.getSchema
     val cqSchema = ParquetTools.convertSchema2CQEngineExtSchema(schema)
-    val collection = new ConcurrentIndexedCollectionEx(schemaDescription = cqSchema)
+    val collection = new ConcurrentIndexedCollectionExt(schemaDescription = cqSchema)
       .addIndexes(Map(
         "cadd_score" -> "NavigableIndex",
         "sample_count" -> "NavigableIndex",
@@ -94,7 +94,7 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
       val v = c.incrementAndGet()
       if (v % 1000 == 0) println(s"loaded ~: $v")
 
-      val r = CQEConvertors.convertGenericRecord2MapEntity(rec)(cqSchema)
+      val r = CqEngineConvertors.convertGenericRecord2MapEntity(rec)(cqSchema)
 //      collection.addElement(r.toMap)
 
       if (c.get() < 500000)

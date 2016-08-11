@@ -2,7 +2,8 @@ package io.scala.toolbox.cqengineext
 
 import com.googlecode.cqengine.entity.MapEntity
 import com.googlecode.cqengine.query.parser.sql.SQLParser
-import io.toolbox.cqengineext.parser.ExtSqlParser
+import io.toolbox.cqengineext.{FoldByKeyQuery, HistogramQuery, SQLCountQuery, SQLQuery}
+import io.toolbox.cqengineext.parser.SqlParserExt
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.JavaConversions._
@@ -18,42 +19,22 @@ class SqlParserExSpec extends FlatSpec with Matchers{
     "sample_count" -> "NavigableIndex"
   )
 
-//  val collection = new ConcurrentIndexedCollectionEx(schemaDescription = schema)
-//    .addIndexes(indexes)
-//
-//  addSomeTestData()
-
   "parser ext" should "test1" in {
 
-    assert(true)
-
-    val parser = ExtSqlParser.create(schema)
+    val parser = SqlParserExt.create(schema)
     val r1 = parser.parseQuery("select * from ds01 order by chrom asc limit 10")
+    assert(r1.isInstanceOf[SQLQuery])
+
     val r2 = parser.parseQuery("select count(*) from ds01")
+    assert(r2.isInstanceOf[SQLCountQuery])
+
     val r3 = parser.parseQuery("select chrom, count(*) from ds01 group by chrom")
+    assert(r3.isInstanceOf[FoldByKeyQuery])
+
     val r4 = parser.parseQuery("select histogram(20) from ds01")
+    assert(r4.isInstanceOf[HistogramQuery])
 
     assert(true)
   }
-
-//  private def addSomeTestData(): Unit ={
-//
-//    collection.add(new MapEntity(Map(
-//      "name" -> "Dmitry",
-//      "age" -> 32,
-//      "subscribed" -> true
-//    )))
-//
-//    collection.add(new MapEntity(Map(
-//      "name" -> "Maria",
-//      "age" -> 28,
-//      "subscribed" -> true
-//    )))
-//
-//    collection.add(new MapEntity(Map(
-//      "name" -> "Patrick",
-//      "subscribed" -> true
-//    )))
-//  }
 
 }

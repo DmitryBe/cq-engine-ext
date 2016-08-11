@@ -8,21 +8,20 @@ import com.googlecode.cqengine.query.option.EngineThresholds._
 import com.googlecode.cqengine.query.option.{AttributeOrder, OrderByOption, QueryOptions}
 import com.googlecode.cqengine.query.parser.common.{ParseResult, QueryParser}
 import com.googlecode.cqengine.query.parser.sql.support.{FallbackValueParser, StringParser}
-import io.toolbox.cqengineex.{DCQGrammarLexer, DCQGrammarParser}
+import io.toolbox.cqengineex.{CQSqlGrammarExtLexer, CQSqlGrammarExtParser}
 import io.toolbox.cqengineext._
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.antlr.v4.runtime.{ANTLRInputStream, CommonTokenStream}
-
 import scala.collection.JavaConversions._
 import scala.util.{Failure, Success, Try}
 
-class ExtSqlParser(schemaDescription: Map[String, String]) extends QueryParser(classOf[java.util.Map[_, _]]){
+class SqlParserExt(schemaDescription: Map[String, String]) extends QueryParser(classOf[java.util.Map[_, _]]){
 
   val stringParser: StringParser = new StringParser
   super.registerValueParser(classOf[String], stringParser)
   super.registerFallbackValueParser(new FallbackValueParser(stringParser))
 
-  val collectionAttrs = CqEngineAttributesGenerator.createAttrs(schemaDescription)
+  val collectionAttrs = CqEngineAttributesGenerator.createSimpleAttrs(schemaDescription)
   this.registerAttributes(collectionAttrs)
 
   /*
@@ -30,9 +29,9 @@ class ExtSqlParser(schemaDescription: Map[String, String]) extends QueryParser(c
     */
   def parseQuery(query: String): QueryBase ={
 
-    ExtSqlParser.parseDCQSQLExpression(query) map { queryParsedCtx =>
+    SqlParserExt.parseDCQSQLExpression(query) map { queryParsedCtx =>
 
-      val queryMd5Hash = DCQQueryHashGenerator.generate(queryParsedCtx) match {
+      val queryMd5Hash = CQSqlQueryHashGeneratorExtBase.generate(queryParsedCtx) match {
         case Success(hash) => hash.hashMD5
         case Failure(e) => throw e
       }
@@ -95,7 +94,7 @@ class ExtSqlParser(schemaDescription: Map[String, String]) extends QueryParser(c
   */
   override def parse(query: String): ParseResult[java.util.Map[_, _]] = {
 
-    ExtSqlParser.parseDCQSQLExpression(query) map { queryParsedCtx =>
+    SqlParserExt.parseDCQSQLExpression(query) map { queryParsedCtx =>
 
       val listener = traverseAST(queryParsedCtx)
       new ParseResult[java.util.Map[_, _]](
@@ -111,10 +110,10 @@ class ExtSqlParser(schemaDescription: Map[String, String]) extends QueryParser(c
   /*
       traverse AST using CQEngineBaseListener
     */
-  private def traverseAST(queryContext: DCQGrammarParser.StartContext): QueryParserListener[java.util.Map[_, _]] ={
+  private def traverseAST(queryContext: CQSqlGrammarExtParser.StartContext): QueryParserExtListenerExtBase[java.util.Map[_, _]] ={
 
     val walker = new ParseTreeWalker()
-    val listener = new QueryParserListener[java.util.Map[_, _]](this)
+    val listener = new QueryParserExtListenerExtBase[java.util.Map[_, _]](this)
     walker.walk(listener, queryContext)
     listener
   }
@@ -167,25 +166,25 @@ class ExtSqlParser(schemaDescription: Map[String, String]) extends QueryParser(c
   }
 }
 
-object ExtSqlParser{
+object SqlParserExt{
 
   /*
     create and initialize instance of DCQSqlParser
   */
-  def create[O](schemaDescription: Map[String, String]): ExtSqlParser ={
-    new ExtSqlParser(schemaDescription)
+  def create[O](schemaDescription: Map[String, String]): SqlParserExt ={
+    new SqlParserExt(schemaDescription)
   }
 
   /*
     parse sql and create dcq grammar context (for traversing)
   */
-  def parseDCQSQLExpression(query: String): Try[DCQGrammarParser.StartContext] ={
+  def parseDCQSQLExpression(query: String): Try[CQSqlGrammarExtParser.StartContext] ={
 
-    val lexer = new DCQGrammarLexer(new ANTLRInputStream(query))
+    val lexer = new CQSqlGrammarExtLexer(new ANTLRInputStream(query))
     lexer.removeErrorListeners()
     val tokens = new CommonTokenStream(lexer)
 
-    val parser = new DCQGrammarParser(tokens)
+    val parser = new CQSqlGrammarExtParser(tokens)
     parser.removeErrorListeners()
 
     val errorListener = new ExtCqlParserErrorListener()

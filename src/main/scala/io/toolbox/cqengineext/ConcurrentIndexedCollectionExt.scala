@@ -17,7 +17,7 @@ import scala.collection.mutable
 class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
 
   val collection = new ConcurrentIndexedCollection[util.Map[_, _]]
-  val attributes = createAttrs(schemaDescription)
+  val attributes = CqEngineAttributesGenerator.createSimpleAttrs(schemaDescription)
 
   def addIndexes(indexes: Map[String, String]): ConcurrentIndexedCollectionExt ={
 
@@ -25,6 +25,7 @@ class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
 
       val attrName = idxInfo._1
       val idxType = idxInfo._2
+
       val indexO = attributes.get(attrName) map { attr =>
 
         val attrType = attr.getAttributeType
@@ -67,27 +68,11 @@ class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
   }
 
   def retrieve(query: Query[util.Map[_, _]], queryOptions: QueryOptions): ResultSet[util.Map[_, _]] ={
-    collection.retrieve(query, noQueryOptions)
-  }
-
-  private def createAttrs(attrs: Map[String, String]): Map[String, Attribute[util.Map[_, _], _]] ={
-
-    val attributes = attrs map {
-      case (name, sType) =>
-        mapAttribute(name, getAttrsType(sType))
-    }
-    Map(attributes map {x => x.getAttributeName -> x} toSeq : _*)
-  }
-
-  private def getAttrsType(sType: String) = sType match {
-    case "java.lang.String" => classOf[java.lang.String]
-    case "java.lang.Integer" => classOf[java.lang.Integer]
-    case "java.lang.Float" => classOf[java.lang.Float]
-    case "java.lang.Boolean" => classOf[java.lang.Boolean]
-    case _ => throw new Exception(s"unsupported type: $sType")
+    collection.retrieve(query, queryOptions)
   }
 
   private def createIdxForAttr[A <: Comparable[A]](idxType: String, a: Attribute[util.Map[_, _], A]): NavigableIndex[A, util.Map[_, _]] = {
+
     idxType match {
       case "NavigableIndex" => NavigableIndex.onAttribute(a)
       case _ => throw new Exception("unsupported index type")

@@ -1,23 +1,21 @@
 package io.toolbox.cqengineext
 
 import java.util
-
 import com.googlecode.cqengine.resultset.ResultSet
-import io.toolbox.cqengineext.parser.ExtSqlParser
-
+import io.toolbox.cqengineext.parser.{SqlParserExt}
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 
-object QueryRunner {
-  def create(schema: Map[String, String])(implicit ec: ExecutionContext) = new QueryRunner(schema)
+object SqlQueryRunner {
+  def create(schema: Map[String, String])(implicit ec: ExecutionContext) = new SqlQueryRunner(schema)
 }
 
-class QueryRunner(schema: Map[String, String])
-                 (implicit ec: ExecutionContext) {
+class SqlQueryRunner(schema: Map[String, String])
+                    (implicit ec: ExecutionContext) {
 
-  val parser = ExtSqlParser.create(schema)
+  val parser = SqlParserExt.create(schema)
 
   def query(query: String)
            (implicit indexedCollection: ConcurrentIndexedCollectionExt): TQueryResultBase ={
@@ -55,7 +53,8 @@ class QueryRunner(schema: Map[String, String])
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
 
-          val key = "getHli_allele_frequency"
+          //! need to retrieve from query
+          val key = "hli_allele_frequency"
           QueryAggregatedResult(ConcurrentIndexedCollectionExt.histogram(key, iter, 0).toMap, Int.MaxValue, sortByDirection=None)
         } finally {iter.close()}
 
@@ -89,6 +88,11 @@ class QueryRunner(schema: Map[String, String])
     }
 
     resultPromise.future
+  }
+
+  def queryMultipleT[TResult <: TQueryResultBase](sql: String)
+                   (partitions: Seq[ConcurrentIndexedCollectionExt]): Future[TResult] ={
+    queryMultiple(sql)(partitions) map {x => x.asInstanceOf[TResult]}
   }
 
   def reduce(sql: String)

@@ -1,4 +1,4 @@
-// Generated from /Users/dmitry/github/scala-toolbox/src/main/antlr4/cqengineext/grammar/DCQGrammar.g4 by ANTLR 4.5.3
+// Generated from /Users/dmitry/github/scala-toolbox/src/main/antlr4/cqengineext/grammar/CQSqlGrammarExt.g4 by ANTLR 4.5.3
 package io.toolbox.cqengineex;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class DCQGrammarLexer extends Lexer {
+public class CQSqlGrammarExtLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.5.3", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -148,7 +148,7 @@ public class DCQGrammarLexer extends Lexer {
 	}
 
 
-	public DCQGrammarLexer(CharStream input) {
+	public CQSqlGrammarExtLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}

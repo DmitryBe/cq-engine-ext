@@ -1,13 +1,16 @@
-// Generated from /Users/dmitry/github/scala-toolbox/src/main/antlr4/cqengineext/grammar/DCQGrammar.g4 by ANTLR 4.5.3
+// Generated from /Users/dmitry/github/scala-toolbox/src/main/antlr4/cqengineext/grammar/CQSqlGrammarExt.g4 by ANTLR 4.5.3
 package io.toolbox.cqengineex;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class DCQGrammarParser extends Parser {
+public class CQSqlGrammarExtParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.5.3", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -190,23 +193,23 @@ public class DCQGrammarParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public DCQGrammarParser(TokenStream input) {
+	public CQSqlGrammarExtParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class StartContext extends ParserRuleContext {
-		public TerminalNode K_SELECT() { return getToken(DCQGrammarParser.K_SELECT, 0); }
+		public TerminalNode K_SELECT() { return getToken(CQSqlGrammarExtParser.K_SELECT, 0); }
 		public List<Result_column_simpleContext> result_column_simple() {
 			return getRuleContexts(Result_column_simpleContext.class);
 		}
 		public Result_column_simpleContext result_column_simple(int i) {
 			return getRuleContext(Result_column_simpleContext.class,i);
 		}
-		public TerminalNode K_FROM() { return getToken(DCQGrammarParser.K_FROM, 0); }
+		public TerminalNode K_FROM() { return getToken(CQSqlGrammarExtParser.K_FROM, 0); }
 		public IndexedCollectionContext indexedCollection() {
 			return getRuleContext(IndexedCollectionContext.class,0);
 		}
-		public TerminalNode EOF() { return getToken(DCQGrammarParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(CQSqlGrammarExtParser.EOF, 0); }
 		public WhereClauseContext whereClause() {
 			return getRuleContext(WhereClauseContext.class,0);
 		}
@@ -225,15 +228,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_start; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterStart(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterStart(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitStart(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitStart(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitStart(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitStart(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -321,23 +324,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class IndexedCollectionContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public IndexedCollectionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_indexedCollection; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterIndexedCollection(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterIndexedCollection(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitIndexedCollection(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitIndexedCollection(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitIndexedCollection(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitIndexedCollection(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -370,7 +373,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class WhereClauseContext extends ParserRuleContext {
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public QueryContext query() {
 			return getRuleContext(QueryContext.class,0);
 		}
@@ -380,15 +383,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_whereClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterWhereClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterWhereClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitWhereClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitWhereClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitWhereClause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitWhereClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -417,8 +420,8 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class OrderByClauseContext extends ParserRuleContext {
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<AttributeOrderContext> attributeOrder() {
 			return getRuleContexts(AttributeOrderContext.class);
 		}
@@ -431,15 +434,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_orderByClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterOrderByClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterOrderByClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitOrderByClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitOrderByClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitOrderByClause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitOrderByClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -487,24 +490,24 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class GroupByClauseContext extends ParserRuleContext {
-		public TerminalNode K_GROUP() { return getToken(DCQGrammarParser.K_GROUP, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
+		public TerminalNode K_GROUP() { return getToken(CQSqlGrammarExtParser.K_GROUP, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
 		public GroupByClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_groupByClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterGroupByClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterGroupByClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitGroupByClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitGroupByClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitGroupByClause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitGroupByClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -535,23 +538,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class LimitClauseContext extends ParserRuleContext {
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
-		public TerminalNode NUMERIC_LITERAL() { return getToken(DCQGrammarParser.NUMERIC_LITERAL, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
+		public TerminalNode NUMERIC_LITERAL() { return getToken(CQSqlGrammarExtParser.NUMERIC_LITERAL, 0); }
 		public LimitClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_limitClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterLimitClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterLimitClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitLimitClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitLimitClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitLimitClause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitLimitClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -580,7 +583,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Result_column_simpleContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
 		public CountClauseContext countClause() {
 			return getRuleContext(CountClauseContext.class,0);
 		}
@@ -593,15 +596,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_result_column_simple; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterResult_column_simple(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterResult_column_simple(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitResult_column_simple(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitResult_column_simple(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitResult_column_simple(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitResult_column_simple(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -656,23 +659,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class HistogramClauseContext extends ParserRuleContext {
-		public TerminalNode F_HISTOGRAM() { return getToken(DCQGrammarParser.F_HISTOGRAM, 0); }
-		public TerminalNode NUMERIC_LITERAL() { return getToken(DCQGrammarParser.NUMERIC_LITERAL, 0); }
+		public TerminalNode F_HISTOGRAM() { return getToken(CQSqlGrammarExtParser.F_HISTOGRAM, 0); }
+		public TerminalNode NUMERIC_LITERAL() { return getToken(CQSqlGrammarExtParser.NUMERIC_LITERAL, 0); }
 		public HistogramClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_histogramClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterHistogramClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterHistogramClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitHistogramClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitHistogramClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitHistogramClause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitHistogramClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -705,23 +708,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class CountClauseContext extends ParserRuleContext {
-		public TerminalNode F_COUNT() { return getToken(DCQGrammarParser.F_COUNT, 0); }
-		public TerminalNode STAR() { return getToken(DCQGrammarParser.STAR, 0); }
+		public TerminalNode F_COUNT() { return getToken(CQSqlGrammarExtParser.F_COUNT, 0); }
+		public TerminalNode STAR() { return getToken(CQSqlGrammarExtParser.STAR, 0); }
 		public CountClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_countClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCountClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCountClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCountClause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCountClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCountClause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCountClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -766,15 +769,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_query; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -829,15 +832,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_logicalQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterLogicalQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterLogicalQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitLogicalQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitLogicalQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitLogicalQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitLogicalQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -884,33 +887,33 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class AndQueryContext extends ParserRuleContext {
-		public TerminalNode OPEN_PAR() { return getToken(DCQGrammarParser.OPEN_PAR, 0); }
+		public TerminalNode OPEN_PAR() { return getToken(CQSqlGrammarExtParser.OPEN_PAR, 0); }
 		public List<QueryContext> query() {
 			return getRuleContexts(QueryContext.class);
 		}
 		public QueryContext query(int i) {
 			return getRuleContext(QueryContext.class,i);
 		}
-		public List<TerminalNode> K_AND() { return getTokens(DCQGrammarParser.K_AND); }
+		public List<TerminalNode> K_AND() { return getTokens(CQSqlGrammarExtParser.K_AND); }
 		public TerminalNode K_AND(int i) {
-			return getToken(DCQGrammarParser.K_AND, i);
+			return getToken(CQSqlGrammarExtParser.K_AND, i);
 		}
-		public TerminalNode CLOSE_PAR() { return getToken(DCQGrammarParser.CLOSE_PAR, 0); }
+		public TerminalNode CLOSE_PAR() { return getToken(CQSqlGrammarExtParser.CLOSE_PAR, 0); }
 		public AndQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_andQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAndQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAndQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAndQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAndQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAndQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAndQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -962,33 +965,33 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class OrQueryContext extends ParserRuleContext {
-		public TerminalNode OPEN_PAR() { return getToken(DCQGrammarParser.OPEN_PAR, 0); }
+		public TerminalNode OPEN_PAR() { return getToken(CQSqlGrammarExtParser.OPEN_PAR, 0); }
 		public List<QueryContext> query() {
 			return getRuleContexts(QueryContext.class);
 		}
 		public QueryContext query(int i) {
 			return getRuleContext(QueryContext.class,i);
 		}
-		public List<TerminalNode> K_OR() { return getTokens(DCQGrammarParser.K_OR); }
+		public List<TerminalNode> K_OR() { return getTokens(CQSqlGrammarExtParser.K_OR); }
 		public TerminalNode K_OR(int i) {
-			return getToken(DCQGrammarParser.K_OR, i);
+			return getToken(CQSqlGrammarExtParser.K_OR, i);
 		}
-		public TerminalNode CLOSE_PAR() { return getToken(DCQGrammarParser.CLOSE_PAR, 0); }
+		public TerminalNode CLOSE_PAR() { return getToken(CQSqlGrammarExtParser.CLOSE_PAR, 0); }
 		public OrQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_orQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterOrQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterOrQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitOrQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitOrQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitOrQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitOrQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1040,7 +1043,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class NotQueryContext extends ParserRuleContext {
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
 		public QueryContext query() {
 			return getRuleContext(QueryContext.class,0);
 		}
@@ -1050,15 +1053,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_notQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterNotQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterNotQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitNotQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitNotQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitNotQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitNotQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1132,26 +1135,26 @@ public class DCQGrammarParser extends Parser {
 		public NotHasQueryContext notHasQuery() {
 			return getRuleContext(NotHasQueryContext.class,0);
 		}
-		public TerminalNode OPEN_PAR() { return getToken(DCQGrammarParser.OPEN_PAR, 0); }
+		public TerminalNode OPEN_PAR() { return getToken(CQSqlGrammarExtParser.OPEN_PAR, 0); }
 		public SimpleQueryContext simpleQuery() {
 			return getRuleContext(SimpleQueryContext.class,0);
 		}
-		public TerminalNode CLOSE_PAR() { return getToken(DCQGrammarParser.CLOSE_PAR, 0); }
+		public TerminalNode CLOSE_PAR() { return getToken(CQSqlGrammarExtParser.CLOSE_PAR, 0); }
 		public SimpleQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_simpleQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSimpleQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSimpleQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSimpleQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSimpleQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSimpleQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSimpleQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1296,7 +1299,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode ASSIGN() { return getToken(DCQGrammarParser.ASSIGN, 0); }
+		public TerminalNode ASSIGN() { return getToken(CQSqlGrammarExtParser.ASSIGN, 0); }
 		public QueryParameterContext queryParameter() {
 			return getRuleContext(QueryParameterContext.class,0);
 		}
@@ -1306,15 +1309,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_equalQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterEqualQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterEqualQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitEqualQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitEqualQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitEqualQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitEqualQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1348,7 +1351,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode NOT_EQ2() { return getToken(DCQGrammarParser.NOT_EQ2, 0); }
+		public TerminalNode NOT_EQ2() { return getToken(CQSqlGrammarExtParser.NOT_EQ2, 0); }
 		public QueryParameterContext queryParameter() {
 			return getRuleContext(QueryParameterContext.class,0);
 		}
@@ -1358,15 +1361,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_notEqualQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterNotEqualQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterNotEqualQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitNotEqualQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitNotEqualQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitNotEqualQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitNotEqualQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1400,7 +1403,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode LT_EQ() { return getToken(DCQGrammarParser.LT_EQ, 0); }
+		public TerminalNode LT_EQ() { return getToken(CQSqlGrammarExtParser.LT_EQ, 0); }
 		public QueryParameterContext queryParameter() {
 			return getRuleContext(QueryParameterContext.class,0);
 		}
@@ -1410,15 +1413,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_lessThanOrEqualToQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterLessThanOrEqualToQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterLessThanOrEqualToQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitLessThanOrEqualToQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitLessThanOrEqualToQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitLessThanOrEqualToQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitLessThanOrEqualToQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1452,7 +1455,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode LT() { return getToken(DCQGrammarParser.LT, 0); }
+		public TerminalNode LT() { return getToken(CQSqlGrammarExtParser.LT, 0); }
 		public QueryParameterContext queryParameter() {
 			return getRuleContext(QueryParameterContext.class,0);
 		}
@@ -1462,15 +1465,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_lessThanQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterLessThanQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterLessThanQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitLessThanQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitLessThanQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitLessThanQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitLessThanQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1504,7 +1507,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode GT_EQ() { return getToken(DCQGrammarParser.GT_EQ, 0); }
+		public TerminalNode GT_EQ() { return getToken(CQSqlGrammarExtParser.GT_EQ, 0); }
 		public QueryParameterContext queryParameter() {
 			return getRuleContext(QueryParameterContext.class,0);
 		}
@@ -1514,15 +1517,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_greaterThanOrEqualToQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterGreaterThanOrEqualToQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterGreaterThanOrEqualToQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitGreaterThanOrEqualToQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitGreaterThanOrEqualToQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitGreaterThanOrEqualToQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitGreaterThanOrEqualToQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1556,7 +1559,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode GT() { return getToken(DCQGrammarParser.GT, 0); }
+		public TerminalNode GT() { return getToken(CQSqlGrammarExtParser.GT, 0); }
 		public QueryParameterContext queryParameter() {
 			return getRuleContext(QueryParameterContext.class,0);
 		}
@@ -1566,15 +1569,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_greaterThanQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterGreaterThanQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterGreaterThanQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitGreaterThanQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitGreaterThanQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitGreaterThanQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitGreaterThanQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1608,29 +1611,29 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_BETWEEN() { return getToken(DCQGrammarParser.K_BETWEEN, 0); }
+		public TerminalNode K_BETWEEN() { return getToken(CQSqlGrammarExtParser.K_BETWEEN, 0); }
 		public List<QueryParameterContext> queryParameter() {
 			return getRuleContexts(QueryParameterContext.class);
 		}
 		public QueryParameterContext queryParameter(int i) {
 			return getRuleContext(QueryParameterContext.class,i);
 		}
-		public TerminalNode K_AND() { return getToken(DCQGrammarParser.K_AND, 0); }
+		public TerminalNode K_AND() { return getToken(CQSqlGrammarExtParser.K_AND, 0); }
 		public BetweenQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_betweenQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterBetweenQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterBetweenQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitBetweenQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitBetweenQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitBetweenQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitBetweenQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1668,30 +1671,30 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_BETWEEN() { return getToken(DCQGrammarParser.K_BETWEEN, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_BETWEEN() { return getToken(CQSqlGrammarExtParser.K_BETWEEN, 0); }
 		public List<QueryParameterContext> queryParameter() {
 			return getRuleContexts(QueryParameterContext.class);
 		}
 		public QueryParameterContext queryParameter(int i) {
 			return getRuleContext(QueryParameterContext.class,i);
 		}
-		public TerminalNode K_AND() { return getToken(DCQGrammarParser.K_AND, 0); }
+		public TerminalNode K_AND() { return getToken(CQSqlGrammarExtParser.K_AND, 0); }
 		public NotBetweenQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_notBetweenQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterNotBetweenQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterNotBetweenQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitNotBetweenQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitNotBetweenQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitNotBetweenQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitNotBetweenQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1731,30 +1734,30 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_IN() { return getToken(DCQGrammarParser.K_IN, 0); }
-		public TerminalNode OPEN_PAR() { return getToken(DCQGrammarParser.OPEN_PAR, 0); }
+		public TerminalNode K_IN() { return getToken(CQSqlGrammarExtParser.K_IN, 0); }
+		public TerminalNode OPEN_PAR() { return getToken(CQSqlGrammarExtParser.OPEN_PAR, 0); }
 		public List<QueryParameterContext> queryParameter() {
 			return getRuleContexts(QueryParameterContext.class);
 		}
 		public QueryParameterContext queryParameter(int i) {
 			return getRuleContext(QueryParameterContext.class,i);
 		}
-		public TerminalNode CLOSE_PAR() { return getToken(DCQGrammarParser.CLOSE_PAR, 0); }
+		public TerminalNode CLOSE_PAR() { return getToken(CQSqlGrammarExtParser.CLOSE_PAR, 0); }
 		public InQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterInQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterInQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitInQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitInQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitInQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitInQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1809,31 +1812,31 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_IN() { return getToken(DCQGrammarParser.K_IN, 0); }
-		public TerminalNode OPEN_PAR() { return getToken(DCQGrammarParser.OPEN_PAR, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_IN() { return getToken(CQSqlGrammarExtParser.K_IN, 0); }
+		public TerminalNode OPEN_PAR() { return getToken(CQSqlGrammarExtParser.OPEN_PAR, 0); }
 		public List<QueryParameterContext> queryParameter() {
 			return getRuleContexts(QueryParameterContext.class);
 		}
 		public QueryParameterContext queryParameter(int i) {
 			return getRuleContext(QueryParameterContext.class,i);
 		}
-		public TerminalNode CLOSE_PAR() { return getToken(DCQGrammarParser.CLOSE_PAR, 0); }
+		public TerminalNode CLOSE_PAR() { return getToken(CQSqlGrammarExtParser.CLOSE_PAR, 0); }
 		public NotInQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_notInQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterNotInQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterNotInQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitNotInQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitNotInQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitNotInQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitNotInQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1890,7 +1893,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_LIKE() { return getToken(DCQGrammarParser.K_LIKE, 0); }
+		public TerminalNode K_LIKE() { return getToken(CQSqlGrammarExtParser.K_LIKE, 0); }
 		public QueryParameterTrailingPercentContext queryParameterTrailingPercent() {
 			return getRuleContext(QueryParameterTrailingPercentContext.class,0);
 		}
@@ -1900,15 +1903,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_startsWithQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterStartsWithQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterStartsWithQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitStartsWithQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitStartsWithQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitStartsWithQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitStartsWithQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1942,7 +1945,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_LIKE() { return getToken(DCQGrammarParser.K_LIKE, 0); }
+		public TerminalNode K_LIKE() { return getToken(CQSqlGrammarExtParser.K_LIKE, 0); }
 		public QueryParameterLeadingPercentContext queryParameterLeadingPercent() {
 			return getRuleContext(QueryParameterLeadingPercentContext.class,0);
 		}
@@ -1952,15 +1955,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_endsWithQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterEndsWithQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterEndsWithQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitEndsWithQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitEndsWithQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitEndsWithQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitEndsWithQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1994,7 +1997,7 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_LIKE() { return getToken(DCQGrammarParser.K_LIKE, 0); }
+		public TerminalNode K_LIKE() { return getToken(CQSqlGrammarExtParser.K_LIKE, 0); }
 		public QueryParameterLeadingAndTrailingPercentContext queryParameterLeadingAndTrailingPercent() {
 			return getRuleContext(QueryParameterLeadingAndTrailingPercentContext.class,0);
 		}
@@ -2004,15 +2007,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_containsQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterContainsQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterContainsQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitContainsQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitContainsQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitContainsQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitContainsQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2046,24 +2049,24 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_IS() { return getToken(DCQGrammarParser.K_IS, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_NULL() { return getToken(DCQGrammarParser.K_NULL, 0); }
+		public TerminalNode K_IS() { return getToken(CQSqlGrammarExtParser.K_IS, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_NULL() { return getToken(CQSqlGrammarExtParser.K_NULL, 0); }
 		public HasQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_hasQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterHasQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterHasQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitHasQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitHasQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitHasQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitHasQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2099,23 +2102,23 @@ public class DCQGrammarParser extends Parser {
 		public AttributeNameContext attributeName() {
 			return getRuleContext(AttributeNameContext.class,0);
 		}
-		public TerminalNode K_IS() { return getToken(DCQGrammarParser.K_IS, 0); }
-		public TerminalNode K_NULL() { return getToken(DCQGrammarParser.K_NULL, 0); }
+		public TerminalNode K_IS() { return getToken(CQSqlGrammarExtParser.K_IS, 0); }
+		public TerminalNode K_NULL() { return getToken(CQSqlGrammarExtParser.K_NULL, 0); }
 		public NotHasQueryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_notHasQuery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterNotHasQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterNotHasQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitNotHasQuery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitNotHasQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitNotHasQuery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitNotHasQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2146,23 +2149,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class AttributeNameContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public AttributeNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_attributeName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAttributeName(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAttributeName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAttributeName(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAttributeName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAttributeName(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAttributeName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2195,22 +2198,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class QueryParameterTrailingPercentContext extends ParserRuleContext {
-		public TerminalNode STRING_LITERAL_WITH_TRAILING_PERCENT() { return getToken(DCQGrammarParser.STRING_LITERAL_WITH_TRAILING_PERCENT, 0); }
+		public TerminalNode STRING_LITERAL_WITH_TRAILING_PERCENT() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL_WITH_TRAILING_PERCENT, 0); }
 		public QueryParameterTrailingPercentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_queryParameterTrailingPercent; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterQueryParameterTrailingPercent(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterQueryParameterTrailingPercent(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitQueryParameterTrailingPercent(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitQueryParameterTrailingPercent(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitQueryParameterTrailingPercent(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitQueryParameterTrailingPercent(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2237,22 +2240,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class QueryParameterLeadingPercentContext extends ParserRuleContext {
-		public TerminalNode STRING_LITERAL_WITH_LEADING_PERCENT() { return getToken(DCQGrammarParser.STRING_LITERAL_WITH_LEADING_PERCENT, 0); }
+		public TerminalNode STRING_LITERAL_WITH_LEADING_PERCENT() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL_WITH_LEADING_PERCENT, 0); }
 		public QueryParameterLeadingPercentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_queryParameterLeadingPercent; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterQueryParameterLeadingPercent(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterQueryParameterLeadingPercent(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitQueryParameterLeadingPercent(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitQueryParameterLeadingPercent(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitQueryParameterLeadingPercent(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitQueryParameterLeadingPercent(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2279,22 +2282,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class QueryParameterLeadingAndTrailingPercentContext extends ParserRuleContext {
-		public TerminalNode STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT() { return getToken(DCQGrammarParser.STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT, 0); }
+		public TerminalNode STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT, 0); }
 		public QueryParameterLeadingAndTrailingPercentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_queryParameterLeadingAndTrailingPercent; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterQueryParameterLeadingAndTrailingPercent(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterQueryParameterLeadingAndTrailingPercent(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitQueryParameterLeadingAndTrailingPercent(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitQueryParameterLeadingAndTrailingPercent(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitQueryParameterLeadingAndTrailingPercent(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitQueryParameterLeadingAndTrailingPercent(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2321,23 +2324,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class QueryParameterContext extends ParserRuleContext {
-		public TerminalNode NUMERIC_LITERAL() { return getToken(DCQGrammarParser.NUMERIC_LITERAL, 0); }
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode NUMERIC_LITERAL() { return getToken(CQSqlGrammarExtParser.NUMERIC_LITERAL, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public QueryParameterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_queryParameter; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterQueryParameter(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterQueryParameter(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitQueryParameter(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitQueryParameter(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitQueryParameter(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitQueryParameter(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2382,15 +2385,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_attributeOrder; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAttributeOrder(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAttributeOrder(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAttributeOrder(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAttributeOrder(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAttributeOrder(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAttributeOrder(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2427,23 +2430,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class DirectionContext extends ParserRuleContext {
-		public TerminalNode K_ASC() { return getToken(DCQGrammarParser.K_ASC, 0); }
-		public TerminalNode K_DESC() { return getToken(DCQGrammarParser.K_DESC, 0); }
+		public TerminalNode K_ASC() { return getToken(CQSqlGrammarExtParser.K_ASC, 0); }
+		public TerminalNode K_DESC() { return getToken(CQSqlGrammarExtParser.K_DESC, 0); }
 		public DirectionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_direction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDirection(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDirection(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDirection(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDirection(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDirection(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDirection(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2476,7 +2479,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class ParseContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(DCQGrammarParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(CQSqlGrammarExtParser.EOF, 0); }
 		public List<Sql_stmt_listContext> sql_stmt_list() {
 			return getRuleContexts(Sql_stmt_listContext.class);
 		}
@@ -2495,15 +2498,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_parse; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterParse(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterParse(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitParse(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitParse(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitParse(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitParse(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2582,22 +2585,22 @@ public class DCQGrammarParser extends Parser {
 
 	public static class ErrorContext extends ParserRuleContext {
 		public Token UNEXPECTED_CHAR;
-		public TerminalNode UNEXPECTED_CHAR() { return getToken(DCQGrammarParser.UNEXPECTED_CHAR, 0); }
+		public TerminalNode UNEXPECTED_CHAR() { return getToken(CQSqlGrammarExtParser.UNEXPECTED_CHAR, 0); }
 		public ErrorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_error; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterError(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterError(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitError(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitError(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitError(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitError(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2639,15 +2642,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_sql_stmt_list; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSql_stmt_list(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSql_stmt_list(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSql_stmt_list(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSql_stmt_list(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSql_stmt_list(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSql_stmt_list(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2826,24 +2829,24 @@ public class DCQGrammarParser extends Parser {
 		public Vacuum_stmtContext vacuum_stmt() {
 			return getRuleContext(Vacuum_stmtContext.class,0);
 		}
-		public TerminalNode K_EXPLAIN() { return getToken(DCQGrammarParser.K_EXPLAIN, 0); }
-		public TerminalNode K_QUERY() { return getToken(DCQGrammarParser.K_QUERY, 0); }
-		public TerminalNode K_PLAN() { return getToken(DCQGrammarParser.K_PLAN, 0); }
+		public TerminalNode K_EXPLAIN() { return getToken(CQSqlGrammarExtParser.K_EXPLAIN, 0); }
+		public TerminalNode K_QUERY() { return getToken(CQSqlGrammarExtParser.K_QUERY, 0); }
+		public TerminalNode K_PLAN() { return getToken(CQSqlGrammarExtParser.K_PLAN, 0); }
 		public Sql_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sql_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSql_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSql_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSql_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSql_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSql_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSql_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3073,39 +3076,39 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Alter_table_stmtContext extends ParserRuleContext {
-		public TerminalNode K_ALTER() { return getToken(DCQGrammarParser.K_ALTER, 0); }
-		public TerminalNode K_TABLE() { return getToken(DCQGrammarParser.K_TABLE, 0); }
+		public TerminalNode K_ALTER() { return getToken(CQSqlGrammarExtParser.K_ALTER, 0); }
+		public TerminalNode K_TABLE() { return getToken(CQSqlGrammarExtParser.K_TABLE, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
-		public TerminalNode K_RENAME() { return getToken(DCQGrammarParser.K_RENAME, 0); }
-		public TerminalNode K_TO() { return getToken(DCQGrammarParser.K_TO, 0); }
+		public TerminalNode K_RENAME() { return getToken(CQSqlGrammarExtParser.K_RENAME, 0); }
+		public TerminalNode K_TO() { return getToken(CQSqlGrammarExtParser.K_TO, 0); }
 		public New_table_nameContext new_table_name() {
 			return getRuleContext(New_table_nameContext.class,0);
 		}
-		public TerminalNode K_ADD() { return getToken(DCQGrammarParser.K_ADD, 0); }
+		public TerminalNode K_ADD() { return getToken(CQSqlGrammarExtParser.K_ADD, 0); }
 		public Column_defContext column_def() {
 			return getRuleContext(Column_defContext.class,0);
 		}
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_COLUMN() { return getToken(DCQGrammarParser.K_COLUMN, 0); }
+		public TerminalNode K_COLUMN() { return getToken(CQSqlGrammarExtParser.K_COLUMN, 0); }
 		public Alter_table_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_alter_table_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAlter_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAlter_table_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAlter_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAlter_table_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAlter_table_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAlter_table_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3181,7 +3184,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Analyze_stmtContext extends ParserRuleContext {
-		public TerminalNode K_ANALYZE() { return getToken(DCQGrammarParser.K_ANALYZE, 0); }
+		public TerminalNode K_ANALYZE() { return getToken(CQSqlGrammarExtParser.K_ANALYZE, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
@@ -3194,15 +3197,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_analyze_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAnalyze_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAnalyze_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAnalyze_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAnalyze_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAnalyze_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAnalyze_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3255,30 +3258,30 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Attach_stmtContext extends ParserRuleContext {
-		public TerminalNode K_ATTACH() { return getToken(DCQGrammarParser.K_ATTACH, 0); }
+		public TerminalNode K_ATTACH() { return getToken(CQSqlGrammarExtParser.K_ATTACH, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_DATABASE() { return getToken(DCQGrammarParser.K_DATABASE, 0); }
+		public TerminalNode K_DATABASE() { return getToken(CQSqlGrammarExtParser.K_DATABASE, 0); }
 		public Attach_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_attach_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAttach_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAttach_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAttach_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAttach_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAttach_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAttach_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3321,11 +3324,11 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Begin_stmtContext extends ParserRuleContext {
-		public TerminalNode K_BEGIN() { return getToken(DCQGrammarParser.K_BEGIN, 0); }
-		public TerminalNode K_TRANSACTION() { return getToken(DCQGrammarParser.K_TRANSACTION, 0); }
-		public TerminalNode K_DEFERRED() { return getToken(DCQGrammarParser.K_DEFERRED, 0); }
-		public TerminalNode K_IMMEDIATE() { return getToken(DCQGrammarParser.K_IMMEDIATE, 0); }
-		public TerminalNode K_EXCLUSIVE() { return getToken(DCQGrammarParser.K_EXCLUSIVE, 0); }
+		public TerminalNode K_BEGIN() { return getToken(CQSqlGrammarExtParser.K_BEGIN, 0); }
+		public TerminalNode K_TRANSACTION() { return getToken(CQSqlGrammarExtParser.K_TRANSACTION, 0); }
+		public TerminalNode K_DEFERRED() { return getToken(CQSqlGrammarExtParser.K_DEFERRED, 0); }
+		public TerminalNode K_IMMEDIATE() { return getToken(CQSqlGrammarExtParser.K_IMMEDIATE, 0); }
+		public TerminalNode K_EXCLUSIVE() { return getToken(CQSqlGrammarExtParser.K_EXCLUSIVE, 0); }
 		public Transaction_nameContext transaction_name() {
 			return getRuleContext(Transaction_nameContext.class,0);
 		}
@@ -3335,15 +3338,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_begin_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterBegin_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterBegin_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitBegin_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitBegin_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitBegin_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitBegin_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3404,9 +3407,9 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Commit_stmtContext extends ParserRuleContext {
-		public TerminalNode K_COMMIT() { return getToken(DCQGrammarParser.K_COMMIT, 0); }
-		public TerminalNode K_END() { return getToken(DCQGrammarParser.K_END, 0); }
-		public TerminalNode K_TRANSACTION() { return getToken(DCQGrammarParser.K_TRANSACTION, 0); }
+		public TerminalNode K_COMMIT() { return getToken(CQSqlGrammarExtParser.K_COMMIT, 0); }
+		public TerminalNode K_END() { return getToken(CQSqlGrammarExtParser.K_END, 0); }
+		public TerminalNode K_TRANSACTION() { return getToken(CQSqlGrammarExtParser.K_TRANSACTION, 0); }
 		public Transaction_nameContext transaction_name() {
 			return getRuleContext(Transaction_nameContext.class,0);
 		}
@@ -3416,15 +3419,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_commit_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCommit_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCommit_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCommit_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCommit_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCommit_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCommit_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3482,45 +3485,45 @@ public class DCQGrammarParser extends Parser {
 		public Select_coreContext select_core(int i) {
 			return getRuleContext(Select_coreContext.class,i);
 		}
-		public TerminalNode K_WITH() { return getToken(DCQGrammarParser.K_WITH, 0); }
+		public TerminalNode K_WITH() { return getToken(CQSqlGrammarExtParser.K_WITH, 0); }
 		public List<Common_table_expressionContext> common_table_expression() {
 			return getRuleContexts(Common_table_expressionContext.class);
 		}
 		public Common_table_expressionContext common_table_expression(int i) {
 			return getRuleContext(Common_table_expressionContext.class,i);
 		}
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<Ordering_termContext> ordering_term() {
 			return getRuleContexts(Ordering_termContext.class);
 		}
 		public Ordering_termContext ordering_term(int i) {
 			return getRuleContext(Ordering_termContext.class,i);
 		}
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public List<TerminalNode> K_UNION() { return getTokens(DCQGrammarParser.K_UNION); }
+		public List<TerminalNode> K_UNION() { return getTokens(CQSqlGrammarExtParser.K_UNION); }
 		public TerminalNode K_UNION(int i) {
-			return getToken(DCQGrammarParser.K_UNION, i);
+			return getToken(CQSqlGrammarExtParser.K_UNION, i);
 		}
-		public List<TerminalNode> K_INTERSECT() { return getTokens(DCQGrammarParser.K_INTERSECT); }
+		public List<TerminalNode> K_INTERSECT() { return getTokens(CQSqlGrammarExtParser.K_INTERSECT); }
 		public TerminalNode K_INTERSECT(int i) {
-			return getToken(DCQGrammarParser.K_INTERSECT, i);
+			return getToken(CQSqlGrammarExtParser.K_INTERSECT, i);
 		}
-		public List<TerminalNode> K_EXCEPT() { return getTokens(DCQGrammarParser.K_EXCEPT); }
+		public List<TerminalNode> K_EXCEPT() { return getTokens(CQSqlGrammarExtParser.K_EXCEPT); }
 		public TerminalNode K_EXCEPT(int i) {
-			return getToken(DCQGrammarParser.K_EXCEPT, i);
+			return getToken(CQSqlGrammarExtParser.K_EXCEPT, i);
 		}
-		public TerminalNode K_RECURSIVE() { return getToken(DCQGrammarParser.K_RECURSIVE, 0); }
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
-		public List<TerminalNode> K_ALL() { return getTokens(DCQGrammarParser.K_ALL); }
+		public TerminalNode K_RECURSIVE() { return getToken(CQSqlGrammarExtParser.K_RECURSIVE, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
+		public List<TerminalNode> K_ALL() { return getTokens(CQSqlGrammarExtParser.K_ALL); }
 		public TerminalNode K_ALL(int i) {
-			return getToken(DCQGrammarParser.K_ALL, i);
+			return getToken(CQSqlGrammarExtParser.K_ALL, i);
 		}
 		public Compound_select_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3528,15 +3531,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_compound_select_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCompound_select_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCompound_select_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCompound_select_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCompound_select_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCompound_select_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCompound_select_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3703,12 +3706,12 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Create_index_stmtContext extends ParserRuleContext {
-		public TerminalNode K_CREATE() { return getToken(DCQGrammarParser.K_CREATE, 0); }
-		public TerminalNode K_INDEX() { return getToken(DCQGrammarParser.K_INDEX, 0); }
+		public TerminalNode K_CREATE() { return getToken(CQSqlGrammarExtParser.K_CREATE, 0); }
+		public TerminalNode K_INDEX() { return getToken(CQSqlGrammarExtParser.K_INDEX, 0); }
 		public Index_nameContext index_name() {
 			return getRuleContext(Index_nameContext.class,0);
 		}
-		public TerminalNode K_ON() { return getToken(DCQGrammarParser.K_ON, 0); }
+		public TerminalNode K_ON() { return getToken(CQSqlGrammarExtParser.K_ON, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
@@ -3718,14 +3721,14 @@ public class DCQGrammarParser extends Parser {
 		public Indexed_columnContext indexed_column(int i) {
 			return getRuleContext(Indexed_columnContext.class,i);
 		}
-		public TerminalNode K_UNIQUE() { return getToken(DCQGrammarParser.K_UNIQUE, 0); }
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_UNIQUE() { return getToken(CQSqlGrammarExtParser.K_UNIQUE, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -3735,15 +3738,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_create_index_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCreate_index_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCreate_index_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCreate_index_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCreate_index_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCreate_index_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCreate_index_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3847,8 +3850,8 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Create_table_stmtContext extends ParserRuleContext {
-		public TerminalNode K_CREATE() { return getToken(DCQGrammarParser.K_CREATE, 0); }
-		public TerminalNode K_TABLE() { return getToken(DCQGrammarParser.K_TABLE, 0); }
+		public TerminalNode K_CREATE() { return getToken(CQSqlGrammarExtParser.K_CREATE, 0); }
+		public TerminalNode K_TABLE() { return getToken(CQSqlGrammarExtParser.K_TABLE, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
@@ -3858,41 +3861,41 @@ public class DCQGrammarParser extends Parser {
 		public Column_defContext column_def(int i) {
 			return getRuleContext(Column_defContext.class,i);
 		}
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_TEMP() { return getToken(DCQGrammarParser.K_TEMP, 0); }
-		public TerminalNode K_TEMPORARY() { return getToken(DCQGrammarParser.K_TEMPORARY, 0); }
+		public TerminalNode K_TEMP() { return getToken(CQSqlGrammarExtParser.K_TEMP, 0); }
+		public TerminalNode K_TEMPORARY() { return getToken(CQSqlGrammarExtParser.K_TEMPORARY, 0); }
 		public List<Table_constraintContext> table_constraint() {
 			return getRuleContexts(Table_constraintContext.class);
 		}
 		public Table_constraintContext table_constraint(int i) {
 			return getRuleContext(Table_constraintContext.class,i);
 		}
-		public TerminalNode K_WITHOUT() { return getToken(DCQGrammarParser.K_WITHOUT, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
+		public TerminalNode K_WITHOUT() { return getToken(CQSqlGrammarExtParser.K_WITHOUT, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
 		public Create_table_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_create_table_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCreate_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCreate_table_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCreate_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCreate_table_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCreate_table_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCreate_table_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4033,45 +4036,45 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Create_trigger_stmtContext extends ParserRuleContext {
-		public TerminalNode K_CREATE() { return getToken(DCQGrammarParser.K_CREATE, 0); }
-		public TerminalNode K_TRIGGER() { return getToken(DCQGrammarParser.K_TRIGGER, 0); }
+		public TerminalNode K_CREATE() { return getToken(CQSqlGrammarExtParser.K_CREATE, 0); }
+		public TerminalNode K_TRIGGER() { return getToken(CQSqlGrammarExtParser.K_TRIGGER, 0); }
 		public Trigger_nameContext trigger_name() {
 			return getRuleContext(Trigger_nameContext.class,0);
 		}
-		public TerminalNode K_ON() { return getToken(DCQGrammarParser.K_ON, 0); }
+		public TerminalNode K_ON() { return getToken(CQSqlGrammarExtParser.K_ON, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
-		public TerminalNode K_BEGIN() { return getToken(DCQGrammarParser.K_BEGIN, 0); }
-		public TerminalNode K_END() { return getToken(DCQGrammarParser.K_END, 0); }
-		public TerminalNode K_DELETE() { return getToken(DCQGrammarParser.K_DELETE, 0); }
-		public TerminalNode K_INSERT() { return getToken(DCQGrammarParser.K_INSERT, 0); }
-		public TerminalNode K_UPDATE() { return getToken(DCQGrammarParser.K_UPDATE, 0); }
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_BEGIN() { return getToken(CQSqlGrammarExtParser.K_BEGIN, 0); }
+		public TerminalNode K_END() { return getToken(CQSqlGrammarExtParser.K_END, 0); }
+		public TerminalNode K_DELETE() { return getToken(CQSqlGrammarExtParser.K_DELETE, 0); }
+		public TerminalNode K_INSERT() { return getToken(CQSqlGrammarExtParser.K_INSERT, 0); }
+		public TerminalNode K_UPDATE() { return getToken(CQSqlGrammarExtParser.K_UPDATE, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public List<Database_nameContext> database_name() {
 			return getRuleContexts(Database_nameContext.class);
 		}
 		public Database_nameContext database_name(int i) {
 			return getRuleContext(Database_nameContext.class,i);
 		}
-		public TerminalNode K_BEFORE() { return getToken(DCQGrammarParser.K_BEFORE, 0); }
-		public TerminalNode K_AFTER() { return getToken(DCQGrammarParser.K_AFTER, 0); }
-		public TerminalNode K_INSTEAD() { return getToken(DCQGrammarParser.K_INSTEAD, 0); }
-		public List<TerminalNode> K_OF() { return getTokens(DCQGrammarParser.K_OF); }
+		public TerminalNode K_BEFORE() { return getToken(CQSqlGrammarExtParser.K_BEFORE, 0); }
+		public TerminalNode K_AFTER() { return getToken(CQSqlGrammarExtParser.K_AFTER, 0); }
+		public TerminalNode K_INSTEAD() { return getToken(CQSqlGrammarExtParser.K_INSTEAD, 0); }
+		public List<TerminalNode> K_OF() { return getTokens(CQSqlGrammarExtParser.K_OF); }
 		public TerminalNode K_OF(int i) {
-			return getToken(DCQGrammarParser.K_OF, i);
+			return getToken(CQSqlGrammarExtParser.K_OF, i);
 		}
-		public TerminalNode K_FOR() { return getToken(DCQGrammarParser.K_FOR, 0); }
-		public TerminalNode K_EACH() { return getToken(DCQGrammarParser.K_EACH, 0); }
-		public TerminalNode K_ROW() { return getToken(DCQGrammarParser.K_ROW, 0); }
-		public TerminalNode K_WHEN() { return getToken(DCQGrammarParser.K_WHEN, 0); }
+		public TerminalNode K_FOR() { return getToken(CQSqlGrammarExtParser.K_FOR, 0); }
+		public TerminalNode K_EACH() { return getToken(CQSqlGrammarExtParser.K_EACH, 0); }
+		public TerminalNode K_ROW() { return getToken(CQSqlGrammarExtParser.K_ROW, 0); }
+		public TerminalNode K_WHEN() { return getToken(CQSqlGrammarExtParser.K_WHEN, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode K_TEMP() { return getToken(DCQGrammarParser.K_TEMP, 0); }
-		public TerminalNode K_TEMPORARY() { return getToken(DCQGrammarParser.K_TEMPORARY, 0); }
+		public TerminalNode K_TEMP() { return getToken(CQSqlGrammarExtParser.K_TEMP, 0); }
+		public TerminalNode K_TEMPORARY() { return getToken(CQSqlGrammarExtParser.K_TEMPORARY, 0); }
 		public List<Column_nameContext> column_name() {
 			return getRuleContexts(Column_nameContext.class);
 		}
@@ -4108,15 +4111,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_create_trigger_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCreate_trigger_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCreate_trigger_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCreate_trigger_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCreate_trigger_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCreate_trigger_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCreate_trigger_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4353,38 +4356,38 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Create_view_stmtContext extends ParserRuleContext {
-		public TerminalNode K_CREATE() { return getToken(DCQGrammarParser.K_CREATE, 0); }
-		public TerminalNode K_VIEW() { return getToken(DCQGrammarParser.K_VIEW, 0); }
+		public TerminalNode K_CREATE() { return getToken(CQSqlGrammarExtParser.K_CREATE, 0); }
+		public TerminalNode K_VIEW() { return getToken(CQSqlGrammarExtParser.K_VIEW, 0); }
 		public View_nameContext view_name() {
 			return getRuleContext(View_nameContext.class,0);
 		}
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_TEMP() { return getToken(DCQGrammarParser.K_TEMP, 0); }
-		public TerminalNode K_TEMPORARY() { return getToken(DCQGrammarParser.K_TEMPORARY, 0); }
+		public TerminalNode K_TEMP() { return getToken(CQSqlGrammarExtParser.K_TEMP, 0); }
+		public TerminalNode K_TEMPORARY() { return getToken(CQSqlGrammarExtParser.K_TEMPORARY, 0); }
 		public Create_view_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_create_view_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCreate_view_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCreate_view_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCreate_view_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCreate_view_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCreate_view_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCreate_view_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4460,19 +4463,19 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Create_virtual_table_stmtContext extends ParserRuleContext {
-		public TerminalNode K_CREATE() { return getToken(DCQGrammarParser.K_CREATE, 0); }
-		public TerminalNode K_VIRTUAL() { return getToken(DCQGrammarParser.K_VIRTUAL, 0); }
-		public TerminalNode K_TABLE() { return getToken(DCQGrammarParser.K_TABLE, 0); }
+		public TerminalNode K_CREATE() { return getToken(CQSqlGrammarExtParser.K_CREATE, 0); }
+		public TerminalNode K_VIRTUAL() { return getToken(CQSqlGrammarExtParser.K_VIRTUAL, 0); }
+		public TerminalNode K_TABLE() { return getToken(CQSqlGrammarExtParser.K_TABLE, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
-		public TerminalNode K_USING() { return getToken(DCQGrammarParser.K_USING, 0); }
+		public TerminalNode K_USING() { return getToken(CQSqlGrammarExtParser.K_USING, 0); }
 		public Module_nameContext module_name() {
 			return getRuleContext(Module_nameContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
@@ -4488,15 +4491,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_create_virtual_table_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCreate_virtual_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCreate_virtual_table_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCreate_virtual_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCreate_virtual_table_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCreate_virtual_table_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCreate_virtual_table_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4589,15 +4592,15 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Delete_stmtContext extends ParserRuleContext {
-		public TerminalNode K_DELETE() { return getToken(DCQGrammarParser.K_DELETE, 0); }
-		public TerminalNode K_FROM() { return getToken(DCQGrammarParser.K_FROM, 0); }
+		public TerminalNode K_DELETE() { return getToken(CQSqlGrammarExtParser.K_DELETE, 0); }
+		public TerminalNode K_FROM() { return getToken(CQSqlGrammarExtParser.K_FROM, 0); }
 		public Qualified_table_nameContext qualified_table_name() {
 			return getRuleContext(Qualified_table_nameContext.class,0);
 		}
 		public With_clauseContext with_clause() {
 			return getRuleContext(With_clauseContext.class,0);
 		}
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -4607,15 +4610,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_delete_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDelete_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDelete_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDelete_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDelete_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDelete_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDelete_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4667,46 +4670,46 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Delete_stmt_limitedContext extends ParserRuleContext {
-		public TerminalNode K_DELETE() { return getToken(DCQGrammarParser.K_DELETE, 0); }
-		public TerminalNode K_FROM() { return getToken(DCQGrammarParser.K_FROM, 0); }
+		public TerminalNode K_DELETE() { return getToken(CQSqlGrammarExtParser.K_DELETE, 0); }
+		public TerminalNode K_FROM() { return getToken(CQSqlGrammarExtParser.K_FROM, 0); }
 		public Qualified_table_nameContext qualified_table_name() {
 			return getRuleContext(Qualified_table_nameContext.class,0);
 		}
 		public With_clauseContext with_clause() {
 			return getRuleContext(With_clauseContext.class,0);
 		}
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<Ordering_termContext> ordering_term() {
 			return getRuleContexts(Ordering_termContext.class);
 		}
 		public Ordering_termContext ordering_term(int i) {
 			return getRuleContext(Ordering_termContext.class,i);
 		}
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
 		public Delete_stmt_limitedContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_delete_stmt_limited; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDelete_stmt_limited(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDelete_stmt_limited(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDelete_stmt_limited(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDelete_stmt_limited(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDelete_stmt_limited(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDelete_stmt_limited(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4814,26 +4817,26 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Detach_stmtContext extends ParserRuleContext {
-		public TerminalNode K_DETACH() { return getToken(DCQGrammarParser.K_DETACH, 0); }
+		public TerminalNode K_DETACH() { return getToken(CQSqlGrammarExtParser.K_DETACH, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_DATABASE() { return getToken(DCQGrammarParser.K_DATABASE, 0); }
+		public TerminalNode K_DATABASE() { return getToken(CQSqlGrammarExtParser.K_DATABASE, 0); }
 		public Detach_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_detach_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDetach_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDetach_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDetach_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDetach_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDetach_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDetach_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4872,13 +4875,13 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Drop_index_stmtContext extends ParserRuleContext {
-		public TerminalNode K_DROP() { return getToken(DCQGrammarParser.K_DROP, 0); }
-		public TerminalNode K_INDEX() { return getToken(DCQGrammarParser.K_INDEX, 0); }
+		public TerminalNode K_DROP() { return getToken(CQSqlGrammarExtParser.K_DROP, 0); }
+		public TerminalNode K_INDEX() { return getToken(CQSqlGrammarExtParser.K_INDEX, 0); }
 		public Index_nameContext index_name() {
 			return getRuleContext(Index_nameContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
@@ -4888,15 +4891,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_drop_index_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDrop_index_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDrop_index_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDrop_index_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDrop_index_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDrop_index_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDrop_index_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4951,13 +4954,13 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Drop_table_stmtContext extends ParserRuleContext {
-		public TerminalNode K_DROP() { return getToken(DCQGrammarParser.K_DROP, 0); }
-		public TerminalNode K_TABLE() { return getToken(DCQGrammarParser.K_TABLE, 0); }
+		public TerminalNode K_DROP() { return getToken(CQSqlGrammarExtParser.K_DROP, 0); }
+		public TerminalNode K_TABLE() { return getToken(CQSqlGrammarExtParser.K_TABLE, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
@@ -4967,15 +4970,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_drop_table_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDrop_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDrop_table_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDrop_table_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDrop_table_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDrop_table_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDrop_table_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5030,13 +5033,13 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Drop_trigger_stmtContext extends ParserRuleContext {
-		public TerminalNode K_DROP() { return getToken(DCQGrammarParser.K_DROP, 0); }
-		public TerminalNode K_TRIGGER() { return getToken(DCQGrammarParser.K_TRIGGER, 0); }
+		public TerminalNode K_DROP() { return getToken(CQSqlGrammarExtParser.K_DROP, 0); }
+		public TerminalNode K_TRIGGER() { return getToken(CQSqlGrammarExtParser.K_TRIGGER, 0); }
 		public Trigger_nameContext trigger_name() {
 			return getRuleContext(Trigger_nameContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
@@ -5046,15 +5049,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_drop_trigger_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDrop_trigger_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDrop_trigger_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDrop_trigger_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDrop_trigger_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDrop_trigger_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDrop_trigger_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5109,13 +5112,13 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Drop_view_stmtContext extends ParserRuleContext {
-		public TerminalNode K_DROP() { return getToken(DCQGrammarParser.K_DROP, 0); }
-		public TerminalNode K_VIEW() { return getToken(DCQGrammarParser.K_VIEW, 0); }
+		public TerminalNode K_DROP() { return getToken(CQSqlGrammarExtParser.K_DROP, 0); }
+		public TerminalNode K_VIEW() { return getToken(CQSqlGrammarExtParser.K_VIEW, 0); }
 		public View_nameContext view_name() {
 			return getRuleContext(View_nameContext.class,0);
 		}
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
@@ -5125,15 +5128,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_drop_view_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDrop_view_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDrop_view_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDrop_view_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDrop_view_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDrop_view_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDrop_view_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5194,7 +5197,7 @@ public class DCQGrammarParser extends Parser {
 		public Select_coreContext select_core(int i) {
 			return getRuleContext(Select_coreContext.class,i);
 		}
-		public TerminalNode K_WITH() { return getToken(DCQGrammarParser.K_WITH, 0); }
+		public TerminalNode K_WITH() { return getToken(CQSqlGrammarExtParser.K_WITH, 0); }
 		public List<Common_table_expressionContext> common_table_expression() {
 			return getRuleContexts(Common_table_expressionContext.class);
 		}
@@ -5207,38 +5210,38 @@ public class DCQGrammarParser extends Parser {
 		public Compound_operatorContext compound_operator(int i) {
 			return getRuleContext(Compound_operatorContext.class,i);
 		}
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<Ordering_termContext> ordering_term() {
 			return getRuleContexts(Ordering_termContext.class);
 		}
 		public Ordering_termContext ordering_term(int i) {
 			return getRuleContext(Ordering_termContext.class,i);
 		}
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode K_RECURSIVE() { return getToken(DCQGrammarParser.K_RECURSIVE, 0); }
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
+		public TerminalNode K_RECURSIVE() { return getToken(CQSqlGrammarExtParser.K_RECURSIVE, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
 		public Factored_select_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_factored_select_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterFactored_select_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterFactored_select_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitFactored_select_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitFactored_select_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitFactored_select_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitFactored_select_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5375,18 +5378,18 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Insert_stmtContext extends ParserRuleContext {
-		public TerminalNode K_INTO() { return getToken(DCQGrammarParser.K_INTO, 0); }
+		public TerminalNode K_INTO() { return getToken(CQSqlGrammarExtParser.K_INTO, 0); }
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
-		public TerminalNode K_INSERT() { return getToken(DCQGrammarParser.K_INSERT, 0); }
-		public TerminalNode K_REPLACE() { return getToken(DCQGrammarParser.K_REPLACE, 0); }
-		public TerminalNode K_OR() { return getToken(DCQGrammarParser.K_OR, 0); }
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_ABORT() { return getToken(DCQGrammarParser.K_ABORT, 0); }
-		public TerminalNode K_FAIL() { return getToken(DCQGrammarParser.K_FAIL, 0); }
-		public TerminalNode K_IGNORE() { return getToken(DCQGrammarParser.K_IGNORE, 0); }
-		public TerminalNode K_VALUES() { return getToken(DCQGrammarParser.K_VALUES, 0); }
+		public TerminalNode K_INSERT() { return getToken(CQSqlGrammarExtParser.K_INSERT, 0); }
+		public TerminalNode K_REPLACE() { return getToken(CQSqlGrammarExtParser.K_REPLACE, 0); }
+		public TerminalNode K_OR() { return getToken(CQSqlGrammarExtParser.K_OR, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_ABORT() { return getToken(CQSqlGrammarExtParser.K_ABORT, 0); }
+		public TerminalNode K_FAIL() { return getToken(CQSqlGrammarExtParser.K_FAIL, 0); }
+		public TerminalNode K_IGNORE() { return getToken(CQSqlGrammarExtParser.K_IGNORE, 0); }
+		public TerminalNode K_VALUES() { return getToken(CQSqlGrammarExtParser.K_VALUES, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
@@ -5396,7 +5399,7 @@ public class DCQGrammarParser extends Parser {
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
 		}
-		public TerminalNode K_DEFAULT() { return getToken(DCQGrammarParser.K_DEFAULT, 0); }
+		public TerminalNode K_DEFAULT() { return getToken(CQSqlGrammarExtParser.K_DEFAULT, 0); }
 		public With_clauseContext with_clause() {
 			return getRuleContext(With_clauseContext.class,0);
 		}
@@ -5415,15 +5418,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_insert_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterInsert_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterInsert_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitInsert_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitInsert_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitInsert_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitInsert_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5651,7 +5654,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Pragma_stmtContext extends ParserRuleContext {
-		public TerminalNode K_PRAGMA() { return getToken(DCQGrammarParser.K_PRAGMA, 0); }
+		public TerminalNode K_PRAGMA() { return getToken(CQSqlGrammarExtParser.K_PRAGMA, 0); }
 		public Pragma_nameContext pragma_name() {
 			return getRuleContext(Pragma_nameContext.class,0);
 		}
@@ -5667,15 +5670,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_pragma_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterPragma_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterPragma_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitPragma_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitPragma_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitPragma_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitPragma_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5766,7 +5769,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Reindex_stmtContext extends ParserRuleContext {
-		public TerminalNode K_REINDEX() { return getToken(DCQGrammarParser.K_REINDEX, 0); }
+		public TerminalNode K_REINDEX() { return getToken(CQSqlGrammarExtParser.K_REINDEX, 0); }
 		public Collation_nameContext collation_name() {
 			return getRuleContext(Collation_nameContext.class,0);
 		}
@@ -5785,15 +5788,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_reindex_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterReindex_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterReindex_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitReindex_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitReindex_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitReindex_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitReindex_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5862,26 +5865,26 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Release_stmtContext extends ParserRuleContext {
-		public TerminalNode K_RELEASE() { return getToken(DCQGrammarParser.K_RELEASE, 0); }
+		public TerminalNode K_RELEASE() { return getToken(CQSqlGrammarExtParser.K_RELEASE, 0); }
 		public Savepoint_nameContext savepoint_name() {
 			return getRuleContext(Savepoint_nameContext.class,0);
 		}
-		public TerminalNode K_SAVEPOINT() { return getToken(DCQGrammarParser.K_SAVEPOINT, 0); }
+		public TerminalNode K_SAVEPOINT() { return getToken(CQSqlGrammarExtParser.K_SAVEPOINT, 0); }
 		public Release_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_release_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterRelease_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterRelease_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitRelease_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitRelease_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitRelease_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitRelease_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5920,31 +5923,31 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Rollback_stmtContext extends ParserRuleContext {
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_TRANSACTION() { return getToken(DCQGrammarParser.K_TRANSACTION, 0); }
-		public TerminalNode K_TO() { return getToken(DCQGrammarParser.K_TO, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_TRANSACTION() { return getToken(CQSqlGrammarExtParser.K_TRANSACTION, 0); }
+		public TerminalNode K_TO() { return getToken(CQSqlGrammarExtParser.K_TO, 0); }
 		public Savepoint_nameContext savepoint_name() {
 			return getRuleContext(Savepoint_nameContext.class,0);
 		}
 		public Transaction_nameContext transaction_name() {
 			return getRuleContext(Transaction_nameContext.class,0);
 		}
-		public TerminalNode K_SAVEPOINT() { return getToken(DCQGrammarParser.K_SAVEPOINT, 0); }
+		public TerminalNode K_SAVEPOINT() { return getToken(CQSqlGrammarExtParser.K_SAVEPOINT, 0); }
 		public Rollback_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rollback_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterRollback_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterRollback_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitRollback_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitRollback_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitRollback_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitRollback_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6012,7 +6015,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Savepoint_stmtContext extends ParserRuleContext {
-		public TerminalNode K_SAVEPOINT() { return getToken(DCQGrammarParser.K_SAVEPOINT, 0); }
+		public TerminalNode K_SAVEPOINT() { return getToken(CQSqlGrammarExtParser.K_SAVEPOINT, 0); }
 		public Savepoint_nameContext savepoint_name() {
 			return getRuleContext(Savepoint_nameContext.class,0);
 		}
@@ -6022,15 +6025,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_savepoint_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSavepoint_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSavepoint_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSavepoint_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSavepoint_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSavepoint_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSavepoint_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6062,45 +6065,45 @@ public class DCQGrammarParser extends Parser {
 		public Select_coreContext select_core() {
 			return getRuleContext(Select_coreContext.class,0);
 		}
-		public TerminalNode K_WITH() { return getToken(DCQGrammarParser.K_WITH, 0); }
+		public TerminalNode K_WITH() { return getToken(CQSqlGrammarExtParser.K_WITH, 0); }
 		public List<Common_table_expressionContext> common_table_expression() {
 			return getRuleContexts(Common_table_expressionContext.class);
 		}
 		public Common_table_expressionContext common_table_expression(int i) {
 			return getRuleContext(Common_table_expressionContext.class,i);
 		}
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<Ordering_termContext> ordering_term() {
 			return getRuleContexts(Ordering_termContext.class);
 		}
 		public Ordering_termContext ordering_term(int i) {
 			return getRuleContext(Ordering_termContext.class,i);
 		}
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode K_RECURSIVE() { return getToken(DCQGrammarParser.K_RECURSIVE, 0); }
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
+		public TerminalNode K_RECURSIVE() { return getToken(CQSqlGrammarExtParser.K_RECURSIVE, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
 		public Simple_select_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_simple_select_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSimple_select_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSimple_select_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSimple_select_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSimple_select_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSimple_select_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSimple_select_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6227,7 +6230,7 @@ public class DCQGrammarParser extends Parser {
 		public Select_or_valuesContext select_or_values(int i) {
 			return getRuleContext(Select_or_valuesContext.class,i);
 		}
-		public TerminalNode K_WITH() { return getToken(DCQGrammarParser.K_WITH, 0); }
+		public TerminalNode K_WITH() { return getToken(CQSqlGrammarExtParser.K_WITH, 0); }
 		public List<Common_table_expressionContext> common_table_expression() {
 			return getRuleContexts(Common_table_expressionContext.class);
 		}
@@ -6240,38 +6243,38 @@ public class DCQGrammarParser extends Parser {
 		public Compound_operatorContext compound_operator(int i) {
 			return getRuleContext(Compound_operatorContext.class,i);
 		}
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<Ordering_termContext> ordering_term() {
 			return getRuleContexts(Ordering_termContext.class);
 		}
 		public Ordering_termContext ordering_term(int i) {
 			return getRuleContext(Ordering_termContext.class,i);
 		}
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode K_RECURSIVE() { return getToken(DCQGrammarParser.K_RECURSIVE, 0); }
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
+		public TerminalNode K_RECURSIVE() { return getToken(CQSqlGrammarExtParser.K_RECURSIVE, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
 		public Select_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_select_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSelect_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSelect_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSelect_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSelect_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSelect_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSelect_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6408,25 +6411,25 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Select_or_valuesContext extends ParserRuleContext {
-		public TerminalNode K_SELECT() { return getToken(DCQGrammarParser.K_SELECT, 0); }
+		public TerminalNode K_SELECT() { return getToken(CQSqlGrammarExtParser.K_SELECT, 0); }
 		public List<Result_columnContext> result_column() {
 			return getRuleContexts(Result_columnContext.class);
 		}
 		public Result_columnContext result_column(int i) {
 			return getRuleContext(Result_columnContext.class,i);
 		}
-		public TerminalNode K_FROM() { return getToken(DCQGrammarParser.K_FROM, 0); }
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_FROM() { return getToken(CQSqlGrammarExtParser.K_FROM, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode K_GROUP() { return getToken(DCQGrammarParser.K_GROUP, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
-		public TerminalNode K_DISTINCT() { return getToken(DCQGrammarParser.K_DISTINCT, 0); }
-		public TerminalNode K_ALL() { return getToken(DCQGrammarParser.K_ALL, 0); }
+		public TerminalNode K_GROUP() { return getToken(CQSqlGrammarExtParser.K_GROUP, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
+		public TerminalNode K_DISTINCT() { return getToken(CQSqlGrammarExtParser.K_DISTINCT, 0); }
+		public TerminalNode K_ALL() { return getToken(CQSqlGrammarExtParser.K_ALL, 0); }
 		public List<Table_or_subqueryContext> table_or_subquery() {
 			return getRuleContexts(Table_or_subqueryContext.class);
 		}
@@ -6436,23 +6439,23 @@ public class DCQGrammarParser extends Parser {
 		public Join_clauseContext join_clause() {
 			return getRuleContext(Join_clauseContext.class,0);
 		}
-		public TerminalNode K_HAVING() { return getToken(DCQGrammarParser.K_HAVING, 0); }
-		public TerminalNode K_VALUES() { return getToken(DCQGrammarParser.K_VALUES, 0); }
+		public TerminalNode K_HAVING() { return getToken(CQSqlGrammarExtParser.K_HAVING, 0); }
+		public TerminalNode K_VALUES() { return getToken(CQSqlGrammarExtParser.K_VALUES, 0); }
 		public Select_or_valuesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_select_or_values; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSelect_or_values(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSelect_or_values(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSelect_or_values(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSelect_or_values(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSelect_or_values(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSelect_or_values(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6677,11 +6680,11 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Update_stmtContext extends ParserRuleContext {
-		public TerminalNode K_UPDATE() { return getToken(DCQGrammarParser.K_UPDATE, 0); }
+		public TerminalNode K_UPDATE() { return getToken(CQSqlGrammarExtParser.K_UPDATE, 0); }
 		public Qualified_table_nameContext qualified_table_name() {
 			return getRuleContext(Qualified_table_nameContext.class,0);
 		}
-		public TerminalNode K_SET() { return getToken(DCQGrammarParser.K_SET, 0); }
+		public TerminalNode K_SET() { return getToken(CQSqlGrammarExtParser.K_SET, 0); }
 		public List<Column_nameContext> column_name() {
 			return getRuleContexts(Column_nameContext.class);
 		}
@@ -6697,28 +6700,28 @@ public class DCQGrammarParser extends Parser {
 		public With_clauseContext with_clause() {
 			return getRuleContext(With_clauseContext.class,0);
 		}
-		public TerminalNode K_OR() { return getToken(DCQGrammarParser.K_OR, 0); }
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_ABORT() { return getToken(DCQGrammarParser.K_ABORT, 0); }
-		public TerminalNode K_REPLACE() { return getToken(DCQGrammarParser.K_REPLACE, 0); }
-		public TerminalNode K_FAIL() { return getToken(DCQGrammarParser.K_FAIL, 0); }
-		public TerminalNode K_IGNORE() { return getToken(DCQGrammarParser.K_IGNORE, 0); }
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_OR() { return getToken(CQSqlGrammarExtParser.K_OR, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_ABORT() { return getToken(CQSqlGrammarExtParser.K_ABORT, 0); }
+		public TerminalNode K_REPLACE() { return getToken(CQSqlGrammarExtParser.K_REPLACE, 0); }
+		public TerminalNode K_FAIL() { return getToken(CQSqlGrammarExtParser.K_FAIL, 0); }
+		public TerminalNode K_IGNORE() { return getToken(CQSqlGrammarExtParser.K_IGNORE, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public Update_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_update_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterUpdate_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterUpdate_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitUpdate_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitUpdate_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitUpdate_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitUpdate_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6840,11 +6843,11 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Update_stmt_limitedContext extends ParserRuleContext {
-		public TerminalNode K_UPDATE() { return getToken(DCQGrammarParser.K_UPDATE, 0); }
+		public TerminalNode K_UPDATE() { return getToken(CQSqlGrammarExtParser.K_UPDATE, 0); }
 		public Qualified_table_nameContext qualified_table_name() {
 			return getRuleContext(Qualified_table_nameContext.class,0);
 		}
-		public TerminalNode K_SET() { return getToken(DCQGrammarParser.K_SET, 0); }
+		public TerminalNode K_SET() { return getToken(CQSqlGrammarExtParser.K_SET, 0); }
 		public List<Column_nameContext> column_name() {
 			return getRuleContexts(Column_nameContext.class);
 		}
@@ -6860,38 +6863,38 @@ public class DCQGrammarParser extends Parser {
 		public With_clauseContext with_clause() {
 			return getRuleContext(With_clauseContext.class,0);
 		}
-		public TerminalNode K_OR() { return getToken(DCQGrammarParser.K_OR, 0); }
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_ABORT() { return getToken(DCQGrammarParser.K_ABORT, 0); }
-		public TerminalNode K_REPLACE() { return getToken(DCQGrammarParser.K_REPLACE, 0); }
-		public TerminalNode K_FAIL() { return getToken(DCQGrammarParser.K_FAIL, 0); }
-		public TerminalNode K_IGNORE() { return getToken(DCQGrammarParser.K_IGNORE, 0); }
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_OR() { return getToken(CQSqlGrammarExtParser.K_OR, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_ABORT() { return getToken(CQSqlGrammarExtParser.K_ABORT, 0); }
+		public TerminalNode K_REPLACE() { return getToken(CQSqlGrammarExtParser.K_REPLACE, 0); }
+		public TerminalNode K_FAIL() { return getToken(CQSqlGrammarExtParser.K_FAIL, 0); }
+		public TerminalNode K_IGNORE() { return getToken(CQSqlGrammarExtParser.K_IGNORE, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public List<Ordering_termContext> ordering_term() {
 			return getRuleContexts(Ordering_termContext.class);
 		}
 		public Ordering_termContext ordering_term(int i) {
 			return getRuleContext(Ordering_termContext.class,i);
 		}
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
 		public Update_stmt_limitedContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_update_stmt_limited; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterUpdate_stmt_limited(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterUpdate_stmt_limited(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitUpdate_stmt_limited(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitUpdate_stmt_limited(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitUpdate_stmt_limited(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitUpdate_stmt_limited(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7069,22 +7072,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Vacuum_stmtContext extends ParserRuleContext {
-		public TerminalNode K_VACUUM() { return getToken(DCQGrammarParser.K_VACUUM, 0); }
+		public TerminalNode K_VACUUM() { return getToken(CQSqlGrammarExtParser.K_VACUUM, 0); }
 		public Vacuum_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_vacuum_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterVacuum_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterVacuum_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitVacuum_stmt(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitVacuum_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitVacuum_stmt(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitVacuum_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7129,15 +7132,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_column_def; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterColumn_def(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterColumn_def(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitColumn_def(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitColumn_def(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitColumn_def(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitColumn_def(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7207,15 +7210,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_type_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterType_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterType_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitType_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitType_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitType_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitType_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7289,26 +7292,26 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Column_constraintContext extends ParserRuleContext {
-		public TerminalNode K_PRIMARY() { return getToken(DCQGrammarParser.K_PRIMARY, 0); }
-		public TerminalNode K_KEY() { return getToken(DCQGrammarParser.K_KEY, 0); }
+		public TerminalNode K_PRIMARY() { return getToken(CQSqlGrammarExtParser.K_PRIMARY, 0); }
+		public TerminalNode K_KEY() { return getToken(CQSqlGrammarExtParser.K_KEY, 0); }
 		public Conflict_clauseContext conflict_clause() {
 			return getRuleContext(Conflict_clauseContext.class,0);
 		}
-		public TerminalNode K_NULL() { return getToken(DCQGrammarParser.K_NULL, 0); }
-		public TerminalNode K_UNIQUE() { return getToken(DCQGrammarParser.K_UNIQUE, 0); }
-		public TerminalNode K_CHECK() { return getToken(DCQGrammarParser.K_CHECK, 0); }
+		public TerminalNode K_NULL() { return getToken(CQSqlGrammarExtParser.K_NULL, 0); }
+		public TerminalNode K_UNIQUE() { return getToken(CQSqlGrammarExtParser.K_UNIQUE, 0); }
+		public TerminalNode K_CHECK() { return getToken(CQSqlGrammarExtParser.K_CHECK, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode K_DEFAULT() { return getToken(DCQGrammarParser.K_DEFAULT, 0); }
-		public TerminalNode K_COLLATE() { return getToken(DCQGrammarParser.K_COLLATE, 0); }
+		public TerminalNode K_DEFAULT() { return getToken(CQSqlGrammarExtParser.K_DEFAULT, 0); }
+		public TerminalNode K_COLLATE() { return getToken(CQSqlGrammarExtParser.K_COLLATE, 0); }
 		public Collation_nameContext collation_name() {
 			return getRuleContext(Collation_nameContext.class,0);
 		}
 		public Foreign_key_clauseContext foreign_key_clause() {
 			return getRuleContext(Foreign_key_clauseContext.class,0);
 		}
-		public TerminalNode K_CONSTRAINT() { return getToken(DCQGrammarParser.K_CONSTRAINT, 0); }
+		public TerminalNode K_CONSTRAINT() { return getToken(CQSqlGrammarExtParser.K_CONSTRAINT, 0); }
 		public NameContext name() {
 			return getRuleContext(NameContext.class,0);
 		}
@@ -7318,25 +7321,25 @@ public class DCQGrammarParser extends Parser {
 		public Literal_valueContext literal_value() {
 			return getRuleContext(Literal_valueContext.class,0);
 		}
-		public TerminalNode K_AUTOINCREMENT() { return getToken(DCQGrammarParser.K_AUTOINCREMENT, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_ASC() { return getToken(DCQGrammarParser.K_ASC, 0); }
-		public TerminalNode K_DESC() { return getToken(DCQGrammarParser.K_DESC, 0); }
+		public TerminalNode K_AUTOINCREMENT() { return getToken(CQSqlGrammarExtParser.K_AUTOINCREMENT, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_ASC() { return getToken(CQSqlGrammarExtParser.K_ASC, 0); }
+		public TerminalNode K_DESC() { return getToken(CQSqlGrammarExtParser.K_DESC, 0); }
 		public Column_constraintContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_column_constraint; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterColumn_constraint(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterColumn_constraint(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitColumn_constraint(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitColumn_constraint(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitColumn_constraint(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitColumn_constraint(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7495,28 +7498,28 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Conflict_clauseContext extends ParserRuleContext {
-		public TerminalNode K_ON() { return getToken(DCQGrammarParser.K_ON, 0); }
-		public TerminalNode K_CONFLICT() { return getToken(DCQGrammarParser.K_CONFLICT, 0); }
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_ABORT() { return getToken(DCQGrammarParser.K_ABORT, 0); }
-		public TerminalNode K_FAIL() { return getToken(DCQGrammarParser.K_FAIL, 0); }
-		public TerminalNode K_IGNORE() { return getToken(DCQGrammarParser.K_IGNORE, 0); }
-		public TerminalNode K_REPLACE() { return getToken(DCQGrammarParser.K_REPLACE, 0); }
+		public TerminalNode K_ON() { return getToken(CQSqlGrammarExtParser.K_ON, 0); }
+		public TerminalNode K_CONFLICT() { return getToken(CQSqlGrammarExtParser.K_CONFLICT, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_ABORT() { return getToken(CQSqlGrammarExtParser.K_ABORT, 0); }
+		public TerminalNode K_FAIL() { return getToken(CQSqlGrammarExtParser.K_FAIL, 0); }
+		public TerminalNode K_IGNORE() { return getToken(CQSqlGrammarExtParser.K_IGNORE, 0); }
+		public TerminalNode K_REPLACE() { return getToken(CQSqlGrammarExtParser.K_REPLACE, 0); }
 		public Conflict_clauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_conflict_clause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterConflict_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterConflict_clause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitConflict_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitConflict_clause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitConflict_clause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitConflict_clause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7563,7 +7566,7 @@ public class DCQGrammarParser extends Parser {
 		public Literal_valueContext literal_value() {
 			return getRuleContext(Literal_valueContext.class,0);
 		}
-		public TerminalNode BIND_PARAMETER() { return getToken(DCQGrammarParser.BIND_PARAMETER, 0); }
+		public TerminalNode BIND_PARAMETER() { return getToken(CQSqlGrammarExtParser.BIND_PARAMETER, 0); }
 		public Column_nameContext column_name() {
 			return getRuleContext(Column_nameContext.class,0);
 		}
@@ -7585,63 +7588,63 @@ public class DCQGrammarParser extends Parser {
 		public Function_nameContext function_name() {
 			return getRuleContext(Function_nameContext.class,0);
 		}
-		public TerminalNode K_DISTINCT() { return getToken(DCQGrammarParser.K_DISTINCT, 0); }
-		public TerminalNode K_CAST() { return getToken(DCQGrammarParser.K_CAST, 0); }
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_DISTINCT() { return getToken(CQSqlGrammarExtParser.K_DISTINCT, 0); }
+		public TerminalNode K_CAST() { return getToken(CQSqlGrammarExtParser.K_CAST, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public Type_nameContext type_name() {
 			return getRuleContext(Type_nameContext.class,0);
 		}
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
 		}
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_CASE() { return getToken(DCQGrammarParser.K_CASE, 0); }
-		public TerminalNode K_END() { return getToken(DCQGrammarParser.K_END, 0); }
-		public List<TerminalNode> K_WHEN() { return getTokens(DCQGrammarParser.K_WHEN); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_CASE() { return getToken(CQSqlGrammarExtParser.K_CASE, 0); }
+		public TerminalNode K_END() { return getToken(CQSqlGrammarExtParser.K_END, 0); }
+		public List<TerminalNode> K_WHEN() { return getTokens(CQSqlGrammarExtParser.K_WHEN); }
 		public TerminalNode K_WHEN(int i) {
-			return getToken(DCQGrammarParser.K_WHEN, i);
+			return getToken(CQSqlGrammarExtParser.K_WHEN, i);
 		}
-		public List<TerminalNode> K_THEN() { return getTokens(DCQGrammarParser.K_THEN); }
+		public List<TerminalNode> K_THEN() { return getTokens(CQSqlGrammarExtParser.K_THEN); }
 		public TerminalNode K_THEN(int i) {
-			return getToken(DCQGrammarParser.K_THEN, i);
+			return getToken(CQSqlGrammarExtParser.K_THEN, i);
 		}
-		public TerminalNode K_ELSE() { return getToken(DCQGrammarParser.K_ELSE, 0); }
+		public TerminalNode K_ELSE() { return getToken(CQSqlGrammarExtParser.K_ELSE, 0); }
 		public Raise_functionContext raise_function() {
 			return getRuleContext(Raise_functionContext.class,0);
 		}
-		public TerminalNode K_IS() { return getToken(DCQGrammarParser.K_IS, 0); }
-		public TerminalNode K_IN() { return getToken(DCQGrammarParser.K_IN, 0); }
-		public TerminalNode K_LIKE() { return getToken(DCQGrammarParser.K_LIKE, 0); }
-		public TerminalNode K_GLOB() { return getToken(DCQGrammarParser.K_GLOB, 0); }
-		public TerminalNode K_MATCH() { return getToken(DCQGrammarParser.K_MATCH, 0); }
-		public TerminalNode K_REGEXP() { return getToken(DCQGrammarParser.K_REGEXP, 0); }
-		public TerminalNode K_AND() { return getToken(DCQGrammarParser.K_AND, 0); }
-		public TerminalNode K_OR() { return getToken(DCQGrammarParser.K_OR, 0); }
-		public TerminalNode K_BETWEEN() { return getToken(DCQGrammarParser.K_BETWEEN, 0); }
-		public TerminalNode K_COLLATE() { return getToken(DCQGrammarParser.K_COLLATE, 0); }
+		public TerminalNode K_IS() { return getToken(CQSqlGrammarExtParser.K_IS, 0); }
+		public TerminalNode K_IN() { return getToken(CQSqlGrammarExtParser.K_IN, 0); }
+		public TerminalNode K_LIKE() { return getToken(CQSqlGrammarExtParser.K_LIKE, 0); }
+		public TerminalNode K_GLOB() { return getToken(CQSqlGrammarExtParser.K_GLOB, 0); }
+		public TerminalNode K_MATCH() { return getToken(CQSqlGrammarExtParser.K_MATCH, 0); }
+		public TerminalNode K_REGEXP() { return getToken(CQSqlGrammarExtParser.K_REGEXP, 0); }
+		public TerminalNode K_AND() { return getToken(CQSqlGrammarExtParser.K_AND, 0); }
+		public TerminalNode K_OR() { return getToken(CQSqlGrammarExtParser.K_OR, 0); }
+		public TerminalNode K_BETWEEN() { return getToken(CQSqlGrammarExtParser.K_BETWEEN, 0); }
+		public TerminalNode K_COLLATE() { return getToken(CQSqlGrammarExtParser.K_COLLATE, 0); }
 		public Collation_nameContext collation_name() {
 			return getRuleContext(Collation_nameContext.class,0);
 		}
-		public TerminalNode K_ESCAPE() { return getToken(DCQGrammarParser.K_ESCAPE, 0); }
-		public TerminalNode K_ISNULL() { return getToken(DCQGrammarParser.K_ISNULL, 0); }
-		public TerminalNode K_NOTNULL() { return getToken(DCQGrammarParser.K_NOTNULL, 0); }
-		public TerminalNode K_NULL() { return getToken(DCQGrammarParser.K_NULL, 0); }
+		public TerminalNode K_ESCAPE() { return getToken(CQSqlGrammarExtParser.K_ESCAPE, 0); }
+		public TerminalNode K_ISNULL() { return getToken(CQSqlGrammarExtParser.K_ISNULL, 0); }
+		public TerminalNode K_NOTNULL() { return getToken(CQSqlGrammarExtParser.K_NOTNULL, 0); }
+		public TerminalNode K_NULL() { return getToken(CQSqlGrammarExtParser.K_NULL, 0); }
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterExpr(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitExpr(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitExpr(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8442,7 +8445,7 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Foreign_key_clauseContext extends ParserRuleContext {
-		public TerminalNode K_REFERENCES() { return getToken(DCQGrammarParser.K_REFERENCES, 0); }
+		public TerminalNode K_REFERENCES() { return getToken(CQSqlGrammarExtParser.K_REFERENCES, 0); }
 		public Foreign_tableContext foreign_table() {
 			return getRuleContext(Foreign_tableContext.class,0);
 		}
@@ -8452,14 +8455,14 @@ public class DCQGrammarParser extends Parser {
 		public Column_nameContext column_name(int i) {
 			return getRuleContext(Column_nameContext.class,i);
 		}
-		public TerminalNode K_DEFERRABLE() { return getToken(DCQGrammarParser.K_DEFERRABLE, 0); }
-		public List<TerminalNode> K_ON() { return getTokens(DCQGrammarParser.K_ON); }
+		public TerminalNode K_DEFERRABLE() { return getToken(CQSqlGrammarExtParser.K_DEFERRABLE, 0); }
+		public List<TerminalNode> K_ON() { return getTokens(CQSqlGrammarExtParser.K_ON); }
 		public TerminalNode K_ON(int i) {
-			return getToken(DCQGrammarParser.K_ON, i);
+			return getToken(CQSqlGrammarExtParser.K_ON, i);
 		}
-		public List<TerminalNode> K_MATCH() { return getTokens(DCQGrammarParser.K_MATCH); }
+		public List<TerminalNode> K_MATCH() { return getTokens(CQSqlGrammarExtParser.K_MATCH); }
 		public TerminalNode K_MATCH(int i) {
-			return getToken(DCQGrammarParser.K_MATCH, i);
+			return getToken(CQSqlGrammarExtParser.K_MATCH, i);
 		}
 		public List<NameContext> name() {
 			return getRuleContexts(NameContext.class);
@@ -8467,45 +8470,45 @@ public class DCQGrammarParser extends Parser {
 		public NameContext name(int i) {
 			return getRuleContext(NameContext.class,i);
 		}
-		public List<TerminalNode> K_DELETE() { return getTokens(DCQGrammarParser.K_DELETE); }
+		public List<TerminalNode> K_DELETE() { return getTokens(CQSqlGrammarExtParser.K_DELETE); }
 		public TerminalNode K_DELETE(int i) {
-			return getToken(DCQGrammarParser.K_DELETE, i);
+			return getToken(CQSqlGrammarExtParser.K_DELETE, i);
 		}
-		public List<TerminalNode> K_UPDATE() { return getTokens(DCQGrammarParser.K_UPDATE); }
+		public List<TerminalNode> K_UPDATE() { return getTokens(CQSqlGrammarExtParser.K_UPDATE); }
 		public TerminalNode K_UPDATE(int i) {
-			return getToken(DCQGrammarParser.K_UPDATE, i);
+			return getToken(CQSqlGrammarExtParser.K_UPDATE, i);
 		}
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_INITIALLY() { return getToken(DCQGrammarParser.K_INITIALLY, 0); }
-		public TerminalNode K_DEFERRED() { return getToken(DCQGrammarParser.K_DEFERRED, 0); }
-		public TerminalNode K_IMMEDIATE() { return getToken(DCQGrammarParser.K_IMMEDIATE, 0); }
-		public List<TerminalNode> K_SET() { return getTokens(DCQGrammarParser.K_SET); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_INITIALLY() { return getToken(CQSqlGrammarExtParser.K_INITIALLY, 0); }
+		public TerminalNode K_DEFERRED() { return getToken(CQSqlGrammarExtParser.K_DEFERRED, 0); }
+		public TerminalNode K_IMMEDIATE() { return getToken(CQSqlGrammarExtParser.K_IMMEDIATE, 0); }
+		public List<TerminalNode> K_SET() { return getTokens(CQSqlGrammarExtParser.K_SET); }
 		public TerminalNode K_SET(int i) {
-			return getToken(DCQGrammarParser.K_SET, i);
+			return getToken(CQSqlGrammarExtParser.K_SET, i);
 		}
-		public List<TerminalNode> K_NULL() { return getTokens(DCQGrammarParser.K_NULL); }
+		public List<TerminalNode> K_NULL() { return getTokens(CQSqlGrammarExtParser.K_NULL); }
 		public TerminalNode K_NULL(int i) {
-			return getToken(DCQGrammarParser.K_NULL, i);
+			return getToken(CQSqlGrammarExtParser.K_NULL, i);
 		}
-		public List<TerminalNode> K_DEFAULT() { return getTokens(DCQGrammarParser.K_DEFAULT); }
+		public List<TerminalNode> K_DEFAULT() { return getTokens(CQSqlGrammarExtParser.K_DEFAULT); }
 		public TerminalNode K_DEFAULT(int i) {
-			return getToken(DCQGrammarParser.K_DEFAULT, i);
+			return getToken(CQSqlGrammarExtParser.K_DEFAULT, i);
 		}
-		public List<TerminalNode> K_CASCADE() { return getTokens(DCQGrammarParser.K_CASCADE); }
+		public List<TerminalNode> K_CASCADE() { return getTokens(CQSqlGrammarExtParser.K_CASCADE); }
 		public TerminalNode K_CASCADE(int i) {
-			return getToken(DCQGrammarParser.K_CASCADE, i);
+			return getToken(CQSqlGrammarExtParser.K_CASCADE, i);
 		}
-		public List<TerminalNode> K_RESTRICT() { return getTokens(DCQGrammarParser.K_RESTRICT); }
+		public List<TerminalNode> K_RESTRICT() { return getTokens(CQSqlGrammarExtParser.K_RESTRICT); }
 		public TerminalNode K_RESTRICT(int i) {
-			return getToken(DCQGrammarParser.K_RESTRICT, i);
+			return getToken(CQSqlGrammarExtParser.K_RESTRICT, i);
 		}
-		public List<TerminalNode> K_NO() { return getTokens(DCQGrammarParser.K_NO); }
+		public List<TerminalNode> K_NO() { return getTokens(CQSqlGrammarExtParser.K_NO); }
 		public TerminalNode K_NO(int i) {
-			return getToken(DCQGrammarParser.K_NO, i);
+			return getToken(CQSqlGrammarExtParser.K_NO, i);
 		}
-		public List<TerminalNode> K_ACTION() { return getTokens(DCQGrammarParser.K_ACTION); }
+		public List<TerminalNode> K_ACTION() { return getTokens(CQSqlGrammarExtParser.K_ACTION); }
 		public TerminalNode K_ACTION(int i) {
-			return getToken(DCQGrammarParser.K_ACTION, i);
+			return getToken(CQSqlGrammarExtParser.K_ACTION, i);
 		}
 		public Foreign_key_clauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -8513,15 +8516,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_foreign_key_clause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterForeign_key_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterForeign_key_clause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitForeign_key_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitForeign_key_clause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitForeign_key_clause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitForeign_key_clause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8697,29 +8700,29 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Raise_functionContext extends ParserRuleContext {
-		public TerminalNode K_RAISE() { return getToken(DCQGrammarParser.K_RAISE, 0); }
-		public TerminalNode K_IGNORE() { return getToken(DCQGrammarParser.K_IGNORE, 0); }
+		public TerminalNode K_RAISE() { return getToken(CQSqlGrammarExtParser.K_RAISE, 0); }
+		public TerminalNode K_IGNORE() { return getToken(CQSqlGrammarExtParser.K_IGNORE, 0); }
 		public Error_messageContext error_message() {
 			return getRuleContext(Error_messageContext.class,0);
 		}
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_ABORT() { return getToken(DCQGrammarParser.K_ABORT, 0); }
-		public TerminalNode K_FAIL() { return getToken(DCQGrammarParser.K_FAIL, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_ABORT() { return getToken(CQSqlGrammarExtParser.K_ABORT, 0); }
+		public TerminalNode K_FAIL() { return getToken(CQSqlGrammarExtParser.K_FAIL, 0); }
 		public Raise_functionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_raise_function; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterRaise_function(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterRaise_function(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitRaise_function(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitRaise_function(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitRaise_function(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitRaise_function(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8782,27 +8785,27 @@ public class DCQGrammarParser extends Parser {
 		public Column_nameContext column_name() {
 			return getRuleContext(Column_nameContext.class,0);
 		}
-		public TerminalNode K_COLLATE() { return getToken(DCQGrammarParser.K_COLLATE, 0); }
+		public TerminalNode K_COLLATE() { return getToken(CQSqlGrammarExtParser.K_COLLATE, 0); }
 		public Collation_nameContext collation_name() {
 			return getRuleContext(Collation_nameContext.class,0);
 		}
-		public TerminalNode K_ASC() { return getToken(DCQGrammarParser.K_ASC, 0); }
-		public TerminalNode K_DESC() { return getToken(DCQGrammarParser.K_DESC, 0); }
+		public TerminalNode K_ASC() { return getToken(CQSqlGrammarExtParser.K_ASC, 0); }
+		public TerminalNode K_DESC() { return getToken(CQSqlGrammarExtParser.K_DESC, 0); }
 		public Indexed_columnContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_indexed_column; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterIndexed_column(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterIndexed_column(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitIndexed_column(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitIndexed_column(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitIndexed_column(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitIndexed_column(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8864,12 +8867,12 @@ public class DCQGrammarParser extends Parser {
 		public Conflict_clauseContext conflict_clause() {
 			return getRuleContext(Conflict_clauseContext.class,0);
 		}
-		public TerminalNode K_CHECK() { return getToken(DCQGrammarParser.K_CHECK, 0); }
+		public TerminalNode K_CHECK() { return getToken(CQSqlGrammarExtParser.K_CHECK, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode K_FOREIGN() { return getToken(DCQGrammarParser.K_FOREIGN, 0); }
-		public TerminalNode K_KEY() { return getToken(DCQGrammarParser.K_KEY, 0); }
+		public TerminalNode K_FOREIGN() { return getToken(CQSqlGrammarExtParser.K_FOREIGN, 0); }
+		public TerminalNode K_KEY() { return getToken(CQSqlGrammarExtParser.K_KEY, 0); }
 		public List<Column_nameContext> column_name() {
 			return getRuleContexts(Column_nameContext.class);
 		}
@@ -8879,27 +8882,27 @@ public class DCQGrammarParser extends Parser {
 		public Foreign_key_clauseContext foreign_key_clause() {
 			return getRuleContext(Foreign_key_clauseContext.class,0);
 		}
-		public TerminalNode K_CONSTRAINT() { return getToken(DCQGrammarParser.K_CONSTRAINT, 0); }
+		public TerminalNode K_CONSTRAINT() { return getToken(CQSqlGrammarExtParser.K_CONSTRAINT, 0); }
 		public NameContext name() {
 			return getRuleContext(NameContext.class,0);
 		}
-		public TerminalNode K_PRIMARY() { return getToken(DCQGrammarParser.K_PRIMARY, 0); }
-		public TerminalNode K_UNIQUE() { return getToken(DCQGrammarParser.K_UNIQUE, 0); }
+		public TerminalNode K_PRIMARY() { return getToken(CQSqlGrammarExtParser.K_PRIMARY, 0); }
+		public TerminalNode K_UNIQUE() { return getToken(CQSqlGrammarExtParser.K_UNIQUE, 0); }
 		public Table_constraintContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_table_constraint; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTable_constraint(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTable_constraint(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTable_constraint(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTable_constraint(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTable_constraint(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTable_constraint(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9033,16 +9036,16 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class With_clauseContext extends ParserRuleContext {
-		public TerminalNode K_WITH() { return getToken(DCQGrammarParser.K_WITH, 0); }
+		public TerminalNode K_WITH() { return getToken(CQSqlGrammarExtParser.K_WITH, 0); }
 		public List<Cte_table_nameContext> cte_table_name() {
 			return getRuleContexts(Cte_table_nameContext.class);
 		}
 		public Cte_table_nameContext cte_table_name(int i) {
 			return getRuleContext(Cte_table_nameContext.class,i);
 		}
-		public List<TerminalNode> K_AS() { return getTokens(DCQGrammarParser.K_AS); }
+		public List<TerminalNode> K_AS() { return getTokens(CQSqlGrammarExtParser.K_AS); }
 		public TerminalNode K_AS(int i) {
-			return getToken(DCQGrammarParser.K_AS, i);
+			return getToken(CQSqlGrammarExtParser.K_AS, i);
 		}
 		public List<Select_stmtContext> select_stmt() {
 			return getRuleContexts(Select_stmtContext.class);
@@ -9050,22 +9053,22 @@ public class DCQGrammarParser extends Parser {
 		public Select_stmtContext select_stmt(int i) {
 			return getRuleContext(Select_stmtContext.class,i);
 		}
-		public TerminalNode K_RECURSIVE() { return getToken(DCQGrammarParser.K_RECURSIVE, 0); }
+		public TerminalNode K_RECURSIVE() { return getToken(CQSqlGrammarExtParser.K_RECURSIVE, 0); }
 		public With_clauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_with_clause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterWith_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterWith_clause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitWith_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitWith_clause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitWith_clause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitWith_clause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9143,27 +9146,27 @@ public class DCQGrammarParser extends Parser {
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public TerminalNode K_INDEXED() { return getToken(DCQGrammarParser.K_INDEXED, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_INDEXED() { return getToken(CQSqlGrammarExtParser.K_INDEXED, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public Index_nameContext index_name() {
 			return getRuleContext(Index_nameContext.class,0);
 		}
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
 		public Qualified_table_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_qualified_table_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterQualified_table_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterQualified_table_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitQualified_table_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitQualified_table_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitQualified_table_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitQualified_table_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9259,27 +9262,27 @@ public class DCQGrammarParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode K_COLLATE() { return getToken(DCQGrammarParser.K_COLLATE, 0); }
+		public TerminalNode K_COLLATE() { return getToken(CQSqlGrammarExtParser.K_COLLATE, 0); }
 		public Collation_nameContext collation_name() {
 			return getRuleContext(Collation_nameContext.class,0);
 		}
-		public TerminalNode K_ASC() { return getToken(DCQGrammarParser.K_ASC, 0); }
-		public TerminalNode K_DESC() { return getToken(DCQGrammarParser.K_DESC, 0); }
+		public TerminalNode K_ASC() { return getToken(CQSqlGrammarExtParser.K_ASC, 0); }
+		public TerminalNode K_DESC() { return getToken(CQSqlGrammarExtParser.K_DESC, 0); }
 		public Ordering_termContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ordering_term; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterOrdering_term(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterOrdering_term(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitOrdering_term(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitOrdering_term(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitOrdering_term(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitOrdering_term(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9338,22 +9341,22 @@ public class DCQGrammarParser extends Parser {
 		public NameContext name() {
 			return getRuleContext(NameContext.class,0);
 		}
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public Pragma_valueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pragma_value; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterPragma_value(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterPragma_value(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitPragma_value(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitPragma_value(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitPragma_value(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitPragma_value(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9403,7 +9406,7 @@ public class DCQGrammarParser extends Parser {
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
 		}
@@ -9419,15 +9422,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_common_table_expression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCommon_table_expression(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCommon_table_expression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCommon_table_expression(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCommon_table_expression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCommon_table_expression(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCommon_table_expression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9501,22 +9504,22 @@ public class DCQGrammarParser extends Parser {
 		public Column_aliasContext column_alias() {
 			return getRuleContext(Column_aliasContext.class,0);
 		}
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public Result_columnContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_result_column; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterResult_column(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterResult_column(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitResult_column(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitResult_column(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitResult_column(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitResult_column(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9595,13 +9598,13 @@ public class DCQGrammarParser extends Parser {
 		public Table_aliasContext table_alias() {
 			return getRuleContext(Table_aliasContext.class,0);
 		}
-		public TerminalNode K_INDEXED() { return getToken(DCQGrammarParser.K_INDEXED, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
+		public TerminalNode K_INDEXED() { return getToken(CQSqlGrammarExtParser.K_INDEXED, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
 		public Index_nameContext index_name() {
 			return getRuleContext(Index_nameContext.class,0);
 		}
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
 		public List<Table_or_subqueryContext> table_or_subquery() {
 			return getRuleContexts(Table_or_subqueryContext.class);
 		}
@@ -9620,15 +9623,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_table_or_subquery; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTable_or_subquery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTable_or_subquery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTable_or_subquery(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTable_or_subquery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTable_or_subquery(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTable_or_subquery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9876,15 +9879,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_join_clause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterJoin_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterJoin_clause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitJoin_clause(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitJoin_clause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitJoin_clause(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitJoin_clause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9930,27 +9933,27 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Join_operatorContext extends ParserRuleContext {
-		public TerminalNode K_JOIN() { return getToken(DCQGrammarParser.K_JOIN, 0); }
-		public TerminalNode K_NATURAL() { return getToken(DCQGrammarParser.K_NATURAL, 0); }
-		public TerminalNode K_LEFT() { return getToken(DCQGrammarParser.K_LEFT, 0); }
-		public TerminalNode K_INNER() { return getToken(DCQGrammarParser.K_INNER, 0); }
-		public TerminalNode K_CROSS() { return getToken(DCQGrammarParser.K_CROSS, 0); }
-		public TerminalNode K_OUTER() { return getToken(DCQGrammarParser.K_OUTER, 0); }
+		public TerminalNode K_JOIN() { return getToken(CQSqlGrammarExtParser.K_JOIN, 0); }
+		public TerminalNode K_NATURAL() { return getToken(CQSqlGrammarExtParser.K_NATURAL, 0); }
+		public TerminalNode K_LEFT() { return getToken(CQSqlGrammarExtParser.K_LEFT, 0); }
+		public TerminalNode K_INNER() { return getToken(CQSqlGrammarExtParser.K_INNER, 0); }
+		public TerminalNode K_CROSS() { return getToken(CQSqlGrammarExtParser.K_CROSS, 0); }
+		public TerminalNode K_OUTER() { return getToken(CQSqlGrammarExtParser.K_OUTER, 0); }
 		public Join_operatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_join_operator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterJoin_operator(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterJoin_operator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitJoin_operator(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitJoin_operator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitJoin_operator(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitJoin_operator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10039,11 +10042,11 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Join_constraintContext extends ParserRuleContext {
-		public TerminalNode K_ON() { return getToken(DCQGrammarParser.K_ON, 0); }
+		public TerminalNode K_ON() { return getToken(CQSqlGrammarExtParser.K_ON, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode K_USING() { return getToken(DCQGrammarParser.K_USING, 0); }
+		public TerminalNode K_USING() { return getToken(CQSqlGrammarExtParser.K_USING, 0); }
 		public List<Column_nameContext> column_name() {
 			return getRuleContexts(Column_nameContext.class);
 		}
@@ -10056,15 +10059,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_join_constraint; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterJoin_constraint(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterJoin_constraint(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitJoin_constraint(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitJoin_constraint(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitJoin_constraint(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitJoin_constraint(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10172,25 +10175,25 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Select_coreContext extends ParserRuleContext {
-		public TerminalNode K_SELECT() { return getToken(DCQGrammarParser.K_SELECT, 0); }
+		public TerminalNode K_SELECT() { return getToken(CQSqlGrammarExtParser.K_SELECT, 0); }
 		public List<Result_columnContext> result_column() {
 			return getRuleContexts(Result_columnContext.class);
 		}
 		public Result_columnContext result_column(int i) {
 			return getRuleContext(Result_columnContext.class,i);
 		}
-		public TerminalNode K_FROM() { return getToken(DCQGrammarParser.K_FROM, 0); }
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
+		public TerminalNode K_FROM() { return getToken(CQSqlGrammarExtParser.K_FROM, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode K_GROUP() { return getToken(DCQGrammarParser.K_GROUP, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
-		public TerminalNode K_DISTINCT() { return getToken(DCQGrammarParser.K_DISTINCT, 0); }
-		public TerminalNode K_ALL() { return getToken(DCQGrammarParser.K_ALL, 0); }
+		public TerminalNode K_GROUP() { return getToken(CQSqlGrammarExtParser.K_GROUP, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
+		public TerminalNode K_DISTINCT() { return getToken(CQSqlGrammarExtParser.K_DISTINCT, 0); }
+		public TerminalNode K_ALL() { return getToken(CQSqlGrammarExtParser.K_ALL, 0); }
 		public List<Table_or_subqueryContext> table_or_subquery() {
 			return getRuleContexts(Table_or_subqueryContext.class);
 		}
@@ -10200,23 +10203,23 @@ public class DCQGrammarParser extends Parser {
 		public Join_clauseContext join_clause() {
 			return getRuleContext(Join_clauseContext.class,0);
 		}
-		public TerminalNode K_HAVING() { return getToken(DCQGrammarParser.K_HAVING, 0); }
-		public TerminalNode K_VALUES() { return getToken(DCQGrammarParser.K_VALUES, 0); }
+		public TerminalNode K_HAVING() { return getToken(CQSqlGrammarExtParser.K_HAVING, 0); }
+		public TerminalNode K_VALUES() { return getToken(CQSqlGrammarExtParser.K_VALUES, 0); }
 		public Select_coreContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_select_core; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSelect_core(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSelect_core(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSelect_core(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSelect_core(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSelect_core(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSelect_core(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10441,25 +10444,25 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Compound_operatorContext extends ParserRuleContext {
-		public TerminalNode K_UNION() { return getToken(DCQGrammarParser.K_UNION, 0); }
-		public TerminalNode K_ALL() { return getToken(DCQGrammarParser.K_ALL, 0); }
-		public TerminalNode K_INTERSECT() { return getToken(DCQGrammarParser.K_INTERSECT, 0); }
-		public TerminalNode K_EXCEPT() { return getToken(DCQGrammarParser.K_EXCEPT, 0); }
+		public TerminalNode K_UNION() { return getToken(CQSqlGrammarExtParser.K_UNION, 0); }
+		public TerminalNode K_ALL() { return getToken(CQSqlGrammarExtParser.K_ALL, 0); }
+		public TerminalNode K_INTERSECT() { return getToken(CQSqlGrammarExtParser.K_INTERSECT, 0); }
+		public TerminalNode K_EXCEPT() { return getToken(CQSqlGrammarExtParser.K_EXCEPT, 0); }
 		public Compound_operatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_compound_operator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCompound_operator(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCompound_operator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCompound_operator(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCompound_operator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCompound_operator(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCompound_operator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10530,15 +10533,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_cte_table_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCte_table_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCte_table_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCte_table_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCte_table_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCte_table_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCte_table_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10595,22 +10598,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Signed_numberContext extends ParserRuleContext {
-		public TerminalNode NUMERIC_LITERAL() { return getToken(DCQGrammarParser.NUMERIC_LITERAL, 0); }
+		public TerminalNode NUMERIC_LITERAL() { return getToken(CQSqlGrammarExtParser.NUMERIC_LITERAL, 0); }
 		public Signed_numberContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_signed_number; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSigned_number(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSigned_number(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSigned_number(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSigned_number(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSigned_number(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSigned_number(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10652,28 +10655,28 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Literal_valueContext extends ParserRuleContext {
-		public TerminalNode NUMERIC_LITERAL() { return getToken(DCQGrammarParser.NUMERIC_LITERAL, 0); }
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
-		public TerminalNode BLOB_LITERAL() { return getToken(DCQGrammarParser.BLOB_LITERAL, 0); }
-		public TerminalNode K_NULL() { return getToken(DCQGrammarParser.K_NULL, 0); }
-		public TerminalNode K_CURRENT_TIME() { return getToken(DCQGrammarParser.K_CURRENT_TIME, 0); }
-		public TerminalNode K_CURRENT_DATE() { return getToken(DCQGrammarParser.K_CURRENT_DATE, 0); }
-		public TerminalNode K_CURRENT_TIMESTAMP() { return getToken(DCQGrammarParser.K_CURRENT_TIMESTAMP, 0); }
+		public TerminalNode NUMERIC_LITERAL() { return getToken(CQSqlGrammarExtParser.NUMERIC_LITERAL, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
+		public TerminalNode BLOB_LITERAL() { return getToken(CQSqlGrammarExtParser.BLOB_LITERAL, 0); }
+		public TerminalNode K_NULL() { return getToken(CQSqlGrammarExtParser.K_NULL, 0); }
+		public TerminalNode K_CURRENT_TIME() { return getToken(CQSqlGrammarExtParser.K_CURRENT_TIME, 0); }
+		public TerminalNode K_CURRENT_DATE() { return getToken(CQSqlGrammarExtParser.K_CURRENT_DATE, 0); }
+		public TerminalNode K_CURRENT_TIMESTAMP() { return getToken(CQSqlGrammarExtParser.K_CURRENT_TIMESTAMP, 0); }
 		public Literal_valueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_literal_value; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterLiteral_value(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterLiteral_value(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitLiteral_value(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitLiteral_value(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitLiteral_value(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitLiteral_value(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10706,22 +10709,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Unary_operatorContext extends ParserRuleContext {
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
 		public Unary_operatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unary_operator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterUnary_operator(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterUnary_operator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitUnary_operator(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitUnary_operator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitUnary_operator(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitUnary_operator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10754,22 +10757,22 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Error_messageContext extends ParserRuleContext {
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public Error_messageContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_error_message; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterError_message(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterError_message(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitError_message(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitError_message(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitError_message(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitError_message(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10808,15 +10811,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_module_argument; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterModule_argument(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterModule_argument(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitModule_argument(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitModule_argument(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitModule_argument(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitModule_argument(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10856,23 +10859,23 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Column_aliasContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public Column_aliasContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_column_alias; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterColumn_alias(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterColumn_alias(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitColumn_alias(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitColumn_alias(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitColumn_alias(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitColumn_alias(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10905,145 +10908,145 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class KeywordContext extends ParserRuleContext {
-		public TerminalNode K_ABORT() { return getToken(DCQGrammarParser.K_ABORT, 0); }
-		public TerminalNode K_ACTION() { return getToken(DCQGrammarParser.K_ACTION, 0); }
-		public TerminalNode K_ADD() { return getToken(DCQGrammarParser.K_ADD, 0); }
-		public TerminalNode K_AFTER() { return getToken(DCQGrammarParser.K_AFTER, 0); }
-		public TerminalNode K_ALL() { return getToken(DCQGrammarParser.K_ALL, 0); }
-		public TerminalNode K_ALTER() { return getToken(DCQGrammarParser.K_ALTER, 0); }
-		public TerminalNode K_ANALYZE() { return getToken(DCQGrammarParser.K_ANALYZE, 0); }
-		public TerminalNode K_AND() { return getToken(DCQGrammarParser.K_AND, 0); }
-		public TerminalNode K_AS() { return getToken(DCQGrammarParser.K_AS, 0); }
-		public TerminalNode K_ASC() { return getToken(DCQGrammarParser.K_ASC, 0); }
-		public TerminalNode K_ATTACH() { return getToken(DCQGrammarParser.K_ATTACH, 0); }
-		public TerminalNode K_AUTOINCREMENT() { return getToken(DCQGrammarParser.K_AUTOINCREMENT, 0); }
-		public TerminalNode K_BEFORE() { return getToken(DCQGrammarParser.K_BEFORE, 0); }
-		public TerminalNode K_BEGIN() { return getToken(DCQGrammarParser.K_BEGIN, 0); }
-		public TerminalNode K_BETWEEN() { return getToken(DCQGrammarParser.K_BETWEEN, 0); }
-		public TerminalNode K_BY() { return getToken(DCQGrammarParser.K_BY, 0); }
-		public TerminalNode K_CASCADE() { return getToken(DCQGrammarParser.K_CASCADE, 0); }
-		public TerminalNode K_CASE() { return getToken(DCQGrammarParser.K_CASE, 0); }
-		public TerminalNode K_CAST() { return getToken(DCQGrammarParser.K_CAST, 0); }
-		public TerminalNode K_CHECK() { return getToken(DCQGrammarParser.K_CHECK, 0); }
-		public TerminalNode K_COLLATE() { return getToken(DCQGrammarParser.K_COLLATE, 0); }
-		public TerminalNode K_COLUMN() { return getToken(DCQGrammarParser.K_COLUMN, 0); }
-		public TerminalNode K_COMMIT() { return getToken(DCQGrammarParser.K_COMMIT, 0); }
-		public TerminalNode K_CONFLICT() { return getToken(DCQGrammarParser.K_CONFLICT, 0); }
-		public TerminalNode K_CONSTRAINT() { return getToken(DCQGrammarParser.K_CONSTRAINT, 0); }
-		public TerminalNode K_CREATE() { return getToken(DCQGrammarParser.K_CREATE, 0); }
-		public TerminalNode K_CROSS() { return getToken(DCQGrammarParser.K_CROSS, 0); }
-		public TerminalNode K_CURRENT_DATE() { return getToken(DCQGrammarParser.K_CURRENT_DATE, 0); }
-		public TerminalNode K_CURRENT_TIME() { return getToken(DCQGrammarParser.K_CURRENT_TIME, 0); }
-		public TerminalNode K_CURRENT_TIMESTAMP() { return getToken(DCQGrammarParser.K_CURRENT_TIMESTAMP, 0); }
-		public TerminalNode K_DATABASE() { return getToken(DCQGrammarParser.K_DATABASE, 0); }
-		public TerminalNode K_DEFAULT() { return getToken(DCQGrammarParser.K_DEFAULT, 0); }
-		public TerminalNode K_DEFERRABLE() { return getToken(DCQGrammarParser.K_DEFERRABLE, 0); }
-		public TerminalNode K_DEFERRED() { return getToken(DCQGrammarParser.K_DEFERRED, 0); }
-		public TerminalNode K_DELETE() { return getToken(DCQGrammarParser.K_DELETE, 0); }
-		public TerminalNode K_DESC() { return getToken(DCQGrammarParser.K_DESC, 0); }
-		public TerminalNode K_DETACH() { return getToken(DCQGrammarParser.K_DETACH, 0); }
-		public TerminalNode K_DISTINCT() { return getToken(DCQGrammarParser.K_DISTINCT, 0); }
-		public TerminalNode K_DROP() { return getToken(DCQGrammarParser.K_DROP, 0); }
-		public TerminalNode K_EACH() { return getToken(DCQGrammarParser.K_EACH, 0); }
-		public TerminalNode K_ELSE() { return getToken(DCQGrammarParser.K_ELSE, 0); }
-		public TerminalNode K_END() { return getToken(DCQGrammarParser.K_END, 0); }
-		public TerminalNode K_ESCAPE() { return getToken(DCQGrammarParser.K_ESCAPE, 0); }
-		public TerminalNode K_EXCEPT() { return getToken(DCQGrammarParser.K_EXCEPT, 0); }
-		public TerminalNode K_EXCLUSIVE() { return getToken(DCQGrammarParser.K_EXCLUSIVE, 0); }
-		public TerminalNode K_EXISTS() { return getToken(DCQGrammarParser.K_EXISTS, 0); }
-		public TerminalNode K_EXPLAIN() { return getToken(DCQGrammarParser.K_EXPLAIN, 0); }
-		public TerminalNode K_FAIL() { return getToken(DCQGrammarParser.K_FAIL, 0); }
-		public TerminalNode K_FOR() { return getToken(DCQGrammarParser.K_FOR, 0); }
-		public TerminalNode K_FOREIGN() { return getToken(DCQGrammarParser.K_FOREIGN, 0); }
-		public TerminalNode K_FROM() { return getToken(DCQGrammarParser.K_FROM, 0); }
-		public TerminalNode K_FULL() { return getToken(DCQGrammarParser.K_FULL, 0); }
-		public TerminalNode K_GLOB() { return getToken(DCQGrammarParser.K_GLOB, 0); }
-		public TerminalNode K_GROUP() { return getToken(DCQGrammarParser.K_GROUP, 0); }
-		public TerminalNode K_HAVING() { return getToken(DCQGrammarParser.K_HAVING, 0); }
-		public TerminalNode K_IF() { return getToken(DCQGrammarParser.K_IF, 0); }
-		public TerminalNode K_IGNORE() { return getToken(DCQGrammarParser.K_IGNORE, 0); }
-		public TerminalNode K_IMMEDIATE() { return getToken(DCQGrammarParser.K_IMMEDIATE, 0); }
-		public TerminalNode K_IN() { return getToken(DCQGrammarParser.K_IN, 0); }
-		public TerminalNode K_INDEX() { return getToken(DCQGrammarParser.K_INDEX, 0); }
-		public TerminalNode K_INDEXED() { return getToken(DCQGrammarParser.K_INDEXED, 0); }
-		public TerminalNode K_INITIALLY() { return getToken(DCQGrammarParser.K_INITIALLY, 0); }
-		public TerminalNode K_INNER() { return getToken(DCQGrammarParser.K_INNER, 0); }
-		public TerminalNode K_INSERT() { return getToken(DCQGrammarParser.K_INSERT, 0); }
-		public TerminalNode K_INSTEAD() { return getToken(DCQGrammarParser.K_INSTEAD, 0); }
-		public TerminalNode K_INTERSECT() { return getToken(DCQGrammarParser.K_INTERSECT, 0); }
-		public TerminalNode K_INTO() { return getToken(DCQGrammarParser.K_INTO, 0); }
-		public TerminalNode K_IS() { return getToken(DCQGrammarParser.K_IS, 0); }
-		public TerminalNode K_ISNULL() { return getToken(DCQGrammarParser.K_ISNULL, 0); }
-		public TerminalNode K_JOIN() { return getToken(DCQGrammarParser.K_JOIN, 0); }
-		public TerminalNode K_KEY() { return getToken(DCQGrammarParser.K_KEY, 0); }
-		public TerminalNode K_LEFT() { return getToken(DCQGrammarParser.K_LEFT, 0); }
-		public TerminalNode K_LIKE() { return getToken(DCQGrammarParser.K_LIKE, 0); }
-		public TerminalNode K_LIMIT() { return getToken(DCQGrammarParser.K_LIMIT, 0); }
-		public TerminalNode K_MATCH() { return getToken(DCQGrammarParser.K_MATCH, 0); }
-		public TerminalNode K_NATURAL() { return getToken(DCQGrammarParser.K_NATURAL, 0); }
-		public TerminalNode K_NO() { return getToken(DCQGrammarParser.K_NO, 0); }
-		public TerminalNode K_NOT() { return getToken(DCQGrammarParser.K_NOT, 0); }
-		public TerminalNode K_NOTNULL() { return getToken(DCQGrammarParser.K_NOTNULL, 0); }
-		public TerminalNode K_NULL() { return getToken(DCQGrammarParser.K_NULL, 0); }
-		public TerminalNode K_OF() { return getToken(DCQGrammarParser.K_OF, 0); }
-		public TerminalNode K_OFFSET() { return getToken(DCQGrammarParser.K_OFFSET, 0); }
-		public TerminalNode K_ON() { return getToken(DCQGrammarParser.K_ON, 0); }
-		public TerminalNode K_OR() { return getToken(DCQGrammarParser.K_OR, 0); }
-		public TerminalNode K_ORDER() { return getToken(DCQGrammarParser.K_ORDER, 0); }
-		public TerminalNode K_OUTER() { return getToken(DCQGrammarParser.K_OUTER, 0); }
-		public TerminalNode K_PLAN() { return getToken(DCQGrammarParser.K_PLAN, 0); }
-		public TerminalNode K_PRAGMA() { return getToken(DCQGrammarParser.K_PRAGMA, 0); }
-		public TerminalNode K_PRIMARY() { return getToken(DCQGrammarParser.K_PRIMARY, 0); }
-		public TerminalNode K_QUERY() { return getToken(DCQGrammarParser.K_QUERY, 0); }
-		public TerminalNode K_RAISE() { return getToken(DCQGrammarParser.K_RAISE, 0); }
-		public TerminalNode K_RECURSIVE() { return getToken(DCQGrammarParser.K_RECURSIVE, 0); }
-		public TerminalNode K_REFERENCES() { return getToken(DCQGrammarParser.K_REFERENCES, 0); }
-		public TerminalNode K_REGEXP() { return getToken(DCQGrammarParser.K_REGEXP, 0); }
-		public TerminalNode K_REINDEX() { return getToken(DCQGrammarParser.K_REINDEX, 0); }
-		public TerminalNode K_RELEASE() { return getToken(DCQGrammarParser.K_RELEASE, 0); }
-		public TerminalNode K_RENAME() { return getToken(DCQGrammarParser.K_RENAME, 0); }
-		public TerminalNode K_REPLACE() { return getToken(DCQGrammarParser.K_REPLACE, 0); }
-		public TerminalNode K_RESTRICT() { return getToken(DCQGrammarParser.K_RESTRICT, 0); }
-		public TerminalNode K_RIGHT() { return getToken(DCQGrammarParser.K_RIGHT, 0); }
-		public TerminalNode K_ROLLBACK() { return getToken(DCQGrammarParser.K_ROLLBACK, 0); }
-		public TerminalNode K_ROW() { return getToken(DCQGrammarParser.K_ROW, 0); }
-		public TerminalNode K_SAVEPOINT() { return getToken(DCQGrammarParser.K_SAVEPOINT, 0); }
-		public TerminalNode K_SELECT() { return getToken(DCQGrammarParser.K_SELECT, 0); }
-		public TerminalNode K_SET() { return getToken(DCQGrammarParser.K_SET, 0); }
-		public TerminalNode K_TABLE() { return getToken(DCQGrammarParser.K_TABLE, 0); }
-		public TerminalNode K_TEMP() { return getToken(DCQGrammarParser.K_TEMP, 0); }
-		public TerminalNode K_TEMPORARY() { return getToken(DCQGrammarParser.K_TEMPORARY, 0); }
-		public TerminalNode K_THEN() { return getToken(DCQGrammarParser.K_THEN, 0); }
-		public TerminalNode K_TO() { return getToken(DCQGrammarParser.K_TO, 0); }
-		public TerminalNode K_TRANSACTION() { return getToken(DCQGrammarParser.K_TRANSACTION, 0); }
-		public TerminalNode K_TRIGGER() { return getToken(DCQGrammarParser.K_TRIGGER, 0); }
-		public TerminalNode K_UNION() { return getToken(DCQGrammarParser.K_UNION, 0); }
-		public TerminalNode K_UNIQUE() { return getToken(DCQGrammarParser.K_UNIQUE, 0); }
-		public TerminalNode K_UPDATE() { return getToken(DCQGrammarParser.K_UPDATE, 0); }
-		public TerminalNode K_USING() { return getToken(DCQGrammarParser.K_USING, 0); }
-		public TerminalNode K_VACUUM() { return getToken(DCQGrammarParser.K_VACUUM, 0); }
-		public TerminalNode K_VALUES() { return getToken(DCQGrammarParser.K_VALUES, 0); }
-		public TerminalNode K_VIEW() { return getToken(DCQGrammarParser.K_VIEW, 0); }
-		public TerminalNode K_VIRTUAL() { return getToken(DCQGrammarParser.K_VIRTUAL, 0); }
-		public TerminalNode K_WHEN() { return getToken(DCQGrammarParser.K_WHEN, 0); }
-		public TerminalNode K_WHERE() { return getToken(DCQGrammarParser.K_WHERE, 0); }
-		public TerminalNode K_WITH() { return getToken(DCQGrammarParser.K_WITH, 0); }
-		public TerminalNode K_WITHOUT() { return getToken(DCQGrammarParser.K_WITHOUT, 0); }
+		public TerminalNode K_ABORT() { return getToken(CQSqlGrammarExtParser.K_ABORT, 0); }
+		public TerminalNode K_ACTION() { return getToken(CQSqlGrammarExtParser.K_ACTION, 0); }
+		public TerminalNode K_ADD() { return getToken(CQSqlGrammarExtParser.K_ADD, 0); }
+		public TerminalNode K_AFTER() { return getToken(CQSqlGrammarExtParser.K_AFTER, 0); }
+		public TerminalNode K_ALL() { return getToken(CQSqlGrammarExtParser.K_ALL, 0); }
+		public TerminalNode K_ALTER() { return getToken(CQSqlGrammarExtParser.K_ALTER, 0); }
+		public TerminalNode K_ANALYZE() { return getToken(CQSqlGrammarExtParser.K_ANALYZE, 0); }
+		public TerminalNode K_AND() { return getToken(CQSqlGrammarExtParser.K_AND, 0); }
+		public TerminalNode K_AS() { return getToken(CQSqlGrammarExtParser.K_AS, 0); }
+		public TerminalNode K_ASC() { return getToken(CQSqlGrammarExtParser.K_ASC, 0); }
+		public TerminalNode K_ATTACH() { return getToken(CQSqlGrammarExtParser.K_ATTACH, 0); }
+		public TerminalNode K_AUTOINCREMENT() { return getToken(CQSqlGrammarExtParser.K_AUTOINCREMENT, 0); }
+		public TerminalNode K_BEFORE() { return getToken(CQSqlGrammarExtParser.K_BEFORE, 0); }
+		public TerminalNode K_BEGIN() { return getToken(CQSqlGrammarExtParser.K_BEGIN, 0); }
+		public TerminalNode K_BETWEEN() { return getToken(CQSqlGrammarExtParser.K_BETWEEN, 0); }
+		public TerminalNode K_BY() { return getToken(CQSqlGrammarExtParser.K_BY, 0); }
+		public TerminalNode K_CASCADE() { return getToken(CQSqlGrammarExtParser.K_CASCADE, 0); }
+		public TerminalNode K_CASE() { return getToken(CQSqlGrammarExtParser.K_CASE, 0); }
+		public TerminalNode K_CAST() { return getToken(CQSqlGrammarExtParser.K_CAST, 0); }
+		public TerminalNode K_CHECK() { return getToken(CQSqlGrammarExtParser.K_CHECK, 0); }
+		public TerminalNode K_COLLATE() { return getToken(CQSqlGrammarExtParser.K_COLLATE, 0); }
+		public TerminalNode K_COLUMN() { return getToken(CQSqlGrammarExtParser.K_COLUMN, 0); }
+		public TerminalNode K_COMMIT() { return getToken(CQSqlGrammarExtParser.K_COMMIT, 0); }
+		public TerminalNode K_CONFLICT() { return getToken(CQSqlGrammarExtParser.K_CONFLICT, 0); }
+		public TerminalNode K_CONSTRAINT() { return getToken(CQSqlGrammarExtParser.K_CONSTRAINT, 0); }
+		public TerminalNode K_CREATE() { return getToken(CQSqlGrammarExtParser.K_CREATE, 0); }
+		public TerminalNode K_CROSS() { return getToken(CQSqlGrammarExtParser.K_CROSS, 0); }
+		public TerminalNode K_CURRENT_DATE() { return getToken(CQSqlGrammarExtParser.K_CURRENT_DATE, 0); }
+		public TerminalNode K_CURRENT_TIME() { return getToken(CQSqlGrammarExtParser.K_CURRENT_TIME, 0); }
+		public TerminalNode K_CURRENT_TIMESTAMP() { return getToken(CQSqlGrammarExtParser.K_CURRENT_TIMESTAMP, 0); }
+		public TerminalNode K_DATABASE() { return getToken(CQSqlGrammarExtParser.K_DATABASE, 0); }
+		public TerminalNode K_DEFAULT() { return getToken(CQSqlGrammarExtParser.K_DEFAULT, 0); }
+		public TerminalNode K_DEFERRABLE() { return getToken(CQSqlGrammarExtParser.K_DEFERRABLE, 0); }
+		public TerminalNode K_DEFERRED() { return getToken(CQSqlGrammarExtParser.K_DEFERRED, 0); }
+		public TerminalNode K_DELETE() { return getToken(CQSqlGrammarExtParser.K_DELETE, 0); }
+		public TerminalNode K_DESC() { return getToken(CQSqlGrammarExtParser.K_DESC, 0); }
+		public TerminalNode K_DETACH() { return getToken(CQSqlGrammarExtParser.K_DETACH, 0); }
+		public TerminalNode K_DISTINCT() { return getToken(CQSqlGrammarExtParser.K_DISTINCT, 0); }
+		public TerminalNode K_DROP() { return getToken(CQSqlGrammarExtParser.K_DROP, 0); }
+		public TerminalNode K_EACH() { return getToken(CQSqlGrammarExtParser.K_EACH, 0); }
+		public TerminalNode K_ELSE() { return getToken(CQSqlGrammarExtParser.K_ELSE, 0); }
+		public TerminalNode K_END() { return getToken(CQSqlGrammarExtParser.K_END, 0); }
+		public TerminalNode K_ESCAPE() { return getToken(CQSqlGrammarExtParser.K_ESCAPE, 0); }
+		public TerminalNode K_EXCEPT() { return getToken(CQSqlGrammarExtParser.K_EXCEPT, 0); }
+		public TerminalNode K_EXCLUSIVE() { return getToken(CQSqlGrammarExtParser.K_EXCLUSIVE, 0); }
+		public TerminalNode K_EXISTS() { return getToken(CQSqlGrammarExtParser.K_EXISTS, 0); }
+		public TerminalNode K_EXPLAIN() { return getToken(CQSqlGrammarExtParser.K_EXPLAIN, 0); }
+		public TerminalNode K_FAIL() { return getToken(CQSqlGrammarExtParser.K_FAIL, 0); }
+		public TerminalNode K_FOR() { return getToken(CQSqlGrammarExtParser.K_FOR, 0); }
+		public TerminalNode K_FOREIGN() { return getToken(CQSqlGrammarExtParser.K_FOREIGN, 0); }
+		public TerminalNode K_FROM() { return getToken(CQSqlGrammarExtParser.K_FROM, 0); }
+		public TerminalNode K_FULL() { return getToken(CQSqlGrammarExtParser.K_FULL, 0); }
+		public TerminalNode K_GLOB() { return getToken(CQSqlGrammarExtParser.K_GLOB, 0); }
+		public TerminalNode K_GROUP() { return getToken(CQSqlGrammarExtParser.K_GROUP, 0); }
+		public TerminalNode K_HAVING() { return getToken(CQSqlGrammarExtParser.K_HAVING, 0); }
+		public TerminalNode K_IF() { return getToken(CQSqlGrammarExtParser.K_IF, 0); }
+		public TerminalNode K_IGNORE() { return getToken(CQSqlGrammarExtParser.K_IGNORE, 0); }
+		public TerminalNode K_IMMEDIATE() { return getToken(CQSqlGrammarExtParser.K_IMMEDIATE, 0); }
+		public TerminalNode K_IN() { return getToken(CQSqlGrammarExtParser.K_IN, 0); }
+		public TerminalNode K_INDEX() { return getToken(CQSqlGrammarExtParser.K_INDEX, 0); }
+		public TerminalNode K_INDEXED() { return getToken(CQSqlGrammarExtParser.K_INDEXED, 0); }
+		public TerminalNode K_INITIALLY() { return getToken(CQSqlGrammarExtParser.K_INITIALLY, 0); }
+		public TerminalNode K_INNER() { return getToken(CQSqlGrammarExtParser.K_INNER, 0); }
+		public TerminalNode K_INSERT() { return getToken(CQSqlGrammarExtParser.K_INSERT, 0); }
+		public TerminalNode K_INSTEAD() { return getToken(CQSqlGrammarExtParser.K_INSTEAD, 0); }
+		public TerminalNode K_INTERSECT() { return getToken(CQSqlGrammarExtParser.K_INTERSECT, 0); }
+		public TerminalNode K_INTO() { return getToken(CQSqlGrammarExtParser.K_INTO, 0); }
+		public TerminalNode K_IS() { return getToken(CQSqlGrammarExtParser.K_IS, 0); }
+		public TerminalNode K_ISNULL() { return getToken(CQSqlGrammarExtParser.K_ISNULL, 0); }
+		public TerminalNode K_JOIN() { return getToken(CQSqlGrammarExtParser.K_JOIN, 0); }
+		public TerminalNode K_KEY() { return getToken(CQSqlGrammarExtParser.K_KEY, 0); }
+		public TerminalNode K_LEFT() { return getToken(CQSqlGrammarExtParser.K_LEFT, 0); }
+		public TerminalNode K_LIKE() { return getToken(CQSqlGrammarExtParser.K_LIKE, 0); }
+		public TerminalNode K_LIMIT() { return getToken(CQSqlGrammarExtParser.K_LIMIT, 0); }
+		public TerminalNode K_MATCH() { return getToken(CQSqlGrammarExtParser.K_MATCH, 0); }
+		public TerminalNode K_NATURAL() { return getToken(CQSqlGrammarExtParser.K_NATURAL, 0); }
+		public TerminalNode K_NO() { return getToken(CQSqlGrammarExtParser.K_NO, 0); }
+		public TerminalNode K_NOT() { return getToken(CQSqlGrammarExtParser.K_NOT, 0); }
+		public TerminalNode K_NOTNULL() { return getToken(CQSqlGrammarExtParser.K_NOTNULL, 0); }
+		public TerminalNode K_NULL() { return getToken(CQSqlGrammarExtParser.K_NULL, 0); }
+		public TerminalNode K_OF() { return getToken(CQSqlGrammarExtParser.K_OF, 0); }
+		public TerminalNode K_OFFSET() { return getToken(CQSqlGrammarExtParser.K_OFFSET, 0); }
+		public TerminalNode K_ON() { return getToken(CQSqlGrammarExtParser.K_ON, 0); }
+		public TerminalNode K_OR() { return getToken(CQSqlGrammarExtParser.K_OR, 0); }
+		public TerminalNode K_ORDER() { return getToken(CQSqlGrammarExtParser.K_ORDER, 0); }
+		public TerminalNode K_OUTER() { return getToken(CQSqlGrammarExtParser.K_OUTER, 0); }
+		public TerminalNode K_PLAN() { return getToken(CQSqlGrammarExtParser.K_PLAN, 0); }
+		public TerminalNode K_PRAGMA() { return getToken(CQSqlGrammarExtParser.K_PRAGMA, 0); }
+		public TerminalNode K_PRIMARY() { return getToken(CQSqlGrammarExtParser.K_PRIMARY, 0); }
+		public TerminalNode K_QUERY() { return getToken(CQSqlGrammarExtParser.K_QUERY, 0); }
+		public TerminalNode K_RAISE() { return getToken(CQSqlGrammarExtParser.K_RAISE, 0); }
+		public TerminalNode K_RECURSIVE() { return getToken(CQSqlGrammarExtParser.K_RECURSIVE, 0); }
+		public TerminalNode K_REFERENCES() { return getToken(CQSqlGrammarExtParser.K_REFERENCES, 0); }
+		public TerminalNode K_REGEXP() { return getToken(CQSqlGrammarExtParser.K_REGEXP, 0); }
+		public TerminalNode K_REINDEX() { return getToken(CQSqlGrammarExtParser.K_REINDEX, 0); }
+		public TerminalNode K_RELEASE() { return getToken(CQSqlGrammarExtParser.K_RELEASE, 0); }
+		public TerminalNode K_RENAME() { return getToken(CQSqlGrammarExtParser.K_RENAME, 0); }
+		public TerminalNode K_REPLACE() { return getToken(CQSqlGrammarExtParser.K_REPLACE, 0); }
+		public TerminalNode K_RESTRICT() { return getToken(CQSqlGrammarExtParser.K_RESTRICT, 0); }
+		public TerminalNode K_RIGHT() { return getToken(CQSqlGrammarExtParser.K_RIGHT, 0); }
+		public TerminalNode K_ROLLBACK() { return getToken(CQSqlGrammarExtParser.K_ROLLBACK, 0); }
+		public TerminalNode K_ROW() { return getToken(CQSqlGrammarExtParser.K_ROW, 0); }
+		public TerminalNode K_SAVEPOINT() { return getToken(CQSqlGrammarExtParser.K_SAVEPOINT, 0); }
+		public TerminalNode K_SELECT() { return getToken(CQSqlGrammarExtParser.K_SELECT, 0); }
+		public TerminalNode K_SET() { return getToken(CQSqlGrammarExtParser.K_SET, 0); }
+		public TerminalNode K_TABLE() { return getToken(CQSqlGrammarExtParser.K_TABLE, 0); }
+		public TerminalNode K_TEMP() { return getToken(CQSqlGrammarExtParser.K_TEMP, 0); }
+		public TerminalNode K_TEMPORARY() { return getToken(CQSqlGrammarExtParser.K_TEMPORARY, 0); }
+		public TerminalNode K_THEN() { return getToken(CQSqlGrammarExtParser.K_THEN, 0); }
+		public TerminalNode K_TO() { return getToken(CQSqlGrammarExtParser.K_TO, 0); }
+		public TerminalNode K_TRANSACTION() { return getToken(CQSqlGrammarExtParser.K_TRANSACTION, 0); }
+		public TerminalNode K_TRIGGER() { return getToken(CQSqlGrammarExtParser.K_TRIGGER, 0); }
+		public TerminalNode K_UNION() { return getToken(CQSqlGrammarExtParser.K_UNION, 0); }
+		public TerminalNode K_UNIQUE() { return getToken(CQSqlGrammarExtParser.K_UNIQUE, 0); }
+		public TerminalNode K_UPDATE() { return getToken(CQSqlGrammarExtParser.K_UPDATE, 0); }
+		public TerminalNode K_USING() { return getToken(CQSqlGrammarExtParser.K_USING, 0); }
+		public TerminalNode K_VACUUM() { return getToken(CQSqlGrammarExtParser.K_VACUUM, 0); }
+		public TerminalNode K_VALUES() { return getToken(CQSqlGrammarExtParser.K_VALUES, 0); }
+		public TerminalNode K_VIEW() { return getToken(CQSqlGrammarExtParser.K_VIEW, 0); }
+		public TerminalNode K_VIRTUAL() { return getToken(CQSqlGrammarExtParser.K_VIRTUAL, 0); }
+		public TerminalNode K_WHEN() { return getToken(CQSqlGrammarExtParser.K_WHEN, 0); }
+		public TerminalNode K_WHERE() { return getToken(CQSqlGrammarExtParser.K_WHERE, 0); }
+		public TerminalNode K_WITH() { return getToken(CQSqlGrammarExtParser.K_WITH, 0); }
+		public TerminalNode K_WITHOUT() { return getToken(CQSqlGrammarExtParser.K_WITHOUT, 0); }
 		public KeywordContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_keyword; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterKeyword(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterKeyword(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitKeyword(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitKeyword(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitKeyword(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitKeyword(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11085,15 +11088,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterName(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitName(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitName(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11129,15 +11132,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_function_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterFunction_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterFunction_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitFunction_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitFunction_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitFunction_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitFunction_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11173,15 +11176,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_database_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterDatabase_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterDatabase_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitDatabase_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitDatabase_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitDatabase_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitDatabase_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11217,15 +11220,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_table_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTable_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTable_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTable_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTable_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTable_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTable_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11261,15 +11264,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_table_or_index_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTable_or_index_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTable_or_index_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTable_or_index_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTable_or_index_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTable_or_index_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTable_or_index_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11305,15 +11308,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_new_table_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterNew_table_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterNew_table_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitNew_table_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitNew_table_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitNew_table_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitNew_table_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11349,15 +11352,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_column_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterColumn_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterColumn_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitColumn_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitColumn_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitColumn_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitColumn_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11393,15 +11396,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_collation_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterCollation_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterCollation_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitCollation_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitCollation_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitCollation_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitCollation_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11437,15 +11440,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_foreign_table; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterForeign_table(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterForeign_table(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitForeign_table(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitForeign_table(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitForeign_table(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitForeign_table(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11481,15 +11484,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_index_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterIndex_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterIndex_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitIndex_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitIndex_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitIndex_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitIndex_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11525,15 +11528,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_trigger_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTrigger_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTrigger_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTrigger_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTrigger_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTrigger_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTrigger_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11569,15 +11572,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_view_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterView_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterView_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitView_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitView_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitView_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitView_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11613,15 +11616,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_module_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterModule_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterModule_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitModule_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitModule_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitModule_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitModule_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11657,15 +11660,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_pragma_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterPragma_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterPragma_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitPragma_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitPragma_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitPragma_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitPragma_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11701,15 +11704,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_savepoint_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterSavepoint_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterSavepoint_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitSavepoint_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitSavepoint_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitSavepoint_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitSavepoint_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11745,15 +11748,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_table_alias; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTable_alias(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTable_alias(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTable_alias(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTable_alias(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTable_alias(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTable_alias(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11789,15 +11792,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_transaction_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterTransaction_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterTransaction_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitTransaction_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitTransaction_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitTransaction_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitTransaction_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11824,11 +11827,11 @@ public class DCQGrammarParser extends Parser {
 	}
 
 	public static class Any_nameContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(DCQGrammarParser.IDENTIFIER, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CQSqlGrammarExtParser.IDENTIFIER, 0); }
 		public KeywordContext keyword() {
 			return getRuleContext(KeywordContext.class,0);
 		}
-		public TerminalNode STRING_LITERAL() { return getToken(DCQGrammarParser.STRING_LITERAL, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(CQSqlGrammarExtParser.STRING_LITERAL, 0); }
 		public Any_nameContext any_name() {
 			return getRuleContext(Any_nameContext.class,0);
 		}
@@ -11838,15 +11841,15 @@ public class DCQGrammarParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_any_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).enterAny_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).enterAny_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DCQGrammarListener ) ((DCQGrammarListener)listener).exitAny_name(this);
+			if ( listener instanceof CQSqlGrammarExtListener ) ((CQSqlGrammarExtListener)listener).exitAny_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DCQGrammarVisitor ) return ((DCQGrammarVisitor<? extends T>)visitor).visitAny_name(this);
+			if ( visitor instanceof CQSqlGrammarExtVisitor ) return ((CQSqlGrammarExtVisitor<? extends T>)visitor).visitAny_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}

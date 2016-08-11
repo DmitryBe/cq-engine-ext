@@ -1,6 +1,6 @@
 package io.toolbox.cqengineext.parser
 
-import io.toolbox.cqengineex.DCQGrammarBaseVisitor
+import io.toolbox.cqengineex.CQSqlGrammarExtBaseVisitor
 import io.toolbox.utils.MD5Helper
 import org.antlr.v4.runtime.tree.{ParseTree, RuleNode, TerminalNode}
 
@@ -8,16 +8,16 @@ import scala.util.{Failure, Success, Try}
 
 case class QueryHashResult(convoluteStr: String, hashMD5:String)
 
-object DCQQueryHashGenerator{
+object CQSqlQueryHashGeneratorExtBase{
 
   def generate(parseTree: ParseTree): Try[QueryHashResult] ={
 
-    val generator = new DCQQueryHashGenerator()
+    val generator = new CQSqlQueryHashGeneratorExtBase()
     generator.genHash(parseTree)
   }
 }
 
-class DCQQueryHashGenerator extends DCQGrammarBaseVisitor[String]{
+class CQSqlQueryHashGeneratorExtBase extends CQSqlGrammarExtBaseVisitor[String]{
 
   def genHash(parseTree: ParseTree): Try[QueryHashResult] = {
 

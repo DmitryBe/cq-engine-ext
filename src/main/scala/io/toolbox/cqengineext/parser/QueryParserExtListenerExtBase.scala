@@ -1,12 +1,12 @@
 package io.toolbox.cqengineext.parser
 
 import com.googlecode.cqengine.query.parser.common.QueryParser
-import io.toolbox.cqengineex.DCQGrammarParser._
-import io.toolbox.cqengineex.parser.CQEngineAntlrBaseListener
+import io.toolbox.cqengineex.CQSqlGrammarExtParser._
+import io.toolbox.cqengineex.parser.CQEngineAntlrExtBaseListener
 
 import scala.util.Try
 
-class QueryParserListener[O](parser: QueryParser[O]) extends CQEngineAntlrBaseListener[O](parser){
+class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineAntlrExtBaseListener[O](parser){
 
   private var limit = None : Option[Int]
   private var groupBy = None : Option[String]

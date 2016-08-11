@@ -10,8 +10,8 @@ import com.googlecode.cqengine.query.option.AttributeOrder;
 import com.googlecode.cqengine.query.option.OrderByOption;
 import com.googlecode.cqengine.query.option.QueryOptions;
 import com.googlecode.cqengine.query.parser.common.QueryParser;
-import io.toolbox.cqengineex.DCQGrammarBaseListener;
-import io.toolbox.cqengineex.DCQGrammarParser;
+import io.toolbox.cqengineex.CQSqlGrammarExtBaseListener;
+import io.toolbox.cqengineex.CQSqlGrammarExtParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.*;
@@ -19,7 +19,7 @@ import static com.googlecode.cqengine.query.parser.common.ParserUtils.getParentC
 import static com.googlecode.cqengine.query.parser.common.ParserUtils.validateAllQueriesParsed;
 import static com.googlecode.cqengine.query.parser.common.ParserUtils.validateExpectedNumberOfChildQueries;
 
-public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
+public class CQEngineAntlrExtBaseListener<O> extends CQSqlGrammarExtBaseListener {
 
     protected final QueryParser<O> queryParser;
     // A map of parent context, to parsed child queries belonging to that context...
@@ -32,36 +32,36 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     /*
         ctor
     */
-    public CQEngineAntlrBaseListener(QueryParser<O> queryParser) {
+    public CQEngineAntlrExtBaseListener(QueryParser<O> queryParser) {
         this.queryParser = queryParser;
     }
 
     // ======== Handler methods for each type of query defined in the antlr grammar... ========
 
     @Override
-    public void exitAndQuery(DCQGrammarParser.AndQueryContext ctx) {
+    public void exitAndQuery(CQSqlGrammarExtParser.AndQueryContext ctx) {
         addParsedQuery(ctx, new And<O>(childQueries.get(ctx)));
     }
 
     @Override
-    public void exitOrQuery(DCQGrammarParser.OrQueryContext ctx) {
+    public void exitOrQuery(CQSqlGrammarExtParser.OrQueryContext ctx) {
         addParsedQuery(ctx, new Or<O>(childQueries.get(ctx)));
     }
 
     @Override
-    public void exitNotQuery(DCQGrammarParser.NotQueryContext ctx) {
+    public void exitNotQuery(CQSqlGrammarExtParser.NotQueryContext ctx) {
         addParsedQuery(ctx, QueryFactory.not(childQueries.get(ctx).iterator().next()));
     }
 
     @Override
-    public void exitEqualQuery(DCQGrammarParser.EqualQueryContext ctx) {
+    public void exitEqualQuery(CQSqlGrammarExtParser.EqualQueryContext ctx) {
         Attribute<O, Object> attribute = queryParser.getAttribute(ctx.attributeName(), Object.class);
         Object value = queryParser.parseValue(attribute, ctx.queryParameter());
         addParsedQuery(ctx, QueryFactory.equal(attribute, value));
     }
 
     @Override
-    public void exitNotEqualQuery(DCQGrammarParser.NotEqualQueryContext ctx) {
+    public void exitNotEqualQuery(CQSqlGrammarExtParser.NotEqualQueryContext ctx) {
         Attribute<O, Object> attribute = queryParser.getAttribute(ctx.attributeName(), Object.class);
         Object value = queryParser.parseValue(attribute, ctx.queryParameter());
         addParsedQuery(ctx, QueryFactory.not(QueryFactory.equal(attribute, value)));
@@ -69,7 +69,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void exitLessThanOrEqualToQuery(DCQGrammarParser.LessThanOrEqualToQueryContext ctx) {
+    public void exitLessThanOrEqualToQuery(CQSqlGrammarExtParser.LessThanOrEqualToQueryContext ctx) {
         Attribute<O, Comparable> attribute = queryParser.getAttribute(ctx.attributeName(), Comparable.class);
         Comparable value = queryParser.parseValue(attribute, ctx.queryParameter());
         addParsedQuery(ctx, QueryFactory.lessThanOrEqualTo(attribute, value));
@@ -77,7 +77,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void exitLessThanQuery(DCQGrammarParser.LessThanQueryContext ctx) {
+    public void exitLessThanQuery(CQSqlGrammarExtParser.LessThanQueryContext ctx) {
         Attribute<O, Comparable> attribute = queryParser.getAttribute(ctx.attributeName(), Comparable.class);
         Comparable value = queryParser.parseValue(attribute, ctx.queryParameter());
         addParsedQuery(ctx, QueryFactory.lessThan(attribute, value));
@@ -85,7 +85,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void exitGreaterThanOrEqualToQuery(DCQGrammarParser.GreaterThanOrEqualToQueryContext ctx) {
+    public void exitGreaterThanOrEqualToQuery(CQSqlGrammarExtParser.GreaterThanOrEqualToQueryContext ctx) {
         Attribute<O, Comparable> attribute = queryParser.getAttribute(ctx.attributeName(), Comparable.class);
         Comparable value = queryParser.parseValue(attribute, ctx.queryParameter());
         addParsedQuery(ctx, QueryFactory.greaterThanOrEqualTo(attribute, value));
@@ -93,7 +93,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void exitGreaterThanQuery(DCQGrammarParser.GreaterThanQueryContext ctx) {
+    public void exitGreaterThanQuery(CQSqlGrammarExtParser.GreaterThanQueryContext ctx) {
         Attribute<O, Comparable> attribute = queryParser.getAttribute(ctx.attributeName(), Comparable.class);
         Comparable value = queryParser.parseValue(attribute, ctx.queryParameter());
         addParsedQuery(ctx, QueryFactory.greaterThan(attribute, value));
@@ -101,7 +101,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void exitBetweenQuery(DCQGrammarParser.BetweenQueryContext ctx) {
+    public void exitBetweenQuery(CQSqlGrammarExtParser.BetweenQueryContext ctx) {
         Attribute<O, Comparable> attribute = queryParser.getAttribute(ctx.attributeName(), Comparable.class);
         List<? extends ParseTree> queryParameters = ctx.queryParameter();
         Comparable lowerValue = queryParser.parseValue(attribute, queryParameters.get(0));
@@ -111,7 +111,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void exitNotBetweenQuery(DCQGrammarParser.NotBetweenQueryContext ctx) {
+    public void exitNotBetweenQuery(CQSqlGrammarExtParser.NotBetweenQueryContext ctx) {
         Attribute<O, Comparable> attribute = queryParser.getAttribute(ctx.attributeName(), Comparable.class);
         List<? extends ParseTree> queryParameters = ctx.queryParameter();
         Comparable lowerValue = queryParser.parseValue(attribute, queryParameters.get(0));
@@ -120,7 +120,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     @Override
-    public void exitInQuery(DCQGrammarParser.InQueryContext ctx) {
+    public void exitInQuery(CQSqlGrammarExtParser.InQueryContext ctx) {
         Attribute<O, Object> attribute = queryParser.getAttribute(ctx.attributeName(), Object.class);
         List<? extends ParseTree> queryParameters = ctx.queryParameter();
         Collection<Object> values = new ArrayList<Object>(queryParameters.size());
@@ -132,7 +132,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     @Override
-    public void exitNotInQuery(DCQGrammarParser.NotInQueryContext ctx) {
+    public void exitNotInQuery(CQSqlGrammarExtParser.NotInQueryContext ctx) {
         Attribute<O, Object> attribute = queryParser.getAttribute(ctx.attributeName(), Object.class);
         List<? extends ParseTree> queryParameters = ctx.queryParameter();
         Collection<Object> values = new ArrayList<Object>(queryParameters.size());
@@ -144,7 +144,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     @Override
-    public void exitStartsWithQuery(DCQGrammarParser.StartsWithQueryContext ctx) {
+    public void exitStartsWithQuery(CQSqlGrammarExtParser.StartsWithQueryContext ctx) {
         Attribute<O, String> attribute = queryParser.getAttribute(ctx.attributeName(), String.class);
         String value = queryParser.parseValue(attribute, ctx.queryParameterTrailingPercent());
         value = value.substring(0, value.length() - 1);
@@ -152,7 +152,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     @Override
-    public void exitEndsWithQuery(DCQGrammarParser.EndsWithQueryContext ctx) {
+    public void exitEndsWithQuery(CQSqlGrammarExtParser.EndsWithQueryContext ctx) {
         Attribute<O, String> attribute = queryParser.getAttribute(ctx.attributeName(), String.class);
         String value = queryParser.parseValue(attribute, ctx.queryParameterLeadingPercent());
         value = value.substring(1, value.length());
@@ -160,7 +160,7 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     @Override
-    public void exitContainsQuery(DCQGrammarParser.ContainsQueryContext ctx) {
+    public void exitContainsQuery(CQSqlGrammarExtParser.ContainsQueryContext ctx) {
         Attribute<O, String> attribute = queryParser.getAttribute(ctx.attributeName(), String.class);
         String value = queryParser.parseValue(attribute, ctx.queryParameterLeadingAndTrailingPercent());
         value = value.substring(1, value.length() - 1);
@@ -168,28 +168,28 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     @Override
-    public void exitHasQuery(DCQGrammarParser.HasQueryContext ctx) {
+    public void exitHasQuery(CQSqlGrammarExtParser.HasQueryContext ctx) {
         Attribute<O, Object> attribute = queryParser.getAttribute(ctx.attributeName(), Object.class);
         addParsedQuery(ctx, QueryFactory.has(attribute));
     }
 
     @Override
-    public void exitNotHasQuery(DCQGrammarParser.NotHasQueryContext ctx) {
+    public void exitNotHasQuery(CQSqlGrammarExtParser.NotHasQueryContext ctx) {
         Attribute<O, Object> attribute = queryParser.getAttribute(ctx.attributeName(), Object.class);
         addParsedQuery(ctx, QueryFactory.not(QueryFactory.has(attribute)));
     }
 
     /** This handler is called for all queries, allows us to validate that no handlers are missing. */
     @Override
-    public void exitQuery(DCQGrammarParser.QueryContext ctx) {
+    public void exitQuery(CQSqlGrammarExtParser.QueryContext ctx) {
         numQueriesEncountered++;
         validateAllQueriesParsed(numQueriesEncountered, numQueriesParsed);
     }
 
     @Override
-    public void exitOrderByClause(DCQGrammarParser.OrderByClauseContext ctx) {
+    public void exitOrderByClause(CQSqlGrammarExtParser.OrderByClauseContext ctx) {
         List<AttributeOrder<O>> attributeOrders = new ArrayList<AttributeOrder<O>>();
-        for (DCQGrammarParser.AttributeOrderContext orderContext : ctx.attributeOrder()) {
+        for (CQSqlGrammarExtParser.AttributeOrderContext orderContext : ctx.attributeOrder()) {
             Attribute<O, Comparable> attribute = queryParser.getAttribute(orderContext.attributeName(), Comparable.class);
             boolean descending = orderContext.direction() != null && orderContext.direction().K_DESC() != null;
             attributeOrders.add(new AttributeOrder<O>(attribute, descending));
@@ -237,6 +237,6 @@ public class CQEngineAntlrBaseListener<O> extends DCQGrammarBaseListener {
     }
 
     protected Class[] getAndOrNotContextClasses() {
-        return new Class[] {DCQGrammarParser.AndQueryContext.class, DCQGrammarParser.OrQueryContext.class, DCQGrammarParser.NotQueryContext.class};
+        return new Class[] {CQSqlGrammarExtParser.AndQueryContext.class, CQSqlGrammarExtParser.OrQueryContext.class, CQSqlGrammarExtParser.NotQueryContext.class};
     }
 }

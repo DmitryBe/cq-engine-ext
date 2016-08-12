@@ -7,7 +7,7 @@ import org.apache.avro.generic.GenericRecord
 
 object CqEngineConvertors {
 
-  def convertGenericRecord2MapEntity(rec: GenericRecord, includeNullVals: Boolean = true)
+  def convertGenericRecord2MapEntity(rec: GenericRecord)
                                     (schema: Map[String, String]): MapEntity ={
 
     val mRec = new util.HashMap[String, Any]()

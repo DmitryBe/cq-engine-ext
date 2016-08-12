@@ -7,12 +7,13 @@ import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import parquet.avro.AvroParquetReader
 
-class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String, partitions: Int, targetPartition: Int) extends Iterator[T]{
+class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String, partitions: Int, targetPartition: Int)
+                                                       (implicit hadoopConf: Configuration) extends Iterator[T]{
 
-  val parquetIterator = getPartitionIterator
-  var _currentParquetIterator = None : Option[Iterator[T]]
+  private val _parquetIterator = _getPartitionIterator
+  private var _currentParquetIterator = None : Option[Iterator[T]]
 
-  def toStreamFiles = parquetIterator
+  def toStreamFiles = _parquetIterator
 
   def toStreamSource = Source.fromIterator(()=> this)
 
@@ -56,7 +57,7 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
     }
   }
 
-  private def getPartitionIterator: Iterator[String] = {
+  private def _getPartitionIterator: Iterator[String] = {
 
     val parquetFiles  = HdfsHelper.listParquetFiles(parquetRootPath) map { f =>
       val partitionNum = math.abs(f.hashCode) % partitions
@@ -70,19 +71,15 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
 
   private def _nextParquetIterator: Option[Iterator[T]] ={
 
-    parquetIterator.hasNext match {
+    _parquetIterator.hasNext match {
 
       case true =>
         /* take next parquet to process */
-        val nextParquetFile = parquetIterator.next()
-
-        val conf = new Configuration()
-        conf.set("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem")
-        conf.set("fs.s3a.server-side-encryption-algorithm", "AES256")
+        val nextParquetFile = _parquetIterator.next()
 
         val path = new Path(nextParquetFile)
         val reader = AvroParquetReader.builder[T](path)
-          .withConf(conf)
+          .withConf(hadoopConf)
           .build()
 
         Some(AvroParquetReaderIterator.create(reader))

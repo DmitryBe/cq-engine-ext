@@ -1,14 +1,15 @@
 package io.scala.toolbox.cqengineext
 
 import java.util
-import java.util.concurrent.atomic.AtomicInteger
-
+import java.util.concurrent.atomic.{AtomicInteger, AtomicLong}
 import akka.NotUsed
-import akka.actor.ActorSystem
+import akka.actor.{Actor, ActorSystem, Props}
+import akka.routing.RoundRobinPool
 import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.{Flow, Sink}
+import akka.stream.scaladsl.{Flow, Sink, Source}
 import com.googlecode.cqengine.ConcurrentIndexedCollection
 import com.googlecode.cqengine.attribute.{Attribute, SimpleAttribute, SimpleNullableMapAttribute}
+import com.googlecode.cqengine.entity.MapEntity
 import com.googlecode.cqengine.index.Index
 import com.googlecode.cqengine.index.navigable.NavigableIndex
 import com.googlecode.cqengine.query.QueryFactory._
@@ -21,11 +22,13 @@ import io.toolbox.cqengineext._
 import io.toolbox.parquet.{AvroParquetPartitionsIterator, ParquetTools}
 import org.apache.avro.generic.GenericRecord
 import org.scalatest.{FlatSpec, Matchers}
-
 import scala.collection.JavaConversions._
 import scala.concurrent.duration._
-import scala.concurrent.{Await, ExecutionContext}
+import scala.concurrent.{Await, ExecutionContext, Future, Promise}
 import com.googlecode.cqengine.query.QueryFactory._
+import io.toolbox.collections.CollectionHelper
+import io.toolbox.cqengineext.storage.CqShardedStorage
+import org.apache.hadoop.conf.Configuration
 
 class SqlExtRunner extends FlatSpec with Matchers{
 
@@ -38,68 +41,73 @@ class SqlExtRunner extends FlatSpec with Matchers{
 
   val pathStr = "/Users/dmitry/playground/data/test_1M" //config.getString("app.parquet-path")
 
-  "runner" should "read and query test" in {
+  val indexes = Map(
+    "cadd_score" -> "NavigableIndex",
+    "sample_count" -> "NavigableIndex",
+    "hli_allele_frequency" -> "NavigableIndex",
+    "gene_name" -> "NavigableIndex"
+  )
 
-    val partitions = 1
-    val targetPartition = 0
-    val storageBins = 5
+  "load from stream, index and query" should "" in {
+
+    implicit val hadoopConf = new Configuration()
+    hadoopConf.set("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem")
+    hadoopConf.set("fs.s3a.server-side-encryption-algorithm", "AES256")
 
     // read parquet schema
     val cqSchema = ParquetTools.readParquetSchema(pathStr)
 
-    def _init = {
-      new ConcurrentIndexedCollectionExt(schemaDescription = cqSchema)
-        .addIndexes(Map(
-          "cadd_score" -> "NavigableIndex",
-          "sample_count" -> "NavigableIndex",
-          "hli_allele_frequency" -> "NavigableIndex",
-          "gene_name" -> "NavigableIndex"
-        ))
-    }
+    val shards = 5
+    val storage = new CqShardedStorage(shards, cqSchema)(Some(indexes))
 
-    val storages = 1 to storageBins map(x => _init)
-    val counter = new AtomicInteger()
-    def getNextStorage = counter.getAndIncrement() % storageBins
-
-    val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, partitions, targetPartition)
+    val parquetPartitionsTotal = 1
+    val parquetPartitionTarget = 0
+    val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, parquetPartitionsTotal, parquetPartitionTarget)
     val parquetSource = avro.toStreamSource
 
-    val mapper = Flow[GenericRecord] map {r => CqEngineConvertors.convertGenericRecord2MapEntity(r)(cqSchema)}
+    val f = storage.loadFromStream(parquetSource)(CqEngineConvertors.convertGenericRecord2MapEntity(_)(cqSchema)) map { res =>
+      println(s"loaded: ${res.durationMs} ms; success: ${res.loadedSucces}, failed: ${res.loadedFailed}")
+      queryTests(cqSchema, storage)
+    } recover {
+      case e: Throwable =>
+        println(s"error: ${e.getMessage}")
+    }
 
-    val stream = parquetSource
-      .via(FlowActions.getCounterFlow(1000))
-      .via(mapper)
-      .to(Sink.foreachParallel(storageBins)((rec) => {
-          storages(getNextStorage).add(rec)
-        }))
-    stream.run()
+    Await.ready(f, 100.seconds)
+  }
 
-    Thread.sleep(30000)
+  def queryTests(cqSchema: Map[String, String], storage: CqShardedStorage): Unit ={
+
+    val maxExecTime = 10.seconds
 
     // query runner
     val runner = SqlQueryRunner.create(cqSchema)
-    val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storages), 10.seconds)
+    val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storage.shards), maxExecTime)
 
-    val ds01 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count asc limit 10")(storages), 10.seconds)
-        .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])
+    val ds01 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count asc limit 100")(storage.shards), maxExecTime)
+      .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])
+    assert(CollectionHelper.isOrdered[Integer](ds01)((a,b) => a <= b))
 
-    val ds02 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count desc limit 10")(storages), 10.seconds)
-        .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])
+    val ds02 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count desc limit 100")(storage.shards), maxExecTime)
+      .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])
+    assert(CollectionHelper.isOrdered[Integer](ds02)((a,b) => a >= b))
 
-    val ds11 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by cadd_score asc limit 10")(storages), 10.seconds)
-        .result.map(x => x.get("cadd_score").asInstanceOf[java.lang.Float])
+    val ds11 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by cadd_score asc limit 100")(storage.shards), maxExecTime)
+      .result.map(x => x.get("cadd_score").asInstanceOf[java.lang.Float])
+    assert(CollectionHelper.isOrdered[java.lang.Float](ds11)((a,b) => a <= b))
 
-    val ds12 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by cadd_score desc limit 10")(storages), 10.seconds)
-        .result.map(x => x.get("cadd_score").asInstanceOf[java.lang.Float])
+    val ds12 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by cadd_score desc limit 100")(storage.shards), maxExecTime)
+      .result.map(x => x.get("cadd_score").asInstanceOf[java.lang.Float])
+    assert(CollectionHelper.isOrdered[java.lang.Float](ds11)((a,b) => a >= b))
 
-    val ds21 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by gene_name desc limit 10")(storages), 10.seconds)
-        .result.map(x => x.get("gene_name").asInstanceOf[java.lang.String])
-
-    val ds22 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by gene_name asc limit 10")(storages), 10.seconds)
+    val ds21 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by gene_name desc limit 100")(storage.shards), maxExecTime)
       .result.map(x => x.get("gene_name").asInstanceOf[java.lang.String])
 
-    val ds31 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where gene_name in ('MORN5', 'MERTK') order by cadd_score desc limit 10")(storages), 10.seconds)
-    val ds32 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where gene_name not in ('MORN5', 'MERTK') order by cadd_score desc limit 10")(storages), 10.seconds)
+    val ds22 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by gene_name asc limit 100")(storage.shards), maxExecTime)
+      .result.map(x => x.get("gene_name").asInstanceOf[java.lang.String])
+
+    val ds31 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where gene_name in ('MORN5', 'MERTK') order by cadd_score desc limit 10")(storage.shards), maxExecTime)
+    val ds32 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where gene_name not in ('MORN5', 'MERTK') order by cadd_score desc limit 10")(storage.shards), maxExecTime)
 
     assert(true)
   }

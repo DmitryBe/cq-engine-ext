@@ -41,6 +41,10 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
     val targetPartition = 0
     val storageBins = 5
 
+    implicit val hadoopConf = new Configuration()
+    hadoopConf.set("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem")
+    hadoopConf.set("fs.s3a.server-side-encryption-algorithm", "AES256")
+
     val cqSchema = ParquetTools.readParquetSchema(pathStr)
     val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, partitions, targetPartition)
     val parquetSource = avro.toStreamSource

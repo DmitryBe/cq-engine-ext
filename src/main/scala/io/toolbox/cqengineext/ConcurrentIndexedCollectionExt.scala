@@ -55,7 +55,7 @@ class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
     this
   }
 
-  def add(e: MapEntity): Unit ={
+  def add(e: MapEntity): Boolean ={
     collection.add(e)
   }
 

@@ -10,12 +10,12 @@ import scala.collection.JavaConversions._
 
 object ParquetTools {
 
-  def readParquetSchema(parquetPath: String): Map[String, String] ={
+  def readParquetSchema(parquetPath: String)
+                       (implicit hadoopConfig: Configuration): Map[String, String] ={
 
     val path = new Path(parquetPath)
-    val conf = new Configuration()
     val reader = AvroParquetReader.builder[GenericRecord](path)
-      .withConf(conf)
+      .withConf(hadoopConfig)
       .build()
 
     val rec = reader.read()

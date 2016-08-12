@@ -37,6 +37,12 @@ object CqEngineAttributesGenerator{
           rec.get(name).asInstanceOf[java.lang.Float]
       }
 
+    case "java.lang.Double" =>
+      new SimpleAttribute[util.Map[_, _], java.lang.Double](name) {
+        def getValue(rec: util.Map[_, _], queryOptions: QueryOptions): java.lang.Double =
+          rec.get(name).asInstanceOf[java.lang.Double]
+      }
+
     case "java.lang.Boolean" =>
       new SimpleAttribute[util.Map[_, _], java.lang.Boolean](name) {
         def getValue(rec: util.Map[_, _], queryOptions: QueryOptions): java.lang.Boolean =

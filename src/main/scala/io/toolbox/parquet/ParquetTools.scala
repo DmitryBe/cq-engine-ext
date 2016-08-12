@@ -32,6 +32,7 @@ object ParquetTools {
         case x if x.contains("string") => "java.lang.String"
         case x if x.contains("int") => "java.lang.Integer"
         case x if x.contains("float") => "java.lang.Float"
+        case x if x.contains("double") => "java.lang.Double"
         case x if x.contains("boolean") => "java.lang.Boolean"
         case _ => throw new Exception("unsupported type")
       }

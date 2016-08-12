@@ -82,7 +82,7 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
           .withConf(hadoopConf)
           .build()
 
-        Some(AvroParquetReaderIterator.create(reader))
+        Some(AvroParquetReaderIterator.createFromParquetReader(reader))
 
       case false =>
         /* no parquet files to process */

@@ -1,5 +1,8 @@
 package io.toolbox.parquet
 
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.fs.Path
+import parquet.avro.AvroParquetReader
 import parquet.hadoop.ParquetReader
 
 class AvroParquetReaderIterator[T] extends Iterator[T]{
@@ -30,5 +33,17 @@ class AvroParquetReaderIterator[T] extends Iterator[T]{
 }
 
 object AvroParquetReaderIterator {
-  def create[T](reader: ParquetReader[T]) = new AvroParquetReaderIterator(reader)
+
+  def createFromParquetReader[T](reader: ParquetReader[T]) = new AvroParquetReaderIterator(reader)
+
+  def createFromParquetFile[T <: org.apache.avro.generic.IndexedRecord](parquetPath: String)
+                                                                       (implicit hadoopConf: Configuration): AvroParquetReaderIterator[T] ={
+
+    val path = new Path(parquetPath)
+    val reader = AvroParquetReader.builder[T](path)
+      .withConf(hadoopConf)
+      .build()
+
+    createFromParquetReader(reader)
+  }
 }

@@ -2,6 +2,7 @@ package io.scala.toolbox.cqengineext
 
 import java.util
 import java.util.concurrent.atomic.{AtomicInteger, AtomicLong}
+
 import akka.NotUsed
 import akka.actor.{Actor, ActorSystem, Props}
 import akka.routing.RoundRobinPool
@@ -19,9 +20,10 @@ import com.googlecode.cqengine.query.parser.sql.SQLParser
 import com.typesafe.config.ConfigFactory
 import io.toolbox.akka.stream.FlowActions
 import io.toolbox.cqengineext._
-import io.toolbox.parquet.{AvroParquetPartitionsIterator, ParquetTools}
+import io.toolbox.parquet.{AvroParquetPartitionsIterator, AvroParquetReaderIterator, ParquetTools}
 import org.apache.avro.generic.GenericRecord
 import org.scalatest.{FlatSpec, Matchers}
+
 import scala.collection.JavaConversions._
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future, Promise}
@@ -39,7 +41,8 @@ class SqlExtRunner extends FlatSpec with Matchers{
   implicit val config = ConfigFactory.parseString("_test = test")
     .withFallback(ConfigFactory.load())
 
-  val pathStr = "/Users/dmitry/playground/data/test_1M" //config.getString("app.parquet-path")
+//  val pathStr = "/Users/dmitry/playground/data/test_1M" //config.getString("app.parquet-path")
+  val pathStr = "/Users/dmitry/playground/data/y2016m08d10-8951a838ac8c18ea159ea43c6f02c569.parquet"
 
   val indexes = Map(
     "cadd_score" -> "NavigableIndex",
@@ -57,13 +60,14 @@ class SqlExtRunner extends FlatSpec with Matchers{
     // read parquet schema
     val cqSchema = ParquetTools.readParquetSchema(pathStr)
 
-    val shards = 5
+    val shards = 10
     val storage = new CqShardedStorage(shards, cqSchema)(Some(indexes))
 
-    val parquetPartitionsTotal = 1
+    val parquetPartitionsTotal = 25
     val parquetPartitionTarget = 0
     val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, parquetPartitionsTotal, parquetPartitionTarget)
     val parquetSource = avro.toStreamSource
+//    val sourceSingleFile = Source.fromIterator(() => AvroParquetReaderIterator.createFromParquetFile[GenericRecord](pathStr))
 
     val f = storage.loadFromStream(parquetSource)(CqEngineConvertors.convertGenericRecord2MapEntity(_)(cqSchema)) map { res =>
       println(s"loaded: ${res.durationMs} ms; success: ${res.loadedSucces}, failed: ${res.loadedFailed}")

@@ -28,6 +28,7 @@ object CqEngineConvertors {
         case "java.lang.String" => ""
         case "java.lang.Integer" => 0
         case "java.lang.Float" => java.lang.Float.MIN_VALUE
+        case "java.lang.Double" => java.lang.Double.MIN_VALUE
         case "java.lang.Boolean" => false
         case _ => throw new Exception(s"unsupported type: $sType")
       }

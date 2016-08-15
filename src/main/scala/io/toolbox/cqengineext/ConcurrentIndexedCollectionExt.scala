@@ -59,11 +59,15 @@ class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
     collection.add(e)
   }
 
-  def add(e: java.util.Map[_, _]): Unit ={
+  def addT[T <: java.util.Map[_, _]](e: T): Unit ={
     collection.add(new MapEntity(e))
   }
 
   def addAll(c: Seq[util.Map[_, _]]): Unit ={
+    c foreach{ e => collection.add(e) }
+  }
+
+  def addAllT[T <: java.util.Map[_, _]](c: Seq[T]): Unit ={
     c foreach{ e => collection.add(e) }
   }
 

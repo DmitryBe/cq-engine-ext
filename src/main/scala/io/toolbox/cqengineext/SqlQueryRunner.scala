@@ -3,10 +3,11 @@ package io.toolbox.cqengineext
 import java.util
 import com.googlecode.cqengine.resultset.ResultSet
 import io.toolbox.cqengineext.parser.{SqlParserExt}
-import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
+import scala.collection.JavaConversions._
+import scala.collection.JavaConversions.{mapAsScalaMap, mapAsJavaMap}
 
 object SqlQueryRunner {
   def create(schema: Map[String, String])(implicit ec: ExecutionContext) = new SqlQueryRunner(schema)
@@ -27,7 +28,7 @@ class SqlQueryRunner(schema: Map[String, String])
         var iter: ResultSet[util.Map[_, _]] = null
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
-          QueryDataSetResult(iter.take(q.limit).toSeq)
+          QueryDataSetResult(iter.take(q.limit).map(x => mapAsScalaMap(x)).toSeq)
         } finally { iter.close()}
 
       case q: FoldByKeyQuery =>
@@ -107,7 +108,7 @@ class SqlQueryRunner(schema: Map[String, String])
         val results = partitionsResult.asInstanceOf[Seq[QueryDataSetResult]]
         val aggregatedIndexedCollection = new ConcurrentIndexedCollectionExt(Map.empty[String, String])
         results foreach { ri =>
-          aggregatedIndexedCollection.addAll(ri.result)
+          aggregatedIndexedCollection.addAllT(ri.result.map(mapAsJavaMap(_)))
         }
         val aggregatedResult = query(sql)(aggregatedIndexedCollection)
         resultPromise.success(aggregatedResult)

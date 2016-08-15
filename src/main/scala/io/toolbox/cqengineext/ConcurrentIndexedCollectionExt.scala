@@ -10,7 +10,7 @@ import com.googlecode.cqengine.query.Query
 import com.googlecode.cqengine.query.QueryFactory._
 import com.googlecode.cqengine.query.option.QueryOptions
 import com.googlecode.cqengine.resultset.ResultSet
-
+import io.toolbox.cqengineex.ex.MapEntityEx
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 
@@ -55,7 +55,7 @@ class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
     this
   }
 
-  def add(e: MapEntity): Boolean ={
+  def add(e: MapEntityEx): Boolean ={
     collection.add(e)
   }
 

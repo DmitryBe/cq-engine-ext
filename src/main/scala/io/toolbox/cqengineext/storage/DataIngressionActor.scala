@@ -2,7 +2,7 @@ package io.toolbox.cqengineext.storage
 
 import java.util.concurrent.atomic.AtomicInteger
 import akka.actor.{Actor, Props}
-import com.googlecode.cqengine.entity.MapEntity
+import io.toolbox.cqengineex.ex.MapEntityEx
 import io.toolbox.cqengineext.ConcurrentIndexedCollectionExt
 import io.toolbox.cqengineext.storage.DataIngressionActor.EndOfStream
 import scala.concurrent.Promise
@@ -35,7 +35,7 @@ protected class DataIngressionActor(getShard: () => ConcurrentIndexedCollectionE
   }
 
   def receive = {
-    case msg: MapEntity =>
+    case msg: MapEntityEx =>
       Try(shard.add(msg)).getOrElse(false) match {
         case true => loadedSuccess.incrementAndGet()
         case false =>

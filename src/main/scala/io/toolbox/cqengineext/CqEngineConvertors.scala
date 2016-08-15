@@ -1,14 +1,13 @@
 package io.toolbox.cqengineext
 
 import java.util
-
-import com.googlecode.cqengine.entity.MapEntity
+import io.toolbox.cqengineex.ex.MapEntityEx
 import org.apache.avro.generic.GenericRecord
 
 object CqEngineConvertors {
 
   def convertGenericRecord2MapEntity(rec: GenericRecord)
-                                    (schema: Map[String, String]): MapEntity ={
+                                    (schema: Map[String, String]): MapEntityEx ={
 
     val mRec = new util.HashMap[String, Any]()
     schema foreach { field =>
@@ -20,7 +19,7 @@ object CqEngineConvertors {
         mRec.put(field._1, getDefaultValue(field._2))
     }
 
-    new MapEntity(mRec)
+    new MapEntityEx(mRec)
   }
 
   def getDefaultValue(sType: String): Any ={

@@ -27,8 +27,8 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
   // count error and success insertion
   val loadedSuccess = new AtomicInteger()
   val loadedFailed = new AtomicInteger()
-  val loadingStartTime = None : Option[Long]
-  val loadingEndTime = None : Option[Long]
+  var loadingStartTime = None : Option[Long]
+  var loadingEndTime = None : Option[Long]
 
   def getShardsNum = _shards.length
 
@@ -71,13 +71,13 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
       .to(sink)
 
     // start
-    val startTime = System.nanoTime
+    loadingStartTime = Some(System.nanoTime)
+    loadingEndTime = None
     stream.run()
 
     // subscribe for end
     endStreamPromise.future map { r =>
-      val durationMs = (System.nanoTime - startTime)/1e6
-      LoadingCompleted(durationMs, loadedSuccess.get, loadedFailed.get)
+      LoadingCompleted(getLoadingDuration.getOrElse(0), loadedSuccess.get, loadedFailed.get)
     }
   }
 

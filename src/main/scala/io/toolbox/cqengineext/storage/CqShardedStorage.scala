@@ -77,6 +77,7 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
 
     // subscribe for end
     endStreamPromise.future map { r =>
+      loadingEndTime = Some(System.nanoTime)
       LoadingCompleted(getLoadingDuration.getOrElse(0), loadedSuccess.get, loadedFailed.get)
     }
   }

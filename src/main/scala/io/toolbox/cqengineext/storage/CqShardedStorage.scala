@@ -26,6 +26,7 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
 
   def loadFromStream[SourceRecType](source: Source[SourceRecType, NotUsed])
                                    (mapper: (SourceRecType) => MapEntityEx)
+                                   (dispatcherName: Option[String] = None)
                                    (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: ActorMaterializer): Future[LoadingCompleted] ={
 
     val mapAction = Flow[SourceRecType] map {r => mapper(r)}
@@ -36,9 +37,20 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
 
     // pool of data loading actors
     val endStreamPromise = Promise[EndOfStream]()
-    val shardLoadingActors = actorSystem.actorOf(RoundRobinPool(shardsNum).props(
-      DataIngressionActor.props(getShardByRoundrobin _)(loadedSuccess, loadedFailed)(endStreamPromise)
-    ))
+
+    var dataIngressActorProp = DataIngressionActor.props(getShardByRoundrobin _)(loadedSuccess, loadedFailed)(endStreamPromise)
+    dataIngressActorProp = dispatcherName match {
+      case Some(x) => dataIngressActorProp.withDispatcher(x)
+      case None => dataIngressActorProp
+    }
+    var routerActorProp = RoundRobinPool(shardsNum).props(dataIngressActorProp)
+    routerActorProp = dispatcherName match {
+      case Some(x) => routerActorProp.withDispatcher(x)
+      case None => routerActorProp
+    }
+
+    // loading actor
+    val shardLoadingActors = actorSystem.actorOf(routerActorProp)
 
     // stream sink
     val sink = Sink.actorRef(shardLoadingActors, onCompleteMessage = EndOfStream())

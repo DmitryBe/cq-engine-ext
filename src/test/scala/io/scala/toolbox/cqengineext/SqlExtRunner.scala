@@ -63,7 +63,7 @@ class SqlExtRunner extends FlatSpec with Matchers{
     val shards = 10
     val storage = new CqShardedStorage(shards, cqSchema)(Some(indexes))
 
-    val parquetPartitionsTotal = 25
+    val parquetPartitionsTotal = 5
     val parquetPartitionTarget = 0
     val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, parquetPartitionsTotal, parquetPartitionTarget)
     val parquetSource = avro.toStreamSource
@@ -89,26 +89,26 @@ class SqlExtRunner extends FlatSpec with Matchers{
     val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storage.shards), maxExecTime)
 
     val ds01 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count asc limit 100")(storage.shards), maxExecTime)
-        .result.asInstanceOf[Seq[scala.collection.mutable.Map[String, _]]].map(x => x.getOrElse("sample_count", 0))
-    assert(CollectionHelper.isOrdered[Int](ds01.asInstanceOf[Seq[Int]])((a,b) => a <= b))
+        .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])
+    assert(CollectionHelper.isOrdered[java.lang.Integer](ds01)((a,b) => a <= b))
 
     val ds02 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count desc limit 100")(storage.shards), maxExecTime)
-      .result.asInstanceOf[Seq[scala.collection.mutable.Map[String, _]]].map(x => x.getOrElse("sample_count", 0))
-    assert(CollectionHelper.isOrdered[Int](ds02.asInstanceOf[Seq[Int]])((a,b) => a >= b))
+      .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])
+    assert(CollectionHelper.isOrdered[java.lang.Integer](ds01)((a,b) => a >= b))
 
     val ds11 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by cadd_score asc limit 100")(storage.shards), maxExecTime)
-      .result.asInstanceOf[Seq[scala.collection.mutable.Map[String, _]]].map(x => x.getOrElse("cadd_score", 0f))
-    assert(CollectionHelper.isOrdered[java.lang.Float](ds11.asInstanceOf[Seq[java.lang.Float]])((a,b) => a <= b))
+      .result.map(x => x.get("cadd_score").asInstanceOf[java.lang.Float])
+    assert(CollectionHelper.isOrdered[java.lang.Float](ds11)((a,b) => a <= b))
 
     val ds12 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by cadd_score desc limit 100")(storage.shards), maxExecTime)
-      .result.asInstanceOf[Seq[scala.collection.mutable.Map[String, _]]].map(x => x.getOrElse("cadd_score", 0f))
-    assert(CollectionHelper.isOrdered[java.lang.Float](ds11.asInstanceOf[Seq[java.lang.Float]])((a,b) => a >= b))
+      .result.map(x => x.get("cadd_score").asInstanceOf[java.lang.Float])
+    assert(CollectionHelper.isOrdered[java.lang.Float](ds11)((a,b) => a >= b))
 
     val ds21 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by gene_name desc limit 100")(storage.shards), maxExecTime)
-      .result.asInstanceOf[Seq[scala.collection.mutable.Map[String, _]]].map(x => x.getOrElse("gene_name", ""))
+      .result.map(x => x.get("gene_name").asInstanceOf[String])
 
     val ds22 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by gene_name asc limit 100")(storage.shards), maxExecTime)
-      .result.asInstanceOf[Seq[scala.collection.mutable.Map[String, _]]].map(x => x.getOrElse("gene_name", ""))
+      .result.map(x => x.get("gene_name").asInstanceOf[String])
 
     val ds31 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where gene_name in ('MORN5', 'MERTK') order by cadd_score desc limit 10")(storage.shards), maxExecTime)
     val ds32 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where gene_name not in ('MORN5', 'MERTK') order by cadd_score desc limit 10")(storage.shards), maxExecTime)

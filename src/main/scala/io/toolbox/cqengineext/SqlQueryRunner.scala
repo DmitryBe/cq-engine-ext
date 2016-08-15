@@ -28,7 +28,7 @@ class SqlQueryRunner(schema: Map[String, String])
         var iter: ResultSet[util.Map[_, _]] = null
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
-          QueryDataSetResult(iter.take(q.limit).map(x => mapAsScalaMap(x)).toSeq)
+          QueryDataSetResult(iter.take(q.limit).toSeq)
         } finally { iter.close()}
 
       case q: FoldByKeyQuery =>
@@ -108,7 +108,7 @@ class SqlQueryRunner(schema: Map[String, String])
         val results = partitionsResult.asInstanceOf[Seq[QueryDataSetResult]]
         val aggregatedIndexedCollection = new ConcurrentIndexedCollectionExt(Map.empty[String, String])
         results foreach { ri =>
-          aggregatedIndexedCollection.addAllT(ri.result.map(mapAsJavaMap(_)))
+          aggregatedIndexedCollection.addAllT(ri.result)
         }
         val aggregatedResult = query(sql)(aggregatedIndexedCollection)
         resultPromise.success(aggregatedResult)

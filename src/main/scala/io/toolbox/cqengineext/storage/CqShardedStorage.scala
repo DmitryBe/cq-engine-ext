@@ -24,16 +24,28 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
   def getShard(i: Int) =
     _shards(i)
 
+  // count error and success insertion
+  val loadedSuccess = new AtomicInteger()
+  val loadedFailed = new AtomicInteger()
+  val loadingStartTime = None : Option[Long]
+  val loadingEndTime = None : Option[Long]
+
+  def getShardsNum = _shards.length
+
+  def getLoadedSuccessFailed = (loadedSuccess.get, loadedFailed.get)
+
+  def getLoadingDuration = (loadingStartTime, loadingEndTime) match {
+    case (Some(s), Some(e)) => Some((e - s)/1e6)
+    case (Some(s), None) => Some((System.nanoTime - s)/1e6)
+    case (_, _) => None
+  }
+
   def loadFromStream[SourceRecType](source: Source[SourceRecType, NotUsed])
                                    (mapper: (SourceRecType) => MapEntityEx, workerCount: Int = shardsNum)
                                    (dispatcherName: Option[String] = None)
                                    (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: ActorMaterializer): Future[LoadingCompleted] ={
 
     val mapAction = Flow[SourceRecType] map {r => mapper(r)}
-
-    // count error and success insertion
-    val loadedSuccess = new AtomicInteger()
-    val loadedFailed = new AtomicInteger()
 
     // pool of data loading actors
     val endStreamPromise = Promise[EndOfStream]()

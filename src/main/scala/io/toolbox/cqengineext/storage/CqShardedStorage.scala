@@ -25,7 +25,7 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
     _shards(i)
 
   def loadFromStream[SourceRecType](source: Source[SourceRecType, NotUsed])
-                                   (mapper: (SourceRecType) => MapEntityEx)
+                                   (mapper: (SourceRecType) => MapEntityEx, workerCount: Int = shardsNum)
                                    (dispatcherName: Option[String] = None)
                                    (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: ActorMaterializer): Future[LoadingCompleted] ={
 
@@ -49,16 +49,13 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
       case None => routerActorProp
     }
 
-    // loading actor
-    val shardLoadingActors = actorSystem.actorOf(routerActorProp)
-
     // stream sink
-    val sink = Sink.actorRef(shardLoadingActors, onCompleteMessage = EndOfStream())
+    val sink = Sink.actorRef(actorSystem.actorOf(routerActorProp), onCompleteMessage = EndOfStream())
 
     // pipe
     val stream = source
       .via(FlowActions.getCounterFlow(1000))
-      .via(FlowActions.balancer(mapAction, shardsNum))
+      .via(FlowActions.balancer(mapAction, workerCount))
       .to(sink)
 
     // start

@@ -10,6 +10,7 @@ val akkaVersion = "2.4.8"
 val parquetVersion = "1.6.0"
 val hadoopVersion = "2.6.0"
 val cqengineVersion = "2.7.0"
+val twitterVersion = "6.35.0"
 
 libraryDependencies ++= Seq(
 
@@ -26,6 +27,8 @@ libraryDependencies ++= Seq(
   "com.twitter" % "parquet-hadoop" % parquetVersion,
 
   "com.googlecode.cqengine" % "cqengine" % cqengineVersion,
+
+  "com.twitter" %% "util-eval" % twitterVersion,
 
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )

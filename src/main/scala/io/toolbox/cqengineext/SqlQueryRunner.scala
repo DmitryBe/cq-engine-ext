@@ -1,13 +1,16 @@
 package io.toolbox.cqengineext
 
 import java.util
+
 import com.googlecode.cqengine.resultset.ResultSet
-import io.toolbox.cqengineext.parser.{SqlParserExt}
+import io.toolbox.cqengineext.parser.SqlParserExt
+import io.toolbox.cqengineext.projection.{ExpCompiler, QueryProjector}
+
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 import scala.collection.JavaConversions._
-import scala.collection.JavaConversions.{mapAsScalaMap, mapAsJavaMap}
+import scala.collection.JavaConversions.{mapAsJavaMap, mapAsScalaMap}
 
 object SqlQueryRunner {
   def create(schema: Map[String, String])(implicit ec: ExecutionContext) = new SqlQueryRunner(schema)
@@ -18,7 +21,7 @@ class SqlQueryRunner(schema: Map[String, String])
 
   val parser = SqlParserExt.create(schema)
 
-  def query(query: String)
+  def query(query: String, project: Boolean = false)
            (implicit indexedCollection: ConcurrentIndexedCollectionExt): TQueryResultBase ={
 
     parser.parseQuery(query) match {
@@ -28,7 +31,19 @@ class SqlQueryRunner(schema: Map[String, String])
         var iter: ResultSet[util.Map[_, _]] = null
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
-          QueryDataSetResult(iter.take(q.limit).toSeq)
+
+          project match {
+            case true =>
+              implicit val compiler: ExpCompiler = ExpCompiler.defaultCompiler
+              val ds = iter.take(q.limit) map {x => mapAsScalaMap(x).asInstanceOf[mutable.Map[String, Any]]}
+              val projectedRes = QueryProjector.project(ds.toSeq, q.columnsProjection)
+//              QueryDataSetResult(projectedRes map {x => mapAsJavaMap(x).asInstanceOf[util.Map[_, _]]})
+              QueryDataSetResult(projectedRes map {x => mapAsJavaMap(x)})
+
+            case false =>
+              QueryDataSetResult(iter.take(q.limit).toSeq)
+          }
+
         } finally { iter.close()}
 
       case q: FoldByKeyQuery =>
@@ -63,7 +78,7 @@ class SqlQueryRunner(schema: Map[String, String])
     }
   }
 
-  def queryMultiple(sql: String)
+  def queryMultiple(sql: String, project: Boolean = true)
                    (partitions: Seq[ConcurrentIndexedCollectionExt]): Future[TQueryResultBase] ={
 
     val resultPromise = Promise[TQueryResultBase]
@@ -71,14 +86,14 @@ class SqlQueryRunner(schema: Map[String, String])
     val partitionQueries = for {
       p <- partitions
       f = Future {
-        query(sql)(p)
+        query(sql, project = false)(p)
       }
     } yield f
 
     Future.sequence(partitionQueries) onComplete {
 
       case Success(partitionsResult) =>
-        reduce(sql)(partitionsResult) onComplete {
+        reduce(sql, project)(partitionsResult) onComplete {
           case Success(r) =>
             resultPromise.success(r)
           case Failure(e) =>
@@ -91,12 +106,12 @@ class SqlQueryRunner(schema: Map[String, String])
     resultPromise.future
   }
 
-  def queryMultipleT[TResult <: TQueryResultBase](sql: String)
-                   (partitions: Seq[ConcurrentIndexedCollectionExt]): Future[TResult] ={
-    queryMultiple(sql)(partitions) map {x => x.asInstanceOf[TResult]}
+  def queryMultipleT[TResult <: TQueryResultBase](sql: String, project: Boolean = true)
+                    (partitions: Seq[ConcurrentIndexedCollectionExt]): Future[TResult] ={
+    queryMultiple(sql, project)(partitions) map {x => x.asInstanceOf[TResult]}
   }
 
-  def reduce(sql: String)
+  def reduce(sql: String, project: Boolean)
             (partitionsResult: Seq[TQueryResultBase]): Future[TQueryResultBase] ={
 
     val resultPromise = Promise[TQueryResultBase]
@@ -110,7 +125,7 @@ class SqlQueryRunner(schema: Map[String, String])
         results foreach { ri =>
           aggregatedIndexedCollection.addAllT(ri.result)
         }
-        val aggregatedResult = query(sql)(aggregatedIndexedCollection)
+        val aggregatedResult = query(sql, project = project)(aggregatedIndexedCollection)
         resultPromise.success(aggregatedResult)
 
       case t : QueryCountResult =>

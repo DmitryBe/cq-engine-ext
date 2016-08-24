@@ -24,49 +24,10 @@ class ProjectionSpec extends FlatSpec with Matchers{
 
     import ExpCompiler.defaultCompiler
 
-    val queryProjection = QueryProjection(
-      resultColumns = Seq(
-        StartColumn(),
-        SimpleColumn("col1", Some("new_col1")),
-        ExprColumn("""
-                     |(row: scala.collection.mutable.Map[String, Any]) => {
-                     |      import io.toolbox.cqengineext.projection.AnyValExt._
-                     |      val c1 = row.getOrElse("col1", null).asInstanceOf[AnyVal]
-                     |      val c2 = row.getOrElse("col2", null).asInstanceOf[AnyVal]
-                     |      c1 + c2
-                     |    }
-                   """.stripMargin,
-          "exp01_col"
-        ),
-        CaseColumn(
-          WhenExpr(
-            """
-              |(row: scala.collection.mutable.Map[String, Any]) => {
-              |      import io.toolbox.cqengineext.projection.AnyValExt._
-              |      val c1 = row.getOrElse("col1", null).asInstanceOf[AnyVal]
-              |      c1 < 10
-              |    }
-            """.stripMargin,
-            """
-              |(row: scala.collection.mutable.Map[String, Any]) => {
-              |      import io.toolbox.cqengineext.projection.AnyValExt._
-              |      7777
-              |    }
-            """.stripMargin
-          ),
-          Some(
-            """
-              |(row: scala.collection.mutable.Map[String, Any]) => {
-              |      import io.toolbox.cqengineext.projection.AnyValExt._
-              |      0
-              |    }
-            """.stripMargin),
-          "case01_col"
-        )
-      )
-    )
+    val parser = SqlParserExt.create(schema)
+    val r0 = parser.parseQuery("select *, case when col1 < 10 then 0 else 1 end as expr1 from ds01").asInstanceOf[SQLQuery]
+    val projectedRes = QueryProjector.project(result, r0.columnsProjection)
 
-    val projectedRes = QueryProjector.project(result, queryProjection)
     assert(true)
   }
 

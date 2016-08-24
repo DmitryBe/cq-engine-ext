@@ -67,7 +67,8 @@ class SqlParserExt(schemaDescription: Map[String, String]) extends QueryParser(c
                 queryMd5Hash,
                 listener.getParsedQuery,
                 rebuildQueryOptions(listener.getQueryOptions),
-                listener.getLimit
+                listener.getLimit,
+                listener.getQueryProjection
               )
 
             case true =>

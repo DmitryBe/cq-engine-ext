@@ -82,11 +82,17 @@ class SqlExtRunner extends FlatSpec with Matchers{
 
   def queryTests(cqSchema: Map[String, String], storage: CqShardedStorage): Unit ={
 
-    val maxExecTime = 10.seconds
+    val maxExecTime = 100.seconds
 
     // query runner
     val runner = SqlQueryRunner.create(cqSchema)
     val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storage.shards), maxExecTime)
+
+//    val rr01 = Await.result(runner.queryMultipleT[QueryCountResult]("select sample_count, cadd_score from ds01")(storage.shards), maxExecTime)
+//    assert(false)
+
+    val ds011 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select sample_count, cadd_score, case when cadd_score < 5 then 5 else 10 end as exp01 from ds01 order by cadd_score asc limit 100")(storage.shards), maxExecTime)
+    val ds012 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select *, case when sample_count == 1 then 100 else sample_count end as exp01 from ds01 limit 100")(storage.shards), maxExecTime)
 
     val ds01 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 order by sample_count asc limit 100")(storage.shards), maxExecTime)
         .result.map(x => x.get("sample_count").asInstanceOf[java.lang.Integer])

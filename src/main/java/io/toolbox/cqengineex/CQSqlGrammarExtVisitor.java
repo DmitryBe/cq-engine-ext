@@ -53,6 +53,36 @@ public interface CQSqlGrammarExtVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitResult_column_simple(CQSqlGrammarExtParser.Result_column_simpleContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpr(CQSqlGrammarExtParser.ExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#column_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#any_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAny_name(CQSqlGrammarExtParser.Any_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#literal_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#column_alias}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#histogramClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -467,12 +497,6 @@ public interface CQSqlGrammarExtVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConflict_clause(CQSqlGrammarExtParser.Conflict_clauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpr(CQSqlGrammarExtParser.ExprContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#foreign_key_clause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -581,12 +605,6 @@ public interface CQSqlGrammarExtVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSigned_number(CQSqlGrammarExtParser.Signed_numberContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#literal_value}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#unary_operator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -604,12 +622,6 @@ public interface CQSqlGrammarExtVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitModule_argument(CQSqlGrammarExtParser.Module_argumentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#column_alias}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#keyword}.
 	 * @param ctx the parse tree
@@ -652,12 +664,6 @@ public interface CQSqlGrammarExtVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNew_table_name(CQSqlGrammarExtParser.New_table_nameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#column_name}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#collation_name}.
 	 * @param ctx the parse tree
@@ -718,10 +724,4 @@ public interface CQSqlGrammarExtVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTransaction_name(CQSqlGrammarExtParser.Transaction_nameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CQSqlGrammarExtParser#any_name}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAny_name(CQSqlGrammarExtParser.Any_nameContext ctx);
 }

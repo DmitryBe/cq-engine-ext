@@ -100,6 +100,66 @@ public class CQSqlGrammarExtBaseListener implements CQSqlGrammarExtListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpr(CQSqlGrammarExtParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr(CQSqlGrammarExtParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAny_name(CQSqlGrammarExtParser.Any_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAny_name(CQSqlGrammarExtParser.Any_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterHistogramClause(CQSqlGrammarExtParser.HistogramClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -928,18 +988,6 @@ public class CQSqlGrammarExtBaseListener implements CQSqlGrammarExtListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(CQSqlGrammarExtParser.ExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpr(CQSqlGrammarExtParser.ExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterForeign_key_clause(CQSqlGrammarExtParser.Foreign_key_clauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1156,18 +1204,6 @@ public class CQSqlGrammarExtBaseListener implements CQSqlGrammarExtListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterUnary_operator(CQSqlGrammarExtParser.Unary_operatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1199,18 +1235,6 @@ public class CQSqlGrammarExtBaseListener implements CQSqlGrammarExtListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitModule_argument(CQSqlGrammarExtParser.Module_argumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1295,18 +1319,6 @@ public class CQSqlGrammarExtBaseListener implements CQSqlGrammarExtListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNew_table_name(CQSqlGrammarExtParser.New_table_nameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1427,18 +1439,6 @@ public class CQSqlGrammarExtBaseListener implements CQSqlGrammarExtListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTransaction_name(CQSqlGrammarExtParser.Transaction_nameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAny_name(CQSqlGrammarExtParser.Any_nameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAny_name(CQSqlGrammarExtParser.Any_nameContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

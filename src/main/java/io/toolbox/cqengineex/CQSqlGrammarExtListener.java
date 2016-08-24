@@ -78,6 +78,56 @@ public interface CQSqlGrammarExtListener extends ParseTreeListener {
 	 */
 	void exitResult_column_simple(CQSqlGrammarExtParser.Result_column_simpleContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpr(CQSqlGrammarExtParser.ExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpr(CQSqlGrammarExtParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#column_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#column_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#any_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterAny_name(CQSqlGrammarExtParser.Any_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#any_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitAny_name(CQSqlGrammarExtParser.Any_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#literal_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#literal_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#column_alias}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#column_alias}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#histogramClause}.
 	 * @param ctx the parse tree
 	 */
@@ -768,16 +818,6 @@ public interface CQSqlGrammarExtListener extends ParseTreeListener {
 	 */
 	void exitConflict_clause(CQSqlGrammarExtParser.Conflict_clauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpr(CQSqlGrammarExtParser.ExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpr(CQSqlGrammarExtParser.ExprContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#foreign_key_clause}.
 	 * @param ctx the parse tree
 	 */
@@ -958,16 +998,6 @@ public interface CQSqlGrammarExtListener extends ParseTreeListener {
 	 */
 	void exitSigned_number(CQSqlGrammarExtParser.Signed_numberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#literal_value}.
-	 * @param ctx the parse tree
-	 */
-	void enterLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#literal_value}.
-	 * @param ctx the parse tree
-	 */
-	void exitLiteral_value(CQSqlGrammarExtParser.Literal_valueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#unary_operator}.
 	 * @param ctx the parse tree
 	 */
@@ -997,16 +1027,6 @@ public interface CQSqlGrammarExtListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModule_argument(CQSqlGrammarExtParser.Module_argumentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#column_alias}.
-	 * @param ctx the parse tree
-	 */
-	void enterColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#column_alias}.
-	 * @param ctx the parse tree
-	 */
-	void exitColumn_alias(CQSqlGrammarExtParser.Column_aliasContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#keyword}.
 	 * @param ctx the parse tree
@@ -1077,16 +1097,6 @@ public interface CQSqlGrammarExtListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNew_table_name(CQSqlGrammarExtParser.New_table_nameContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#column_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#column_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitColumn_name(CQSqlGrammarExtParser.Column_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#collation_name}.
 	 * @param ctx the parse tree
@@ -1187,14 +1197,4 @@ public interface CQSqlGrammarExtListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTransaction_name(CQSqlGrammarExtParser.Transaction_nameContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CQSqlGrammarExtParser#any_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterAny_name(CQSqlGrammarExtParser.Any_nameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CQSqlGrammarExtParser#any_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitAny_name(CQSqlGrammarExtParser.Any_nameContext ctx);
 }

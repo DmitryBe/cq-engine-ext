@@ -1,10 +1,14 @@
 package io.toolbox.cqengineext.projection
 
 import com.twitter.util.Eval
+import io.toolbox.cqengineext.parser.ExpressionInfo
 import io.toolbox.utils.MD5Helper
 import scala.collection.mutable
+import scala.util.control.Breaks._
 
-case class QueryProjection(resultColumns: Seq[TResultColumn])
+case class QueryProjection(resultColumns: Seq[TResultColumn]) {
+  def length = resultColumns.length
+}
 
 trait TResultColumn{
   def project(row: mutable.Map[String, Any]): mutable.Map[String, Any]
@@ -37,10 +41,11 @@ case class SimpleColumn(columnName: String, alias: Option[String] = None) extend
 /*
   equivalent of col1 - col2 as c1
  */
-case class ExprColumn(expr: String, alias: String)(implicit expCompiler: ExpCompiler) extends TResultColumn {
+case class ExprColumn(exprInfo: ExpressionInfo, alias: String)(implicit expCompiler: ExpCompiler) extends TResultColumn {
   override def project(row: mutable.Map[String, Any]): mutable.Map[String, Any] = {
 
-    val func = expCompiler.compileExpr(expr)
+    val scalaExpr = ExpressionTranslator.translate(exprInfo)
+    val func = expCompiler.compileExpr(scalaExpr)
     mutable.Map(alias -> func(row))
   }
 }
@@ -51,29 +56,42 @@ case class ExprColumn(expr: String, alias: String)(implicit expCompiler: ExpComp
     ...
   end as c1
  */
-case class CaseColumn(whenExpr: WhenExpr, elseExpr: Option[String], alias: String)(implicit expCompiler: ExpCompiler) extends TResultColumn {
+case class CaseColumn(whenExprs: Seq[WhenExpr], elseExprInfo: Option[ExpressionInfo], alias: String)(implicit expCompiler: ExpCompiler) extends TResultColumn {
   override def project(row: mutable.Map[String, Any]): mutable.Map[String, Any] = {
-    whenExpr.evaluate(row) match {
-      case Some(v) =>
-        mutable.Map(alias -> v)
-      case None =>
-        elseExpr match {
-          case Some(_elseExp) =>
-            val func = expCompiler.compileExpr(_elseExp)
-            mutable.Map(alias -> func(row))
+
+    var result = None: Option[mutable.Map[String, Any]]
+    breakable{
+      for(whenExpr <- whenExprs){
+        whenExpr.evaluate(row) match {
+          case Some(v) =>
+            result = Some(mutable.Map(alias -> v))
+            break()
           case None =>
-            throw new Exception("else expression is None")
         }
+      }
     }
+
+    (result, elseExprInfo) match {
+      case (None, Some(_elseExprInfo)) =>
+        val scalaElseExpr = ExpressionTranslator.translate(_elseExprInfo)
+        val func = expCompiler.compileExpr(scalaElseExpr)
+        result = Some(mutable.Map(alias -> func(row)))
+      case _ => /* to do ? */
+    }
+
+    // not safe
+    result.get
   }
 }
 
-case class WhenExpr(boolExpr: String, valExpr: String)(implicit expCompiler: ExpCompiler) {
+case class WhenExpr(boolExprInfo: ExpressionInfo, valExprInfo: ExpressionInfo)(implicit expCompiler: ExpCompiler) {
   def evaluate(row: mutable.Map[String, Any]): Option[Any] = {
-    val func = expCompiler.compile[Boolean](boolExpr)
+    val scalaBoolExpr = ExpressionTranslator.translate(boolExprInfo)
+    val func = expCompiler.compile[Boolean](scalaBoolExpr)
     func(row) match {
       case true =>
-        val funcExp = expCompiler.compileExpr(valExpr)
+        val scalaValExp = ExpressionTranslator.translate(valExprInfo)
+        val funcExp = expCompiler.compileExpr(scalaValExp)
         Some(funcExp(row))
       case false =>
         None
@@ -82,4 +100,34 @@ case class WhenExpr(boolExpr: String, valExpr: String)(implicit expCompiler: Exp
 }
 
 
+object ExpressionTranslator {
 
+  private val EXPR_SCALA_HEADER =
+    """
+      |(row: scala.collection.mutable.Map[String, Any]) => {
+      |   import io.toolbox.cqengineext.projection.AnyValExt._
+      |
+    """.stripMargin
+
+  private val EXPR_SCALA_FOOTER =
+    """
+      |
+      |}
+    """.stripMargin
+
+  def translate(exprInfo: ExpressionInfo): String = {
+
+    val exprBuilder = StringBuilder.newBuilder
+    exprBuilder.append(EXPR_SCALA_HEADER)
+
+    exprInfo.columns
+      .map {c => s"""val $c = row.getOrElse(\"$c\", null).asInstanceOf[AnyVal] \n"""}
+      .foreach{r => exprBuilder.append(r)}
+
+    exprBuilder.append(exprInfo.expr)
+
+    exprBuilder.append(EXPR_SCALA_FOOTER)
+
+    exprBuilder.toString
+  }
+}

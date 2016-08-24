@@ -26,10 +26,67 @@ groupByClause: K_GROUP K_BY IDENTIFIER;
 limitClause : K_LIMIT NUMERIC_LITERAL;
 
 result_column_simple
- : '*'
- | IDENTIFIER
+ : expr ( K_AS? column_alias )?
  | countClause
  | histogramClause
+ ;
+
+expr
+ : STAR
+ | literal_value
+// | BIND_PARAMETER
+ | column_name
+// | unary_operator expr
+// | expr '||' expr
+ | expr ( '*' | '/' | '%' ) expr
+ | expr ( '+' | '-' ) expr
+ | expr ( '<<' | '>>' | '&' | '|' ) expr
+ | expr ( '<' | '<=' | '>' | '>=' ) expr
+ | expr ( '=' | '==' | '!=' | '<>' | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP ) expr
+// | expr K_AND expr
+// | expr K_OR expr
+ | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'
+ | '(' expr ')'
+// | K_CAST '(' expr K_AS type_name ')'
+// | expr K_COLLATE collation_name
+// | expr K_NOT? ( K_LIKE | K_GLOB | K_REGEXP | K_MATCH ) expr ( K_ESCAPE expr )?
+// | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )
+// | expr K_IS K_NOT? expr
+// | expr K_NOT? K_BETWEEN expr K_AND expr
+// | expr K_NOT? K_IN ( '(' ( select_stmt
+//                          | expr ( ',' expr )*
+//                          )?
+//                      ')'
+//                    | ( database_name '.' )? table_name )
+// | ( ( K_NOT )? K_EXISTS )? '(' select_stmt ')'
+ | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END
+// | raise_function
+ ;
+
+column_name
+ : any_name
+ ;
+
+any_name
+ : IDENTIFIER
+ | keyword
+ | STRING_LITERAL
+ | '(' any_name ')'
+ ;
+
+literal_value
+ : NUMERIC_LITERAL
+ | STRING_LITERAL
+ | BLOB_LITERAL
+ | K_NULL
+ | K_CURRENT_TIME
+ | K_CURRENT_DATE
+ | K_CURRENT_TIMESTAMP
+ ;
+
+column_alias
+ : IDENTIFIER
+ | STRING_LITERAL
  ;
 
 histogramClause: F_HISTOGRAM '(' NUMERIC_LITERAL ')' ;

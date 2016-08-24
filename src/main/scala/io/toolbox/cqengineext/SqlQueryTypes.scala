@@ -2,6 +2,7 @@ package io.toolbox.cqengineext
 
 import com.googlecode.cqengine.query.Query
 import com.googlecode.cqengine.query.option.QueryOptions
+import io.toolbox.cqengineext.projection.{QueryProjection, TResultColumn}
 
 class QueryBase(
   hash: String,
@@ -13,7 +14,8 @@ case class SQLQuery(
    hash: String,
    query: Query[java.util.Map[_, _]],
    queryOptions: QueryOptions,
-   limit: Int
+   limit: Int,
+   columnsProjection: QueryProjection
 ) extends QueryBase(hash, query, queryOptions)
 
 case class SQLCountQuery(

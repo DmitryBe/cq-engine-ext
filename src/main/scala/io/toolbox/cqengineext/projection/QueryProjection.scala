@@ -120,7 +120,7 @@ object ExpressionTranslator {
     val exprBuilder = StringBuilder.newBuilder
     exprBuilder.append(EXPR_SCALA_HEADER)
 
-    exprInfo.columns
+    exprInfo.columns.distinct
       .map {c => s"""val $c = row.getOrElse(\"$c\", null).asInstanceOf[AnyVal] \n"""}
       .foreach{r => exprBuilder.append(r)}
 

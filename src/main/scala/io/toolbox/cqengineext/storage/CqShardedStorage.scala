@@ -1,9 +1,11 @@
 package io.toolbox.cqengineext.storage
 
+import java.util.concurrent.{Executor, Executors}
 import java.util.concurrent.atomic.AtomicInteger
 
 import akka.NotUsed
 import akka.actor.{Actor, ActorSystem, Props}
+import akka.dispatch.ForkJoinExecutorConfigurator
 import akka.routing.RoundRobinPool
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
@@ -42,7 +44,7 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
 
   def loadFromStream[SourceRecType](source: Source[SourceRecType, NotUsed])
                                    (mapper: (SourceRecType) => MapEntityEx, workerCount: Int = shardsNum)
-                                   (dispatcherName: Option[String] = None)
+                                   (dispatcherName: String)
                                    (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: ActorMaterializer): Future[LoadingCompleted] ={
 
     val mapAction = Flow[SourceRecType] map {r => mapper(r)}
@@ -50,23 +52,15 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
     // pool of data loading actors
     val endStreamPromise = Promise[EndOfStream]()
 
-    var dataIngressActorProp = DataIngressionActor.props(getShardByRoundrobin _)(loadedSuccess, loadedFailed)(endStreamPromise)
-    dataIngressActorProp = dispatcherName match {
-      case Some(x) => dataIngressActorProp.withDispatcher(x)
-      case None => dataIngressActorProp
-    }
-    var routerActorProp = RoundRobinPool(shardsNum).props(dataIngressActorProp)
-    routerActorProp = dispatcherName match {
-      case Some(x) => routerActorProp.withDispatcher(x)
-      case None => routerActorProp
-    }
+    val dataIngressActorProp = DataIngressionActor.props(getShardByRoundrobin _)(loadedSuccess, loadedFailed)(endStreamPromise).withDispatcher(dispatcherName)
+    val routerActorProp = RoundRobinPool(shardsNum).props(dataIngressActorProp).withDispatcher(dispatcherName)
 
     // stream sink
     val sink = Sink.actorRef(actorSystem.actorOf(routerActorProp), onCompleteMessage = EndOfStream())
 
     // pipe
     val stream = source
-      .via(FlowActions.getCounterFlow(1000))
+      .via(FlowActions.getCounterFlow(10000))
       .via(FlowActions.balancer(mapAction, workerCount))
       .to(sink)
 

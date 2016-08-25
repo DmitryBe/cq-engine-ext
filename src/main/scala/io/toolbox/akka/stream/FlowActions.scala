@@ -12,7 +12,9 @@ object FlowActions {
     val c = new AtomicInteger(0)
     Flow.fromFunction(rec => {
       val v = c.incrementAndGet()
-      if (v % 1000 == 0) println(s"loaded ~: $v")
+      if (v % logEvery == 0)
+        println(s"loaded ~: $v")
+      // out
       rec
     })
   }

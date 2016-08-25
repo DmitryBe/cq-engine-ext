@@ -4,6 +4,7 @@ import scala.collection.mutable
 
 object QueryProjector{
 
+  @scala.throws[Exception]
   def project(result: Seq[mutable.Map[String, Any]], queryProjection: QueryProjection): Seq[mutable.Map[String, Any]] ={
     result.map(row => projectRow(row)(queryProjection))
   }

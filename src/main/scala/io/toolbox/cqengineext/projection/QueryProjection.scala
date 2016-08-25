@@ -10,6 +10,8 @@ case class QueryProjection(resultColumns: Seq[TResultColumn]) {
   def length = resultColumns.length
 }
 
+
+
 trait TResultColumn{
   def project(row: mutable.Map[String, Any]): mutable.Map[String, Any]
 
@@ -44,7 +46,7 @@ case class SimpleColumn(columnName: String, alias: Option[String] = None) extend
 case class ExprColumn(exprInfo: ExpressionInfo, alias: String)(implicit expCompiler: ExpCompiler) extends TResultColumn {
   override def project(row: mutable.Map[String, Any]): mutable.Map[String, Any] = {
 
-    val scalaExpr = ExpressionTranslator.translate(exprInfo)
+    val scalaExpr = ExpressionTranslator.translateArithmeticExpr2ScalaMethod(exprInfo)
     val func = expCompiler.compileExpr(scalaExpr)
     mutable.Map(alias -> func(row))
   }
@@ -73,7 +75,7 @@ case class CaseColumn(whenExprs: Seq[WhenExpr], elseExprInfo: Option[ExpressionI
 
     (result, elseExprInfo) match {
       case (None, Some(_elseExprInfo)) =>
-        val scalaElseExpr = ExpressionTranslator.translate(_elseExprInfo)
+        val scalaElseExpr = ExpressionTranslator.translateArithmeticExpr2ScalaMethod(_elseExprInfo)
         val func = expCompiler.compileExpr(scalaElseExpr)
         result = Some(mutable.Map(alias -> func(row)))
       case _ => /* to do ? */
@@ -86,48 +88,15 @@ case class CaseColumn(whenExprs: Seq[WhenExpr], elseExprInfo: Option[ExpressionI
 
 case class WhenExpr(boolExprInfo: ExpressionInfo, valExprInfo: ExpressionInfo)(implicit expCompiler: ExpCompiler) {
   def evaluate(row: mutable.Map[String, Any]): Option[Any] = {
-    val scalaBoolExpr = ExpressionTranslator.translate(boolExprInfo)
+    val scalaBoolExpr = ExpressionTranslator.translateArithmeticExpr2ScalaMethod(boolExprInfo)
     val func = expCompiler.compile[Boolean](scalaBoolExpr)
     func(row) match {
       case true =>
-        val scalaValExp = ExpressionTranslator.translate(valExprInfo)
+        val scalaValExp = ExpressionTranslator.translateArithmeticExpr2ScalaMethod(valExprInfo)
         val funcExp = expCompiler.compileExpr(scalaValExp)
         Some(funcExp(row))
       case false =>
         None
     }
-  }
-}
-
-
-object ExpressionTranslator {
-
-  private val EXPR_SCALA_HEADER =
-    """
-      |(row: scala.collection.mutable.Map[String, Any]) => {
-      |   import io.toolbox.cqengineext.projection.AnyValExt._
-      |
-    """.stripMargin
-
-  private val EXPR_SCALA_FOOTER =
-    """
-      |
-      |}
-    """.stripMargin
-
-  def translate(exprInfo: ExpressionInfo): String = {
-
-    val exprBuilder = StringBuilder.newBuilder
-    exprBuilder.append(EXPR_SCALA_HEADER)
-
-    exprInfo.columns.distinct
-      .map {c => s"""val $c = row.getOrElse(\"$c\", null).asInstanceOf[AnyVal] \n"""}
-      .foreach{r => exprBuilder.append(r)}
-
-    exprBuilder.append(exprInfo.expr)
-
-    exprBuilder.append(EXPR_SCALA_FOOTER)
-
-    exprBuilder.toString
   }
 }

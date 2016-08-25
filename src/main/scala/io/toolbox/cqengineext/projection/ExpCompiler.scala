@@ -5,7 +5,7 @@ import io.toolbox.utils.MD5Helper
 import scala.collection.mutable
 
 object ExpCompiler {
-  implicit val defaultCompiler = new ExpCompiler().warmup()
+  implicit val defaultCompiler = new ExpCompiler().warmUp()
 }
 
 class ExpCompiler {
@@ -14,7 +14,7 @@ class ExpCompiler {
 
   val cache = mutable.Map.empty[String, (mutable.Map[String, Any])=> Any]
 
-  def warmup(): ExpCompiler ={
+  def warmUp(): ExpCompiler ={
     eval.apply("1 + 1")
     this
   }

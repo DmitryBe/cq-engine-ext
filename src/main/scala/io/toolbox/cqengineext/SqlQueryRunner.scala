@@ -1,16 +1,18 @@
 package io.toolbox.cqengineext
 
 import java.util
-
 import com.googlecode.cqengine.resultset.ResultSet
 import io.toolbox.cqengineext.parser.SqlParserExt
 import io.toolbox.cqengineext.projection.{ExpCompiler, QueryProjector}
-
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 import scala.collection.JavaConversions._
 import scala.collection.JavaConversions.{mapAsJavaMap, mapAsScalaMap}
+/*
+  required for query projection (runtime expression compilation)
+*/
+import ExpCompiler.defaultCompiler
 
 object SqlQueryRunner {
   def create(schema: Map[String, String])(implicit ec: ExecutionContext) = new SqlQueryRunner(schema)
@@ -22,7 +24,7 @@ class SqlQueryRunner(schema: Map[String, String])
   val parser = SqlParserExt.create(schema)
 
   def query(query: String, project: Boolean = false)
-           (implicit indexedCollection: ConcurrentIndexedCollectionExt): TQueryResultBase ={
+           (implicit indexedCollection: ConcurrentIndexedCollectionExt): Future[TQueryResultBase] = Future {
 
     parser.parseQuery(query) match {
 
@@ -34,10 +36,11 @@ class SqlQueryRunner(schema: Map[String, String])
 
           project match {
             case true =>
-              implicit val compiler: ExpCompiler = ExpCompiler.defaultCompiler
+
+              // note
+              // not elegant: extra conversion is required: java.Map -> scala.Map -> java.Map
               val ds = iter.take(q.limit) map {x => mapAsScalaMap(x).asInstanceOf[mutable.Map[String, Any]]}
               val projectedRes = QueryProjector.project(ds.toSeq, q.columnsProjection)
-//              QueryDataSetResult(projectedRes map {x => mapAsJavaMap(x).asInstanceOf[util.Map[_, _]]})
               QueryDataSetResult(projectedRes map {x => mapAsJavaMap(x)})
 
             case false =>
@@ -85,10 +88,7 @@ class SqlQueryRunner(schema: Map[String, String])
 
     val partitionQueries = for {
       p <- partitions
-      f = Future {
-        query(sql, project = false)(p)
-      }
-    } yield f
+    } yield query(sql, project = false)(p)
 
     Future.sequence(partitionQueries) onComplete {
 
@@ -112,9 +112,7 @@ class SqlQueryRunner(schema: Map[String, String])
   }
 
   def reduce(sql: String, project: Boolean)
-            (partitionsResult: Seq[TQueryResultBase]): Future[TQueryResultBase] ={
-
-    val resultPromise = Promise[TQueryResultBase]
+             (partitionsResult: Seq[TQueryResultBase]): Future[TQueryResultBase] ={
 
     partitionsResult.head  match {
 
@@ -125,47 +123,50 @@ class SqlQueryRunner(schema: Map[String, String])
         results foreach { ri =>
           aggregatedIndexedCollection.addAllT(ri.result)
         }
-        val aggregatedResult = query(sql, project = project)(aggregatedIndexedCollection)
-        resultPromise.success(aggregatedResult)
+        val queryFuture = query(sql, project = project)(aggregatedIndexedCollection)
+        queryFuture
 
       case t : QueryCountResult =>
 
-        val results = partitionsResult.asInstanceOf[Seq[QueryCountResult]]
-        val aggregatedResult = QueryCountResult(results.map(x => x.count).sum)
-        resultPromise.success(aggregatedResult)
+        Future {
+          val results = partitionsResult.asInstanceOf[Seq[QueryCountResult]]
+          QueryCountResult(results.map(x => x.count).sum)
+        }
 
       case t : QueryAggregatedResult =>
 
-        val results = partitionsResult.asInstanceOf[Seq[QueryAggregatedResult]]
-        val aggregatedResult = results.foldLeft(mutable.Map.empty[Any, Int])((res, row) => {
-          row.result.foldLeft(res)((resTmp, pair) => {
-            resTmp(pair._1) = resTmp.getOrElse(pair._1, 0) + pair._2
-            resTmp
+        Future {
+          val results = partitionsResult.asInstanceOf[Seq[QueryAggregatedResult]]
+          val aggregatedResult = results.foldLeft(mutable.Map.empty[Any, Int])((res, row) => {
+            row.result.foldLeft(res)((resTmp, pair) => {
+              resTmp(pair._1) = resTmp.getOrElse(pair._1, 0) + pair._2
+              resTmp
+            })
           })
-        })
 
-        val sortedAggregatedResult = t.sortByDirection match {
+          val sortedAggregatedResult = t.sortByDirection match {
 
-          case Some("asc") =>
-            aggregatedResult.toSeq
-              .sortBy(_._2)
-              .take(t.limit)
+            case Some("asc") =>
+              aggregatedResult.toSeq
+                .sortBy(_._2)
+                .take(t.limit)
 
-          case _ =>
-            /* default sort is desc*/
-            aggregatedResult.toSeq
-              .sortBy(_._2)
-              .reverse
-              .take(t.limit)
+            case _ =>
+              /* default sort is desc*/
+              aggregatedResult.toSeq
+                .sortBy(_._2)
+                .reverse
+                .take(t.limit)
+          }
+          val sortedAggregatedResultMap = Map(sortedAggregatedResult: _*)
+          QueryAggregatedResult(sortedAggregatedResultMap, t.limit, t.sortByDirection)
         }
-        val sortedAggregatedResultMap = Map(sortedAggregatedResult : _*)
-        resultPromise.success(QueryAggregatedResult(sortedAggregatedResultMap, t.limit, t.sortByDirection))
 
       case _ =>
-        resultPromise.failure(new Exception("not supported query"))
+        Future.failed(new Exception("not supported query"))
     }
 
-    resultPromise.future
   }
+
 
 }

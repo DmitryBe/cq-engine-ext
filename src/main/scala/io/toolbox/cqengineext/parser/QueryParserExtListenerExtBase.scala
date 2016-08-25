@@ -1,17 +1,21 @@
 package io.toolbox.cqengineext.parser
 
+import java.util.concurrent.atomic.AtomicInteger
+
 import com.googlecode.cqengine.query.parser.common.QueryParser
 import io.toolbox.cqengineex.CQSqlGrammarExtBaseVisitor
 import io.toolbox.cqengineex.CQSqlGrammarExtParser._
 import io.toolbox.cqengineex.parser.CQEngineAntlrExtBaseListener
 import io.toolbox.cqengineext.projection._
 import org.antlr.v4.runtime.tree.TerminalNode
+
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 import scala.util.Try
 
 class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineAntlrExtBaseListener[O](parser){
 
+  private val uniqCounter = new AtomicInteger(0)
   private var limit = None : Option[Int]
   private var groupBy = None : Option[String]
   private var histogram = None: Option[Int]
@@ -97,11 +101,11 @@ class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineA
           case (false, true, false) =>
             val exprVisitor = new ExpressionVisitor()
             val exprInfo = ctx.expr().accept(exprVisitor)
-            resultColumns += ExprColumn(exprInfo, colAlias.getOrElse("_tmp1"))
+            resultColumns += ExprColumn(exprInfo, colAlias.getOrElse(createTmpColumnName))
           case (false, true, true) =>
             val caseExprVisitor = new CaseExpressionVisitor()
             val caseExp = ctx.expr().accept(caseExprVisitor)
-            resultColumns += CaseColumn(caseExp.whenExprs, caseExp.elseExprInfo, colAlias.getOrElse("_tmp2"))
+            resultColumns += CaseColumn(caseExp.whenExprs, caseExp.elseExprInfo, colAlias.getOrElse(createTmpColumnName))
           case _ =>
         }
 
@@ -113,5 +117,7 @@ class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineA
         */
     }
   }
+
+  private def createTmpColumnName = s"_col_${uniqCounter.incrementAndGet()}"
 
 }

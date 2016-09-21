@@ -40,7 +40,7 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
     val partitions = 4
     val targetPartition = 0
     val storageBins = 5
-    
+
 
     implicit val hadoopConf = new Configuration()
     hadoopConf.set("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem")

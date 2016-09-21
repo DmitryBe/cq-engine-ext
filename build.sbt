@@ -30,7 +30,12 @@ libraryDependencies ++= Seq(
 
   "com.twitter" %% "util-eval" % twitterVersion,
 
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+
+  "org.slf4j" % "slf4j-api" % "1.7.21",
+  "ch.qos.logback" % "logback-classic" % "1.1.3",
+  "ch.qos.logback" % "logback-core" % "1.1.3",
+  "com.internetitem" % "logback-elasticsearch-appender" % "1.3"
 )
 
 fork in run := true

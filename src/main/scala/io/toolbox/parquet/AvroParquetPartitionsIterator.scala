@@ -10,7 +10,7 @@ import parquet.avro.AvroParquetReader
 class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String, partitions: Int, targetPartition: Int)
                                                        (implicit hadoopConf: Configuration) extends Iterator[T]{
 
-  private val _parquetIterator = _getPartitionIterator
+  private val _parquetIterator = getPartitionIterator
   private var _currentParquetIterator = None : Option[Iterator[T]]
 
   def toStreamFiles = _parquetIterator
@@ -32,7 +32,7 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
 
           case false =>
             /* current iterator comes to end, try next iterator */
-            _currentParquetIterator = _nextParquetIterator
+            _currentParquetIterator = nextParquetIterator
             _currentParquetIterator match {
               case Some(nextIter) => nextIter.hasNext
               case None => false
@@ -41,7 +41,7 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
 
       case None =>
         /* no current iterator */
-        _currentParquetIterator = _nextParquetIterator
+        _currentParquetIterator = nextParquetIterator
         _currentParquetIterator match {
           case Some(nextIter) => nextIter.hasNext
           case None => false
@@ -57,19 +57,7 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
     }
   }
 
-  private def _getPartitionIterator: Iterator[String] = {
-
-    val parquetFiles  = HdfsHelper.listParquetFiles(parquetRootPath) map { f =>
-      val partitionNum = math.abs(f.hashCode) % partitions
-      (f, partitionNum)
-    }
-
-    val targetFiles = parquetFiles filter (_._2 equals targetPartition)
-
-    targetFiles.map(_._1).toIterator
-  }
-
-  private def _nextParquetIterator: Option[Iterator[T]] ={
+  private def nextParquetIterator: Option[Iterator[T]] ={
 
     _parquetIterator.hasNext match {
 
@@ -89,4 +77,29 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
         None
     }
   }
+
+  private def getPartitionIterator: Iterator[String] = getPartitionFiles(parquetRootPath, targetPartition, partitions).toIterator
+
+  private def getPartitionFiles(parquetRootPath: String, targetPartitionId: Int, dataNodesTotal: Int): Seq[String] ={
+    val parquetPartitionsFiles = HdfsHelper.listParquetFiles(parquetRootPath)
+    val parquetPartitionsTotal = parquetPartitionsFiles.length
+    val parquetPartitionsPerDataNode = parquetPartitionsTotal % dataNodesTotal match {
+      case 0 => parquetPartitionsTotal / dataNodesTotal
+      case _ => parquetPartitionsTotal / dataNodesTotal + 1
+    }
+    val offset = targetPartitionId * parquetPartitionsPerDataNode
+    parquetPartitionsFiles.drop(offset).take(parquetPartitionsPerDataNode)
+  }
+
+  //  private def _getPartitionIterator: Iterator[String] = {
+  //
+  //    val parquetFiles  = HdfsHelper.listParquetFiles(parquetRootPath) map { f =>
+  //      val partitionNum = math.abs(f.hashCode) % partitions
+  //      (f, partitionNum)
+  //    }
+  //
+  //    val targetFiles = parquetFiles filter (_._2 equals targetPartition)
+  //
+  //    targetFiles.map(_._1).toIterator
+  //  }
 }

@@ -1,7 +1,6 @@
 package io.toolbox.hdfs
 
 import java.net.URI
-
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 
@@ -70,6 +69,6 @@ object HdfsHelper {
 
     fileList collect {
       case f if !f.getPath.getName.startsWith("_") => f.getPath.toString
-    }
+    } sorted Ordering[String]
   }
 }

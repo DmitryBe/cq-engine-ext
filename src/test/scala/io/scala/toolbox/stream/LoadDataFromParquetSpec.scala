@@ -50,7 +50,7 @@ class LoadDataFromParquetSpec extends FlatSpec with Matchers{
     val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, partitions, targetPartition)
     val parquetSource = avro.toStreamSource
 
-    val mapper = Flow[GenericRecord] map {r => CqEngineConvertors.convertGenericRecord2MapEntity(r)(cqSchema)}
+    val mapper = Flow[GenericRecord] map {r => ParquetTools.convertGenericRecord2MapEntity(r)(cqSchema)}
 
     val stream = parquetSource via FlowActions.getCounterFlow(1000) via mapper to Sink.foreachParallel(storageBins)((rec) => {
       // do something with record

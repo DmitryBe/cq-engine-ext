@@ -2,10 +2,8 @@ package io.toolbox.cqengineext.storage
 
 import java.util.concurrent.{Executor, Executors}
 import java.util.concurrent.atomic.AtomicInteger
-
 import akka.NotUsed
 import akka.actor.{Actor, ActorSystem, Props}
-import akka.dispatch.ForkJoinExecutorConfigurator
 import akka.routing.RoundRobinPool
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
@@ -13,7 +11,6 @@ import io.toolbox.akka.stream.FlowActions
 import io.toolbox.cqengineex.ex.MapEntityEx
 import io.toolbox.cqengineext.ConcurrentIndexedCollectionExt
 import io.toolbox.cqengineext.storage.DataIngressionActor.{EndOfStream, LoadingCompleted}
-
 import scala.concurrent.{ExecutionContext, Future, Promise}
 
 class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
@@ -60,7 +57,7 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
 
     // pipe
     val stream = source
-      .via(FlowActions.getCounterFlow(10000))
+      .via(FlowActions.getCounterFlow(100000))
       .via(FlowActions.balancer(mapAction, workerCount))
       .to(sink)
 

@@ -73,7 +73,7 @@ class SqlExtRunner extends FlatSpec with Matchers{
     implicit val loadDataDispatcher = actorSystem.dispatchers.lookup(loadingDispatcherName)
     implicit val loadingDataExecContext = loadDataDispatcher.prepare()
 
-    val f = storage.loadFromStream(parquetSource)(CqEngineConvertors.convertGenericRecord2MapEntity(_)(cqSchema))(loadingDispatcherName)(loadingDataExecContext, actorSystem, materializer) map { res =>
+    val f = storage.loadFromStream(parquetSource)(ParquetTools.convertGenericRecord2MapEntity(_)(cqSchema))(loadingDispatcherName)(loadingDataExecContext, actorSystem, materializer) map { res =>
       println(s"loaded: ${res.durationMs} ms; success: ${res.loadedSucces}, failed: ${res.loadedFailed}")
       queryTests(cqSchema, storage)
     } recover {
@@ -91,6 +91,9 @@ class SqlExtRunner extends FlatSpec with Matchers{
     // query runner
     val runner = SqlQueryRunner.create(cqSchema)
     val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storage.shards), maxExecTime)
+
+    val d1001 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where high_conf_region = 0 limit 100")(storage.shards), maxExecTime)
+      .result.map(x => x.get("high_conf_region").asInstanceOf[java.lang.Integer])
 
 //    val rr01 = Await.result(runner.queryMultipleT[QueryCountResult]("select sample_count, cadd_score from ds01")(storage.shards), maxExecTime)
 //    assert(false)

@@ -23,7 +23,7 @@ object FlowActions {
     import GraphDSL.Implicits._
 
     Flow.fromGraph(GraphDSL.create() { implicit b =>
-      val balancer = b.add(Balance[In](workerCount, waitForAllDownstreams = true))
+      val balancer = b.add(Balance[In](workerCount, waitForAllDownstreams = false))
       val merge = b.add(Merge[Out](workerCount))
 
       for (_ <- 1 to workerCount) {

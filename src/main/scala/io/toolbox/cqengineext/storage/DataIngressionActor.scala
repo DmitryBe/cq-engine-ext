@@ -8,6 +8,7 @@ import io.toolbox.cqengineext.storage.DataIngressionActor.EndOfStream
 import scala.concurrent.Promise
 import scala.util.Try
 
+@deprecated
 object DataIngressionActor {
 
   def props(getShard: ()=> ConcurrentIndexedCollectionExt)
@@ -18,6 +19,7 @@ object DataIngressionActor {
   case class LoadingCompleted(durationMs: Double, loadedSucces: Int, loadedFailed: Int)
 }
 
+@deprecated
 protected class DataIngressionActor(getShard: () => ConcurrentIndexedCollectionExt)
                                    (loadedSuccess: AtomicInteger, loadedFailed: AtomicInteger)
                                    (endPromise: Promise[EndOfStream]) extends Actor with akka.actor.ActorLogging{

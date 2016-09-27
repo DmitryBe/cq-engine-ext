@@ -4,13 +4,12 @@ import java.util.concurrent.{Executor, Executors}
 import java.util.concurrent.atomic.AtomicInteger
 import akka.NotUsed
 import akka.actor.{Actor, ActorSystem, Props}
-import akka.routing.RoundRobinPool
-import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.{Flow, Sink, Source}
-import io.toolbox.akka.stream.FlowActions
-import io.toolbox.cqengineex.ex.MapEntityEx
+import akka.stream.{ActorMaterializer, FlowShape}
+import akka.stream.scaladsl.{Balance, Flow, GraphDSL, Merge, Sink, Source}
 import io.toolbox.cqengineext.ConcurrentIndexedCollectionExt
 import io.toolbox.cqengineext.storage.DataIngressionActor.{EndOfStream, LoadingCompleted}
+import io.toolbox.parquet.{AvroParquetPartitionsIterator, ParquetTools}
+import org.apache.avro.generic.GenericRecord
 import scala.concurrent.{ExecutionContext, Future, Promise}
 
 class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
@@ -24,10 +23,10 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
     _shards(i)
 
   // count error and success insertion
-  val loadedSuccess = new AtomicInteger()
-  val loadedFailed = new AtomicInteger()
-  var loadingStartTime = None : Option[Long]
-  var loadingEndTime = None : Option[Long]
+  private val loadedSuccess = new AtomicInteger()
+  private val loadedFailed = new AtomicInteger()
+  private var loadingStartTime = None : Option[Long]
+  private var loadingEndTime = None : Option[Long]
 
   def getShardsNum = _shards.length
 
@@ -39,38 +38,41 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
     case (_, _) => None
   }
 
-  def loadFromStream[SourceRecType](source: Source[SourceRecType, NotUsed])
-                                   (mapper: (SourceRecType) => MapEntityEx, workerCount: Int = shardsNum)
-                                   (dispatcherName: String)
-                                   (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: ActorMaterializer): Future[LoadingCompleted] ={
+  def loadData(source: Source[GenericRecord, NotUsed])
+              (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: ActorMaterializer)={
 
-    val mapAction = Flow[SourceRecType] map {r => mapper(r)}
+    val balance = balancer2(() => {
+      val shard = getShardByRoundrobin
+      Flow[GenericRecord].map((x) => {
+        val rec = ParquetTools.convertGenericRecord2MapEntity(x)(schema)
+        shard.add(rec) match {
+          case true =>
+            (1, 0)
+          case false =>
+            (0, 1)
+        }
+      })
+    }, shardsNum)
 
-    // pool of data loading actors
-    val endStreamPromise = Promise[EndOfStream]()
+    val sinkOut = Sink.foreach[(Int, Int)]{
+      case (1, 0) =>
+        val _t = loadedSuccess.incrementAndGet()
+        if (_t % 100000 == 0) println(s"processed (success): ${_t}")
+      case (0, 1) =>
+        val _t = loadedFailed.incrementAndGet()
+        if (_t % 1000 == 0) println(s"processed (failed): ${_t}")
+    }
 
-    val dataIngressActorProp = DataIngressionActor.props(getShardByRoundrobin _)(loadedSuccess, loadedFailed)(endStreamPromise).withDispatcher(dispatcherName)
-    val routerActorProp = RoundRobinPool(shardsNum).props(dataIngressActorProp).withDispatcher(dispatcherName)
-
-    // stream sink
-    val sink = Sink.actorRef(actorSystem.actorOf(routerActorProp), onCompleteMessage = EndOfStream())
-
-    // pipe
-    val stream = source
-      .via(FlowActions.getCounterFlow(100000))
-      .via(FlowActions.balancer(mapAction, workerCount))
-      .to(sink)
-
-    // start
     loadingStartTime = Some(System.nanoTime)
     loadingEndTime = None
-    stream.run()
 
-    // subscribe for end
-    endStreamPromise.future map { r =>
+    // pipe: source ~> map(genericrec -> map) -> balancer(ingress to partition) -> count(success, errors)
+    val f = source.via(balance).runWith(sinkOut)
+    f.map(r => {
       loadingEndTime = Some(System.nanoTime)
-      LoadingCompleted(getLoadingDuration.getOrElse(0), loadedSuccess.get, loadedFailed.get)
-    }
+      (getLoadingDuration.getOrElse(0d), loadedSuccess.get(), loadedFailed.get())
+    })
+
   }
 
   private val _counter = new AtomicInteger()
@@ -82,4 +84,20 @@ class CqShardedStorage(shardsNum: Int, schema: Map[String, String])
     indexes map {i => shard.addIndexes(i)}
     shard
   }
+
+  def balancer2[In, Out](getWorkerFlow: () => Flow[In, Out, Any], workerCount: Int): Flow[In, Out, NotUsed] = {
+    import akka.stream.scaladsl.GraphDSL.Implicits._
+
+    Flow.fromGraph(GraphDSL.create() { implicit b =>
+      val balancer = b.add(Balance[In](workerCount, waitForAllDownstreams = true))
+      val merge = b.add(Merge[Out](workerCount))
+
+      for (_ <- 1 to workerCount) {
+        balancer ~> getWorkerFlow().async ~> merge
+      }
+
+      FlowShape(balancer.in, merge.out)
+    })
+  }
+
 }

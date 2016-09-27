@@ -69,12 +69,12 @@ class SqlExtRunner extends FlatSpec with Matchers{
     val parquetSource = avro.toStreamSource
 //    val sourceSingleFile = Source.fromIterator(() => AvroParquetReaderIterator.createFromParquetFile[GenericRecord](pathStr))
 
-    val loadingDispatcherName = "loading-data-dispatcher"
-    implicit val loadDataDispatcher = actorSystem.dispatchers.lookup(loadingDispatcherName)
+    implicit val loadDataDispatcher = actorSystem.dispatchers.defaultGlobalDispatcher
     implicit val loadingDataExecContext = loadDataDispatcher.prepare()
 
-    val f = storage.loadFromStream(parquetSource)(ParquetTools.convertGenericRecord2MapEntity(_)(cqSchema))(loadingDispatcherName)(loadingDataExecContext, actorSystem, materializer) map { res =>
-      println(s"loaded: ${res.durationMs} ms; success: ${res.loadedSucces}, failed: ${res.loadedFailed}")
+    val f = storage.loadData(parquetSource)(loadingDataExecContext, actorSystem, materializer) map { res =>
+      val (loadedSec, success, failed) = res
+      print(s"data loaded; duration $loadedSec sec; success: $success, failed: $failed")
       queryTests(cqSchema, storage)
     } recover {
       case e: Throwable =>

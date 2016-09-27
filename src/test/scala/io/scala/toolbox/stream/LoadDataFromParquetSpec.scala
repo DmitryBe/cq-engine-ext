@@ -2,15 +2,12 @@ package io.scala.toolbox.stream
 
 import java.util
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
-
-import akka.NotUsed
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
 import com.googlecode.cqengine.entity.MapEntity
 import com.typesafe.config.ConfigFactory
 import io.toolbox.akka.stream.FlowActions
-import io.toolbox.cqengineext.{ConcurrentIndexedCollectionExt, CqEngineConvertors}
 import io.toolbox.parquet.{AvroParquetPartitionsIterator, ParquetTools}
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
@@ -18,10 +15,6 @@ import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.scalatest.{FlatSpec, Matchers}
 import parquet.avro.AvroParquetReader
-
-import collection.JavaConverters._
-import scala.collection.JavaConversions._
-import scala.collection.mutable
 import scala.concurrent.ExecutionContext
 
 class LoadDataFromParquetSpec extends FlatSpec with Matchers{

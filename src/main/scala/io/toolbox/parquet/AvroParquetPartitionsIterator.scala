@@ -91,15 +91,4 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
     parquetPartitionsFiles.drop(offset).take(parquetPartitionsPerDataNode)
   }
 
-  //  private def _getPartitionIterator: Iterator[String] = {
-  //
-  //    val parquetFiles  = HdfsHelper.listParquetFiles(parquetRootPath) map { f =>
-  //      val partitionNum = math.abs(f.hashCode) % partitions
-  //      (f, partitionNum)
-  //    }
-  //
-  //    val targetFiles = parquetFiles filter (_._2 equals targetPartition)
-  //
-  //    targetFiles.map(_._1).toIterator
-  //  }
 }

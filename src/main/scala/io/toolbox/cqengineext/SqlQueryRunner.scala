@@ -41,6 +41,7 @@ class SqlQueryRunner(schema: Map[String, String])
               // not elegant: extra conversion is required: java.Map -> scala.Map -> java.Map
               val ds = iter.take(q.limit) map {x => mapAsScalaMap(x).asInstanceOf[mutable.Map[String, Any]]}
               val projectedRes = QueryProjector.project(ds.toSeq, q.columnsProjection)
+
               QueryDataSetResult(projectedRes map {x => mapAsJavaMap(x)})
 
             case false =>

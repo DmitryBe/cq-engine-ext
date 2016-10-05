@@ -20,9 +20,6 @@ class ExpCompiler {
   def compileExpr(expr: String): (mutable.Map[String, Any]) => Any ={
 
     val exprHash = MD5Helper.hash(expr.toLowerCase)
-
-    println(s"expr [$exprHash]: $expr")
-
     var f = cache.get(exprHash)
     if(f == null){
       val eval = new Eval()

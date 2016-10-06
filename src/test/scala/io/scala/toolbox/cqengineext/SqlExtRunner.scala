@@ -48,7 +48,8 @@ class SqlExtRunner extends FlatSpec with Matchers{
     "cadd_score" -> "NavigableIndex",
     "sample_count" -> "NavigableIndex",
     "hli_allele_frequency" -> "NavigableIndex",
-    "gene_name" -> "NavigableIndex"
+    "gene_name" -> "NavigableIndex",
+    "cohort_allele_frequency" -> "NavigableIndex"
   )
 
   "load from stream, index and query" should "" in {

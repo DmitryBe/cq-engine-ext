@@ -39,6 +39,9 @@ class ConcurrentIndexedCollectionExt(schemaDescription: Map[String, String]) {
           case "java.lang.Float" =>
             val a = attr.asInstanceOf[Attribute[util.Map[_,_], java.lang.Float]]
             createIdxForAttr(idxType, a)
+          case "java.lang.Double" =>
+            val a = attr.asInstanceOf[Attribute[util.Map[_,_], java.lang.Double]]
+            createIdxForAttr(idxType, a)
           case "java.lang.Boolean" =>
             val a = attr.asInstanceOf[Attribute[util.Map[_,_], java.lang.Boolean]]
             createIdxForAttr(idxType, a)

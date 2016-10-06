@@ -13,7 +13,7 @@ class ExpCompiler {
   val cache = new java.util.concurrent.ConcurrentHashMap[String, (mutable.Map[String, Any])=> Any]()
 
   def warmUp(): ExpCompiler ={
-    compileExpr("(row: scala.collection.mutable.Map[String, Any]) => 0")
+    compileExpr("(x: scala.collection.mutable.Map[String, Any]) => x.size")
     this
   }
 

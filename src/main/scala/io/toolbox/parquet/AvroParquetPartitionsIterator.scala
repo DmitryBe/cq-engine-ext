@@ -7,6 +7,8 @@ import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import parquet.avro.AvroParquetReader
 
+import scala.collection.mutable
+
 class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String, partitions: Int, targetPartition: Int)
                                                        (implicit hadoopConf: Configuration) extends Iterator[T]{
 
@@ -78,17 +80,22 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
     }
   }
 
-  private def getPartitionIterator: Iterator[String] = getPartitionFiles(parquetRootPath, targetPartition, partitions).toIterator
+  private def getPartitionIterator: Iterator[String] = getPartitionFiles(HdfsHelper.listParquetFiles(parquetRootPath), targetPartition, partitions).toIterator
 
-  private def getPartitionFiles(parquetRootPath: String, targetPartitionId: Int, dataNodesTotal: Int): Seq[String] ={
-    val parquetPartitionsFiles = HdfsHelper.listParquetFiles(parquetRootPath)
+  private def getPartitionFiles(parquetPartitionsFiles: Seq[String], targetPartitionId: Int, dataNodesTotal: Int): Seq[String] ={
+
     val parquetPartitionsTotal = parquetPartitionsFiles.length
-    val parquetPartitionsPerDataNode = parquetPartitionsTotal % dataNodesTotal match {
-      case 0 => parquetPartitionsTotal / dataNodesTotal
-      case _ => parquetPartitionsTotal / dataNodesTotal + 1
+    val bins = mutable.Map.empty[Int, mutable.Buffer[String]]
+
+    0 until parquetPartitionsTotal foreach { i =>
+      val currentBinIdx = i % dataNodesTotal
+      val bin = bins.getOrElse(currentBinIdx, mutable.Buffer.empty[String])
+      val file = parquetPartitionsFiles(i)
+      bin.append(file)
+      bins.update(currentBinIdx, bin)
     }
-    val offset = targetPartitionId * parquetPartitionsPerDataNode
-    parquetPartitionsFiles.drop(offset).take(parquetPartitionsPerDataNode)
+
+    bins.getOrElse(targetPartitionId, Seq())
   }
 
 }

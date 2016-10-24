@@ -13,6 +13,7 @@ object HdfsHelper {
 
     val pattern1 = "^(:?^hdfs):\\/\\/(.+):(\\d+)(.+)".r
     val pattern2 = "^(:?^hdfs):\\/\\/(.+)(.+)".r
+    val pattern4 = "^(:?^s3a):\\/\\/(.+)(.+)".r
     val pattern3 = "^(\\/:?.+)".r
 
     var hdfsUrl = None: Option[String]
@@ -27,6 +28,11 @@ object HdfsHelper {
 
       case pattern2(protocol, ip, relPath) =>
         // match: hdfs://name/path/
+        hdfsUrl = Some(s"$protocol://$ip")
+        hdfsPath = Some(relPath)
+
+      case pattern4(protocol, ip, relPath) =>
+        // match: s3a://name/path/
         hdfsUrl = Some(s"$protocol://$ip")
         hdfsPath = Some(relPath)
 

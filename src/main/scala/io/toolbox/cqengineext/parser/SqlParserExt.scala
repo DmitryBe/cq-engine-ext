@@ -5,13 +5,14 @@ import java.util
 import com.googlecode.cqengine.attribute.Attribute
 import com.googlecode.cqengine.query.QueryFactory._
 import com.googlecode.cqengine.query.option.EngineThresholds._
-import com.googlecode.cqengine.query.option.{AttributeOrder, OrderByOption, QueryOptions}
+import com.googlecode.cqengine.query.option.{AttributeOrder, DeduplicationStrategy, OrderByOption, QueryOptions}
 import com.googlecode.cqengine.query.parser.common.{ParseResult, QueryParser}
 import com.googlecode.cqengine.query.parser.sql.support.{FallbackValueParser, StringParser}
 import io.toolbox.cqengineex.{CQSqlGrammarExtLexer, CQSqlGrammarExtParser}
 import io.toolbox.cqengineext._
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.antlr.v4.runtime.{ANTLRInputStream, CommonTokenStream}
+
 import scala.collection.JavaConversions._
 import scala.util.{Failure, Success, Try}
 
@@ -154,6 +155,10 @@ class SqlParserExt(schemaDescription: Map[String, String]) extends QueryParser(c
       val t = applyThresholds(threshold(INDEX_ORDERING_SELECTIVITY, 1.0))
       resultOptions.put(t.getClass, t)
     }
+
+    // deduplication strategy
+    val deduplication = deduplicate(DeduplicationStrategy.LOGICAL_ELIMINATION)
+    resultOptions.put(deduplication.getClass, deduplication)
 
     resultOptions
   }

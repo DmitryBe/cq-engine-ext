@@ -34,6 +34,7 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
 
           case false =>
             /* current iterator comes to end, try next iterator */
+
             _currentParquetIterator = nextParquetIterator
             _currentParquetIterator match {
               case Some(nextIter) => nextIter.hasNext
@@ -72,7 +73,11 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
           .withConf(hadoopConf)
           .build()
 
-        Some(AvroParquetReaderIterator.createFromParquetReader(reader))
+        val parquetIter = AvroParquetReaderIterator.createFromParquetReader(reader)
+        parquetIter.hasNext match {
+          case true => Some(parquetIter)
+          case false => nextParquetIterator
+        }
 
       case false =>
         /* no parquet files to process */
@@ -83,6 +88,11 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
   private def getPartitionIterator: Iterator[String] = getPartitionFiles(HdfsHelper.listParquetFiles(parquetRootPath), targetPartition, partitions).toIterator
 
   private def getPartitionFiles(parquetPartitionsFiles: Seq[String], targetPartitionId: Int, dataNodesTotal: Int): Seq[String] ={
+
+    println("* parquet files [all]")
+    parquetPartitionsFiles.foreach{ i =>
+      println(s"** $i")
+    }
 
     val parquetPartitionsTotal = parquetPartitionsFiles.length
     val bins = mutable.Map.empty[Int, mutable.Buffer[String]]
@@ -95,7 +105,14 @@ class AvroParquetPartitionsIterator[T <: IndexedRecord](parquetRootPath: String,
       bins.update(currentBinIdx, bin)
     }
 
-    bins.getOrElse(targetPartitionId, Seq())
+    val parquetPartitionsList = bins.getOrElse(targetPartitionId, Seq())
+
+    println(s"* parquet partitions for node id $targetPartitionId")
+    parquetPartitionsList.foreach { i =>
+      println(s"** $i")
+    }
+
+    parquetPartitionsList
   }
 
 }

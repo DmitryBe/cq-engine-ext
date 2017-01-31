@@ -80,11 +80,14 @@ class SqlQueryRunner(schema: Map[String, String])
           q.isApprox match {
 
             case true =>
-              // count distinct approx using hll
-              val hll = new HyperLogLogMonoid(bits = 10)
-              val hllList = iter.map{ row =>
 
-                val distinctValue = q.distinctColumns.map{ distinctColumnName =>
+              // count distinct approx using hll
+              val hllMonoid = new HyperLogLogMonoid(bits = 10)
+
+              val emptyHll = hllMonoid.create("".getBytes)
+              val hllSum = iter.foldLeft(emptyHll)((accumulatedHll, row) => {
+
+                val uniqValKey = q.distinctColumns.map{ distinctColumnName =>
                   val distinctColumnValStr = row.containsKey(distinctColumnName) match {
                     case true => row.get(distinctColumnName).toString
                     case false => ""
@@ -92,9 +95,11 @@ class SqlQueryRunner(schema: Map[String, String])
                   distinctColumnValStr
                 }.mkString("_")
 
-                hll.create(distinctValue.getBytes)
-              }
-              QueryCountDistinctHllResult(hll.sum(hllList))
+                val uniqValHll = hllMonoid.create(uniqValKey.getBytes)
+                hllMonoid.plus(accumulatedHll, uniqValHll)
+              })
+
+              QueryCountDistinctHllResult(hllSum)
 
             case false =>
               // count distinct precise

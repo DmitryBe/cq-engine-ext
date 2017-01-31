@@ -10,6 +10,6 @@ case class QueryCountDistinctResult(set: scala.collection.mutable.Set[String]) e
   def count = set.size
 }
 case class QueryCountDistinctHllResult(hll: com.twitter.algebird.HLL) extends TQueryResultBase {
-  def count = hll.approximateSize.estimate
+  def count = hll.approximateSize.estimate - 1
 }
 

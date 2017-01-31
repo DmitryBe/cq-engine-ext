@@ -41,7 +41,7 @@ class SqlExtRunnerSpec extends FlatSpec with Matchers{
   implicit val config = ConfigFactory.parseString("_test = test")
     .withFallback(ConfigFactory.load())
 
-  val pathStr = "/Users/dmitry/playground/test_1M" //config.getString("app.parquet-path")
+  val pathStr = "/Users/dmitry/playground/test_1M_10_partitions" //config.getString("app.parquet-path")
 //  val pathStr = "/Users/dmitry/playground/data/y2016m08d10-8951a838ac8c18ea159ea43c6f02c569.parquet"
 
   val indexes = Map(
@@ -64,7 +64,7 @@ class SqlExtRunnerSpec extends FlatSpec with Matchers{
     val shards = 10
     val storage = new CqShardedStorage(shards, cqSchema)(Some(indexes))
 
-    val parquetPartitionsTotal = 5
+    val parquetPartitionsTotal = 1
     val parquetPartitionTarget = 0
     val avro = new AvroParquetPartitionsIterator[GenericRecord](pathStr, parquetPartitionsTotal, parquetPartitionTarget)
     val parquetSource = avro.toStreamSource

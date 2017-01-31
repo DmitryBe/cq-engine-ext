@@ -90,7 +90,10 @@ column_alias
  ;
 
 histogramClause: F_HISTOGRAM '(' NUMERIC_LITERAL ')' ;
-countClause: F_COUNT '(' STAR ')' ;
+countClause
+	: F_COUNT '(' K_DISTINCT column_name (',' column_name)* ')'
+	| F_COUNT '(' STAR ')'
+	;
 
 query : logicalQuery | simpleQuery ;
 

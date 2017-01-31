@@ -2,7 +2,7 @@ package io.scala.toolbox.cqengineext
 
 import com.googlecode.cqengine.entity.MapEntity
 import com.googlecode.cqengine.query.parser.sql.SQLParser
-import io.toolbox.cqengineext.{FoldByKeyQuery, HistogramQuery, SQLCountQuery, SQLQuery}
+import io.toolbox.cqengineext._
 import io.toolbox.cqengineext.parser.SqlParserExt
 import io.toolbox.cqengineext.projection.{CaseColumn, ExprColumn, SimpleColumn, StartColumn}
 import org.scalatest.{FlatSpec, Matchers}
@@ -23,11 +23,15 @@ class SqlParserExSpec extends FlatSpec with Matchers{
   "parser ext" should "test1" in {
 
     val parser = SqlParserExt.create(schema)
+
     val r1 = parser.parseQuery("select * from ds01 order by chrom asc limit 10")
     assert(r1.isInstanceOf[SQLQuery])
 
     val r2 = parser.parseQuery("select count(*) from ds01")
     assert(r2.isInstanceOf[SQLCountQuery])
+
+    val r2_1 = parser.parseQuery("select count(distinct chrom, cadd_score) from ds01")
+    assert(r2_1.isInstanceOf[SQLCountDistinctQuery])
 
     val r3 = parser.parseQuery("select chrom, count(*) from ds01 group by chrom")
     assert(r3.isInstanceOf[FoldByKeyQuery])

@@ -1,4 +1,4 @@
-// Generated from /Users/dmitry/github/scala-toolbox/src/main/antlr4/cqengineext/grammar/CQSqlGrammarExt.g4 by ANTLR 4.5.3
+// Generated from /Users/dmitry/workspace/cq-engine-ext/src/main/antlr4/cqengineext/grammar/CQSqlGrammarExt.g4 by ANTLR 4.5.3
 package io.toolbox.cqengineex;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

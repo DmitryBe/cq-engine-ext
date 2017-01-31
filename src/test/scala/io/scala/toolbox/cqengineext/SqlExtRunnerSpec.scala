@@ -32,7 +32,7 @@ import io.toolbox.collections.CollectionHelper
 import io.toolbox.cqengineext.storage.CqShardedStorage
 import org.apache.hadoop.conf.Configuration
 
-class SqlExtRunner extends FlatSpec with Matchers{
+class SqlExtRunnerSpec extends FlatSpec with Matchers{
 
   implicit val ec = ExecutionContext.global
   implicit val actorSystem = ActorSystem("Test")
@@ -41,7 +41,7 @@ class SqlExtRunner extends FlatSpec with Matchers{
   implicit val config = ConfigFactory.parseString("_test = test")
     .withFallback(ConfigFactory.load())
 
-  val pathStr = "/Users/dmitry/playground/data/test_1M" //config.getString("app.parquet-path")
+  val pathStr = "/Users/dmitry/playground/test_1M" //config.getString("app.parquet-path")
 //  val pathStr = "/Users/dmitry/playground/data/y2016m08d10-8951a838ac8c18ea159ea43c6f02c569.parquet"
 
   val indexes = Map(
@@ -92,6 +92,7 @@ class SqlExtRunner extends FlatSpec with Matchers{
     // query runner
     val runner = SqlQueryRunner.create(cqSchema)
     val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storage.shards), maxExecTime)
+    val c02 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(distinct chrom, pos, ref, alt) from ds01")(storage.shards), maxExecTime)
 
     val d1001 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where high_conf_region = 0 limit 100")(storage.shards), maxExecTime)
       .result.map(x => x.get("high_conf_region").asInstanceOf[java.lang.Integer])

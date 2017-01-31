@@ -67,6 +67,29 @@ class SqlQueryRunner(schema: Map[String, String])
           QueryCountResult(iter.size())
         } finally { iter.close() }
 
+      case q: SQLCountDistinctQuery =>
+
+        var iter: ResultSet[util.Map[_, _]] = null
+        try {
+          iter = indexedCollection.retrieve(q.query, q.queryOptions)
+
+          val distinctValuesMap = iter.foldLeft(mutable.Set.empty[String])((set, row) => {
+
+            val distinctValue = q.distinctColumns.map{ distinctColumnName =>
+              val distinctColumnValStr = row.containsKey(distinctColumnName) match {
+                case true => row.get(distinctColumnName).toString
+                case false => ""
+              }
+              distinctColumnValStr
+            }.mkString("_")
+
+            set += distinctValue
+            set
+          })
+
+          QueryCountDistinctResult(distinctValuesMap)
+        } finally { iter.close() }
+
       case q: HistogramQuery =>
 
         var iter: ResultSet[util.Map[_, _]] = null
@@ -132,6 +155,16 @@ class SqlQueryRunner(schema: Map[String, String])
         Future {
           val results = partitionsResult.asInstanceOf[Seq[QueryCountResult]]
           QueryCountResult(results.map(x => x.count).sum)
+        }
+
+      case t: QueryCountDistinctResult =>
+
+        Future{
+          val results = partitionsResult.asInstanceOf[Seq[QueryCountDistinctResult]]
+          val unionDistincts = results.map(x => x.set).reduceLeft((a,b) => {
+            a.union(b)
+          })
+          QueryCountResult(unionDistincts.size)
         }
 
       case t : QueryAggregatedResult =>

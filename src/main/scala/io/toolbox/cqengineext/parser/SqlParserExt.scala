@@ -73,11 +73,21 @@ class SqlParserExt(schemaDescription: Map[String, String]) extends QueryParser(c
               )
 
             case true =>
-              SQLCountQuery(
-                queryMd5Hash,
-                listener.getParsedQuery,
-                rebuildQueryOptions(listener.getQueryOptions)
-              )
+              listener.getIsDistinctCount match {
+                case false =>
+                  SQLCountQuery(
+                    queryMd5Hash,
+                    listener.getParsedQuery,
+                    rebuildQueryOptions(listener.getQueryOptions)
+                  )
+                case true =>
+                  SQLCountDistinctQuery(
+                    queryMd5Hash,
+                    listener.getParsedQuery,
+                    rebuildQueryOptions(listener.getQueryOptions),
+                    listener.getCountDistinctColumns
+                  )
+              }
           }
 
         case _ => throw new Exception("unknown query type")

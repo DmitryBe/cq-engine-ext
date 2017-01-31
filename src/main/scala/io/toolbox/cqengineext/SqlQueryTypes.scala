@@ -24,6 +24,13 @@ case class SQLCountQuery(
   queryOptions: QueryOptions
 ) extends QueryBase(hash, query, queryOptions)
 
+case class SQLCountDistinctQuery(
+  hash: String,
+  query: Query[java.util.Map[_, _]],
+  queryOptions: QueryOptions,
+  distinctColumns: Seq[String]
+) extends QueryBase(hash, query, queryOptions)
+
 case class FoldByKeyQuery(
   hash: String,
   query: Query[java.util.Map[_, _]],

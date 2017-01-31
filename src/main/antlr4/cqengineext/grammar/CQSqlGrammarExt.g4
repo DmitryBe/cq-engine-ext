@@ -91,7 +91,7 @@ column_alias
 
 histogramClause: F_HISTOGRAM '(' NUMERIC_LITERAL ')' ;
 countClause
-	: F_COUNT '(' K_DISTINCT column_name (',' column_name)* ')'
+	: F_COUNT '(' F_HLL? K_DISTINCT column_name (',' column_name)* ')'
 	| F_COUNT '(' STAR ')'
 	;
 
@@ -153,5 +153,5 @@ direction : K_ASC | K_DESC ;
 
 F_HISTOGRAM: H I S T O G R A M;
 F_COUNT: C O U N T;
-
+F_HLL: H L L;
 

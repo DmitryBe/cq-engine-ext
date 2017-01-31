@@ -1,14 +1,18 @@
 package io.toolbox.cqengineext
 
 import java.util
+
 import com.googlecode.cqengine.resultset.ResultSet
+import com.twitter.algebird.HyperLogLogMonoid
 import io.toolbox.cqengineext.parser.SqlParserExt
 import io.toolbox.cqengineext.projection.{ExpCompiler, QueryProjector}
+
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 import scala.collection.JavaConversions._
 import scala.collection.JavaConversions.{mapAsJavaMap, mapAsScalaMap}
+
 /*
   required for query projection (runtime expression compilation)
 */
@@ -73,21 +77,43 @@ class SqlQueryRunner(schema: Map[String, String])
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
 
-          val distinctValuesMap = iter.foldLeft(mutable.Set.empty[String])((set, row) => {
+          q.isApprox match {
 
-            val distinctValue = q.distinctColumns.map{ distinctColumnName =>
-              val distinctColumnValStr = row.containsKey(distinctColumnName) match {
-                case true => row.get(distinctColumnName).toString
-                case false => ""
+            case true =>
+              // count distinct approx using hll
+              val hll = new HyperLogLogMonoid(bits = 10)
+              val hllList = iter.map{ row =>
+
+                val distinctValue = q.distinctColumns.map{ distinctColumnName =>
+                  val distinctColumnValStr = row.containsKey(distinctColumnName) match {
+                    case true => row.get(distinctColumnName).toString
+                    case false => ""
+                  }
+                  distinctColumnValStr
+                }.mkString("_")
+
+                hll.create(distinctValue.getBytes)
               }
-              distinctColumnValStr
-            }.mkString("_")
+              QueryCountDistinctHllResult(hll.sum(hllList))
 
-            set += distinctValue
-            set
-          })
+            case false =>
+              // count distinct precise
+              val distinctValuesMap = iter.foldLeft(mutable.Set.empty[String])((set, row) => {
 
-          QueryCountDistinctResult(distinctValuesMap)
+                val distinctValue = q.distinctColumns.map{ distinctColumnName =>
+                  val distinctColumnValStr = row.containsKey(distinctColumnName) match {
+                    case true => row.get(distinctColumnName).toString
+                    case false => ""
+                  }
+                  distinctColumnValStr
+                }.mkString("_")
+
+                set += distinctValue
+                set
+              })
+              QueryCountDistinctResult(distinctValuesMap)
+          }
+
         } finally { iter.close() }
 
       case q: HistogramQuery =>
@@ -160,11 +186,21 @@ class SqlQueryRunner(schema: Map[String, String])
       case t: QueryCountDistinctResult =>
 
         Future{
+
           val results = partitionsResult.asInstanceOf[Seq[QueryCountDistinctResult]]
           val unionDistincts = results.map(x => x.set).reduceLeft((a,b) => {
             a.union(b)
           })
-          QueryCountResult(unionDistincts.size)
+          QueryCountDistinctResult(unionDistincts)
+        }
+
+      case t: QueryCountDistinctHllResult =>
+
+        Future{
+          val results = partitionsResult.asInstanceOf[Seq[QueryCountDistinctHllResult]]
+          val hll = new HyperLogLogMonoid(bits = 10)
+          val reducedHll = hll.sum(results.map(_.hll))
+          QueryCountDistinctHllResult(reducedHll)
         }
 
       case t : QueryAggregatedResult =>

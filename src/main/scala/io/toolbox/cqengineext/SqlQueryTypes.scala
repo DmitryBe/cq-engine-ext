@@ -28,7 +28,8 @@ case class SQLCountDistinctQuery(
   hash: String,
   query: Query[java.util.Map[_, _]],
   queryOptions: QueryOptions,
-  distinctColumns: Seq[String]
+  distinctColumns: Seq[String],
+  isApprox: Boolean
 ) extends QueryBase(hash, query, queryOptions)
 
 case class FoldByKeyQuery(

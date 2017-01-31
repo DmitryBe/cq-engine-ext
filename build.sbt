@@ -1,5 +1,4 @@
 
-
 name := """scala-toolbox"""
 
 version := "1.0"
@@ -33,6 +32,7 @@ libraryDependencies ++= Seq(
   "com.googlecode.cqengine" % "cqengine" % cqengineVersion,
 
   "com.twitter" %% "util-eval" % twitterVersion,
+  "com.twitter" % "algebird-core_2.11" % "0.12.3",
 
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )

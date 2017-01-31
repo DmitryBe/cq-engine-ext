@@ -21,6 +21,7 @@ class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineA
   private var histogram = None: Option[Int]
   private var hasCountClause = false
   private var isDistinctCount = false
+  private var isDistinctCountApprox = false
   private var sortByDirection = None: Option[String]
   private var resultColumns = ListBuffer.empty[TResultColumn]
 
@@ -29,6 +30,7 @@ class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineA
   def getHistogram = histogram
   def getHasCountClause = hasCountClause
   def getIsDistinctCount = isDistinctCount
+  def getIsDistinctCountApprox = isDistinctCountApprox
   def getCountDistinctColumns = resultColumns.map{ case x: SimpleColumn => x.columnName }
   def getSortByDirection = sortByDirection
   def getQueryProjection = QueryProjection(resultColumns)
@@ -62,6 +64,9 @@ class QueryParserExtListenerExtBase[O](parser: QueryParser[O]) extends CQEngineA
     hasCountClause = true
     if(ctx.K_DISTINCT() != null){
       isDistinctCount = true
+      if(ctx.F_HLL() != null){
+        isDistinctCountApprox = true
+      }
       val distinctColumnsCount = ctx.column_name().length
       assert(distinctColumnsCount > 0, "count distinct require column names (one or many)")
       resultColumns ++= ctx.column_name().map{ x => SimpleColumn(x.getText)}

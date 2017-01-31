@@ -85,7 +85,8 @@ class SqlParserExt(schemaDescription: Map[String, String]) extends QueryParser(c
                     queryMd5Hash,
                     listener.getParsedQuery,
                     rebuildQueryOptions(listener.getQueryOptions),
-                    listener.getCountDistinctColumns
+                    listener.getCountDistinctColumns,
+                    listener.getIsDistinctCountApprox
                   )
               }
           }

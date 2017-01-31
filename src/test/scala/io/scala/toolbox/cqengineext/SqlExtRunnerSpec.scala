@@ -92,7 +92,8 @@ class SqlExtRunnerSpec extends FlatSpec with Matchers{
     // query runner
     val runner = SqlQueryRunner.create(cqSchema)
     val c01 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(*) from ds01")(storage.shards), maxExecTime)
-    val c02 = Await.result(runner.queryMultipleT[QueryCountResult]("select count(distinct chrom, pos, ref, alt) from ds01")(storage.shards), maxExecTime)
+    val c02 = Await.result(runner.queryMultipleT[QueryCountDistinctResult]("select count(distinct chrom, pos) from ds01")(storage.shards), maxExecTime).count
+    val c03 = Await.result(runner.queryMultipleT[QueryCountDistinctHllResult]("select count(hll distinct chrom, pos) from ds01")(storage.shards), maxExecTime).count
 
     val d1001 = Await.result(runner.queryMultipleT[QueryDataSetResult]("select * from ds01 where high_conf_region = 0 limit 100")(storage.shards), maxExecTime)
       .result.map(x => x.get("high_conf_region").asInstanceOf[java.lang.Integer])

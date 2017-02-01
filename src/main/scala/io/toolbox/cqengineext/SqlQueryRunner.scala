@@ -77,6 +77,17 @@ class SqlQueryRunner(schema: Map[String, String])
         try {
           iter = indexedCollection.retrieve(q.query, q.queryOptions)
 
+          val createUniqKeyFunc = q.distinctColumns match {
+            case Seq(col1) => createUniqKey(col1)(_)
+            case Seq(col1, col2) => createUniqKey(col1,col2)(_)
+            case Seq(col1, col2, col3) => createUniqKey(col1,col2,col3)(_)
+            case Seq(col1, col2, col3, col4) => createUniqKey(col1,col2,col3,col4)(_)
+            case Seq(col1, col2, col3, col4, col5) => createUniqKey(col1,col2,col3,col4,col5)(_)
+            case Seq(col1, col2, col3, col4, col5, col6) => createUniqKey(col1,col2,col3,col4,col5,col6)(_)
+            case Seq(col1, col2, col3, col4, col5, col6, col7) => createUniqKey(col1,col2,col3,col4,col5,col6,col7)(_)
+            case _ => throw new Exception("not supported")
+          }
+
           q.isApprox match {
 
             case true =>
@@ -86,16 +97,7 @@ class SqlQueryRunner(schema: Map[String, String])
 
               val emptyHll = hllMonoid.create("".getBytes)
               val hllSum = iter.foldLeft(emptyHll)((accumulatedHll, row) => {
-
-                val uniqValKey = q.distinctColumns.map{ distinctColumnName =>
-                  val distinctColumnValStr = row.containsKey(distinctColumnName) match {
-                    case true => row.get(distinctColumnName).toString
-                    case false => ""
-                  }
-                  distinctColumnValStr
-                }.mkString("_")
-
-                val uniqValHll = hllMonoid.create(uniqValKey.getBytes)
+                val uniqValHll = hllMonoid.create(createUniqKeyFunc(row).getBytes)
                 hllMonoid.plus(accumulatedHll, uniqValHll)
               })
 
@@ -104,16 +106,7 @@ class SqlQueryRunner(schema: Map[String, String])
             case false =>
               // count distinct precise
               val distinctValuesMap = iter.foldLeft(mutable.Set.empty[String])((set, row) => {
-
-                val distinctValue = q.distinctColumns.map{ distinctColumnName =>
-                  val distinctColumnValStr = row.containsKey(distinctColumnName) match {
-                    case true => row.get(distinctColumnName).toString
-                    case false => ""
-                  }
-                  distinctColumnValStr
-                }.mkString("_")
-
-                set += distinctValue
+                set += createUniqKeyFunc(row)
                 set
               })
               QueryCountDistinctResult(distinctValuesMap)
@@ -243,5 +236,31 @@ class SqlQueryRunner(schema: Map[String, String])
 
   }
 
+  private def createUniqKey(col1: String)(row: util.Map[_,_]) = {
+    row.get(col1).toString
+  }
 
+  private def createUniqKey(col1: String, col2: String)(row: util.Map[_,_]) = {
+    s"${row.get(col1).toString}_${row.get(col2).toString}"
+  }
+
+  private def createUniqKey(col1: String, col2: String, col3: String)(row: util.Map[_,_]) = {
+    s"${row.get(col1).toString}_${row.get(col2).toString}_${row.get(col3).toString}"
+  }
+
+  private def createUniqKey(col1: String, col2: String, col3: String, col4: String)(row: util.Map[_,_]) = {
+    s"${row.get(col1).toString}_${row.get(col2).toString}_${row.get(col3).toString}_${row.get(col4).toString}"
+  }
+
+  private def createUniqKey(col1: String, col2: String, col3: String, col4: String, col5: String)(row: util.Map[_,_]) = {
+    s"${row.get(col1).toString}_${row.get(col2).toString}_${row.get(col3).toString}_${row.get(col4).toString}_${row.get(col5).toString}"
+  }
+
+  private def createUniqKey(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String)(row: util.Map[_,_]) = {
+    s"${row.get(col1).toString}_${row.get(col2).toString}_${row.get(col3).toString}_${row.get(col4).toString}_${row.get(col5).toString}_${row.get(col6).toString}"
+  }
+
+  private def createUniqKey(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String)(row: util.Map[_,_]) = {
+    s"${row.get(col1).toString}_${row.get(col2).toString}_${row.get(col3).toString}_${row.get(col4).toString}_${row.get(col5).toString}_${row.get(col6).toString}_${row.get(col7).toString}"
+  }
 }
